@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — UNIVERSAL-CONVERTER</title>
+<meta name="description" content="Häufig gestellte Fragen zum Universal-Converter – Einheitenrechner für über 35 Kategorien in 11 Sprachen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep:#050c1a; --bg-panel:#081428; --bg-card:#0a1930;
+  --blue-bright:#00c8ff; --blue-mid:#0077aa; --blue-dim:#003355;
+  --copper:#d4824a; --copper-light:#f0a060; --copper-dim:#7a3a1a;
+  --grid-line:rgba(0,150,200,0.08);
+  --text-primary:#c8e8ff; --text-secondary:#5a90b0;
+  --border:rgba(0,150,200,0.2); --success:#00e5a0;
+  --lang-bar-h:32px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:15px;scroll-behavior:smooth;}
+body{
+  background:var(--bg-deep); color:var(--text-primary);
+  font-family:'IBM Plex Mono',monospace; min-height:100vh;
+  background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:40px 40px; padding-top:var(--lang-bar-h);
+}
+::-webkit-scrollbar{width:6px;} ::-webkit-scrollbar-track{background:var(--bg-deep);} ::-webkit-scrollbar-thumb{background:var(--blue-dim);border-radius:3px;}
+
+/* LANG BAR */
+#lang-bar{
+  position:fixed;top:0;left:0;right:0;height:var(--lang-bar-h);
+  background:rgba(4,10,22,0.98); border-bottom:1px solid rgba(212,130,74,0.25);
+  display:flex;align-items:center;justify-content:center;gap:3px;z-index:200;
+  padding:0 12px;overflow-x:auto;scrollbar-width:none;
+}
+#lang-bar::-webkit-scrollbar{display:none;}
+.lang-btn{
+  background:none;border:1px solid transparent;border-radius:3px;cursor:pointer;
+  padding:2px 7px;font-size:0.72rem;color:var(--text-secondary);
+  font-family:'IBM Plex Mono',monospace;transition:all 0.15s;white-space:nowrap;
+  display:flex;align-items:center;gap:4px;flex-shrink:0;
+}
+.lang-btn:hover{border-color:var(--border);color:var(--text-primary);}
+.lang-btn.active{border-color:var(--copper);color:var(--copper);background:rgba(212,130,74,0.1);}
+
+.page-wrap{max-width:820px;margin:0 auto;padding:40px 20px 80px;}
+
+/* HEADER */
+.page-header{margin-bottom:36px;padding-bottom:20px;border-bottom:1px solid var(--border);position:relative;}
+.page-header::after{content:'';position:absolute;bottom:-1px;left:0;width:120px;height:2px;background:linear-gradient(90deg,var(--copper),transparent);}
+.logo{font-family:'Orbitron',monospace;font-weight:900;font-size:0.95rem;color:var(--blue-bright);letter-spacing:0.15em;margin-bottom:12px;display:block;text-decoration:none;}
+.logo span{color:var(--copper);}
+.page-title{font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:700;color:var(--text-primary);letter-spacing:0.06em;margin-bottom:6px;}
+.page-meta{font-size:0.7rem;color:var(--text-secondary);letter-spacing:0.15em;text-transform:uppercase;}
+
+/* SEARCH */
+.faq-search-wrap{
+  background:var(--bg-panel);border:1px solid var(--border);border-radius:4px;
+  padding:12px 16px;margin-bottom:24px;display:flex;align-items:center;gap:10px;
+  transition:border-color 0.2s;
+}
+.faq-search-wrap:focus-within{border-color:var(--blue-bright);}
+#faq-search{
+  background:transparent;border:none;outline:none;
+  color:var(--text-primary);font-family:'IBM Plex Mono',monospace;
+  font-size:0.9rem;width:100%;
+}
+#faq-search::placeholder{color:var(--text-secondary);}
+
+/* CATEGORIES */
+.faq-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.faq-cat-btn{
+  padding:4px 12px;border-radius:2px;border:1px solid var(--border);
+  background:transparent;color:var(--text-secondary);cursor:pointer;
+  font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.05em;
+  transition:all 0.15s;
+}
+.faq-cat-btn:hover{border-color:var(--blue-mid);color:var(--text-primary);}
+.faq-cat-btn.active{border-color:var(--blue-bright);color:var(--blue-bright);background:rgba(0,200,255,0.08);}
+
+/* FAQ ITEMS */
+.faq-group{margin-bottom:24px;}
+.faq-group-title{
+  font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:10px;
+  padding-bottom:6px;border-bottom:1px solid rgba(212,130,74,0.2);
+}
+.faq-item{
+  background:var(--bg-panel);border:1px solid var(--border);
+  border-radius:4px;margin-bottom:6px;overflow:hidden;position:relative;
+}
+.faq-item::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--blue-dim),transparent);}
+.faq-q{
+  padding:14px 18px;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;user-select:none;
+  font-size:0.85rem;color:var(--text-primary);line-height:1.5;
+  transition:background 0.15s;
+}
+.faq-q:hover{background:rgba(0,200,255,0.04);}
+.faq-item.open .faq-q{color:var(--blue-bright);}
+.faq-toggle{color:var(--text-secondary);font-size:1rem;flex-shrink:0;transition:transform 0.2s;}
+.faq-item.open .faq-toggle{transform:rotate(45deg);color:var(--blue-bright);}
+.faq-a{
+  display:none;padding:0 18px 14px;
+  font-size:0.82rem;color:var(--text-secondary);line-height:1.8;
+  border-top:1px solid var(--border);padding-top:12px;
+}
+.faq-item.open .faq-a{display:block;}
+.faq-a a{color:var(--blue-bright);text-decoration:none;}
+.faq-a a:hover{text-decoration:underline;}
+.faq-a code{background:rgba(0,200,255,0.08);border:1px solid var(--blue-dim);border-radius:3px;padding:1px 6px;font-size:0.85em;}
+
+.no-results{text-align:center;padding:40px;color:var(--text-secondary);font-size:0.85rem;}
+
+/* FOOTER */
+.site-footer{
+  margin-top:48px;padding:20px 0 0;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.footer-brand{font-family:'Orbitron',monospace;font-size:0.7rem;font-weight:700;color:var(--blue-bright);letter-spacing:0.15em;text-decoration:none;}
+.footer-brand span{color:var(--copper);}
+.footer-links{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.footer-link{font-size:0.68rem;color:var(--text-secondary);text-decoration:none;letter-spacing:0.08em;padding:5px 10px;border:1px solid transparent;border-radius:3px;transition:all 0.15s;}
+.footer-link:hover{color:var(--blue-bright);border-color:var(--border);}
+.footer-link.active{color:var(--copper);border-color:rgba(212,130,74,0.3);}
+.footer-sep{color:var(--border);font-size:0.65rem;}
+.footer-copy{width:100%;font-size:0.6rem;color:var(--text-secondary);letter-spacing:0.1em;padding:10px 0 4px;opacity:0.55;}
+@media(max-width:600px){body{padding-bottom:60px;} .page-wrap{padding:24px 14px 60px;} .page-title{font-size:1.3rem;} .faq-q{font-size:0.8rem;padding:12px 14px;} .faq-a{padding:0 14px 12px;padding-top:10px;}}
+</style>
+</head>
+<body>
+
+<div id="lang-bar"></div>
+
+<div class="page-wrap">
+  <header class="page-header">
+    <a class="logo" href="/">UNIVERSAL-<span>CONVERTER</span></a>
+    <h1 class="page-title" id="page-title">FAQ</h1>
+    <div class="page-meta" id="page-meta">Häufig gestellte Fragen · Universal-Converter</div>
+  </header>
+
+  <div class="faq-search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="faq-search" placeholder="FAQ durchsuchen…" autocomplete="off" aria-label="FAQ Suche">
+  </div>
+
+  <div class="faq-cats" id="faq-cats"></div>
+  <div id="faq-content"></div>
+
+  <footer class="site-footer">
+    <a class="footer-brand" href="/">UNIVERSAL-<span>CONVERTER</span></a>
+    <nav class="footer-links">
+      <a class="footer-link" href="/universal-converter.html" id="footer-converter">⇢ Rechner</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link active" href="/faq.html" id="footer-faq">FAQ</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link" href="/hilfe.html" id="footer-help">Hilfe</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link" href="/impressum.html" id="footer-impressum">Impressum</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link" href="/datenschutz.html" id="footer-datenschutz">Datenschutz</a>
+    </nav>
+    <div class="footer-copy" id="footer-copy">© Universal-Converter · Alle Berechnungen erfolgen lokal im Browser</div>
+  </footer>
+</div>
+
+<script>
+const LANGS = [
+  {code:'de',flag:'🇩🇪',name:'Deutsch'},
+  {code:'en',flag:'🇬🇧',name:'English'},
+  {code:'fr',flag:'🇫🇷',name:'Français'},
+  {code:'es',flag:'🇪🇸',name:'Español'},
+  {code:'it',flag:'🇮🇹',name:'Italiano'},
+  {code:'pt',flag:'🇵🇹',name:'Português'},
+  {code:'nl',flag:'🇳🇱',name:'Nederlands'},
+  {code:'pl',flag:'🇵🇱',name:'Polski'},
+  {code:'tr',flag:'🇹🇷',name:'Türkçe'},
+  {code:'ar',flag:'🇸🇦',name:'العربية',rtl:true},
+  {code:'zh',flag:'🇨🇳',name:'中文'},
+];
+
+const FAQ_DATA = {
+  de: {
+    title: 'FAQ', meta: 'Häufig gestellte Fragen',
+    search_placeholder: 'FAQ durchsuchen…',
+    all: 'Alle',
+    footer_converter: '⇢ Rechner', footer_faq: 'FAQ', footer_help: 'Hilfe',
+    footer_impressum: 'Impressum', footer_datenschutz: 'Datenschutz',
+    footer_copy: '© Universal-Converter · Alle Berechnungen erfolgen lokal im Browser',
+    groups: [
+      { id:'allgemein', label:'Allgemein', items:[
+        { q:'Was ist der Universal-Converter?', a:'Der Universal-Converter ist ein kostenloser Online-Einheitenrechner mit über 35 Kategorien und 11 Sprachen. Er ermöglicht die sofortige Umrechnung von Längen, Gewichten, Temperaturen, Währungen und vielem mehr – direkt im Browser ohne Installation.' },
+        { q:'Ist der Universal-Converter kostenlos?', a:'Ja, vollständig kostenlos. Es gibt keine versteckten Kosten, keine Registrierung und kein Abo.' },
+        { q:'Welche Sprachen werden unterstützt?', a:'Derzeit: Deutsch, Englisch, Französisch, Spanisch, Italienisch, Portugiesisch, Niederländisch, Polnisch, Türkisch, Arabisch und Chinesisch. Weitere Sprachen sind in Planung.' },
+        { q:'Funktioniert der Rechner auch offline?', a:'Ja! Nach dem ersten Laden läuft der Universal-Converter vollständig im Browser. Alle Berechnungen erfolgen lokal – keine Internetverbindung für Umrechnungen erforderlich.' },
+      ]},
+      { id:'berechnung', label:'Berechnungen', items:[
+        { q:'Wie genau sind die Umrechnungen?', a:'Alle Berechnungen basieren auf international anerkannten SI-Einheiten und amtlichen Umrechnungsfaktoren. Die Genauigkeit beträgt bis zu 8 signifikante Stellen. Bei wissenschaftlichen Berechnungen empfehlen wir dennoch eine Überprüfung durch Fachpersonal.' },
+        { q:'Warum weichen die Währungskurse ab?', a:'Die Währungsumrechnung verwendet statische Referenzkurse. Da Wechselkurse sich ständig ändern, können die Werte von aktuellen Kursen abweichen. Für verbindliche Transaktionen nutzen Sie bitte aktuelle Kurse der EZB oder Ihrer Bank.' },
+        { q:'Was bedeutet die wissenschaftliche Notation (z.B. 1.23e+15)?', a:'Bei sehr großen oder sehr kleinen Zahlen wechselt der Rechner automatisch in die wissenschaftliche Notation. "1.23e+15" bedeutet 1,23 × 10¹⁵ (also 1.230.000.000.000.000).' },
+        { q:'Wie rechne ich Kraftstoffverbrauch um?', a:'Kraftstoffverbrauch ist nicht-linear: l/100km und km/l sind Kehrwerte voneinander. Der Rechner berücksichtigt das automatisch. Wählen Sie einfach die Einheit aus und geben Sie den Wert ein.' },
+      ]},
+      { id:'nutzung', label:'Nutzung', items:[
+        { q:'Wie wechsle ich die Sprache?', a:'Über die Sprachleiste ganz oben auf der Seite. Klicken Sie auf die gewünschte Flagge – die gesamte Oberfläche wechselt sofort. Ihre Sprachwahl wird gespeichert.' },
+        { q:'Wie speichere ich meine Lieblingseinheiten?', a:'Klicken Sie auf den Stern ★ neben einer Kategorie in der Seitenleiste. Die Kategorie wird als Favorit markiert und bleibt gespeichert (auch nach dem Schließen des Browsers).' },
+        { q:'Wie kopiere ich ein Ergebnis?', a:'Fahren Sie mit der Maus über eine Ergebniskarte – es erscheint ein Kopier-Symbol ⎘. Klicken Sie darauf, um den Wert in die Zwischenablage zu kopieren.' },
+        { q:'Wo finde ich den Umrechnungsverlauf?', a:'Am unteren Rand der aktiven Kategorie wird automatisch ein Verlauf der letzten 10 Umrechnungen angezeigt. Dieser kann über "Löschen" geleert werden.' },
+      ]},
+      { id:'technik', label:'Technik & Datenschutz', items:[
+        { q:'Werden meine Eingaben gespeichert oder übertragen?', a:'Nein. Alle Berechnungen laufen vollständig im Browser (JavaScript). Es werden keine Eingabewerte an Server übertragen. Favoriten und Verlauf werden nur lokal im Browser-Speicher (localStorage) gesichert.' },
+        { q:'Warum sehe ich Werbung?', a:'Um den kostenlosen Betrieb zu finanzieren, zeigen wir Werbeanzeigen über Google AdSense. Diese Werbung ist nicht-invasiv und wird nur nach Ihrer Einwilligung über den Cookie-Banner geladen.' },
+        { q:'Wie kann ich Cookies ablehnen?', a:'Beim ersten Besuch erscheint ein Cookie-Banner. Dort können Sie Ihre Einwilligung für Analyse- und Werbe-Cookies individuell erteilen oder ablehnen. Technisch notwendige Cookies sind immer aktiv.' },
+        { q:'Auf welchen Geräten funktioniert der Converter?', a:'Auf allen modernen Geräten: Desktop, Laptop, Tablet, Smartphone. Unterstützte Browser: Chrome, Firefox, Safari, Edge (alle aktuellen Versionen).' },
+      ]},
+    ]
+  },
+  en: {
+    title:'FAQ', meta:'Frequently Asked Questions',
+    search_placeholder:'Search FAQ…', all:'All',
+    footer_converter:'⇢ Converter', footer_faq:'FAQ', footer_help:'Help',
+    footer_impressum:'Imprint', footer_datenschutz:'Privacy',
+    footer_copy:'© Universal-Converter · All calculations run locally in your browser',
+    groups:[
+      { id:'general', label:'General', items:[
+        { q:'What is Universal-Converter?', a:'Universal-Converter is a free online unit converter with over 35 categories and 11 languages. It enables instant conversion of lengths, weights, temperatures, currencies and much more – directly in the browser without installation.' },
+        { q:'Is Universal-Converter free?', a:'Yes, completely free. No hidden costs, no registration, no subscription.' },
+        { q:'Which languages are supported?', a:'Currently: German, English, French, Spanish, Italian, Portuguese, Dutch, Polish, Turkish, Arabic and Chinese. More languages are planned.' },
+        { q:'Does it work offline?', a:'Yes! After the first load, Universal-Converter runs entirely in the browser. All calculations are performed locally – no internet connection required for conversions.' },
+      ]},
+      { id:'calc', label:'Calculations', items:[
+        { q:'How accurate are the conversions?', a:'All calculations are based on internationally recognized SI units and official conversion factors. Accuracy is up to 8 significant digits.' },
+        { q:'Why do currency rates differ?', a:'Currency conversion uses static reference rates. Since exchange rates change constantly, values may differ from current rates. For binding transactions, please use current rates from the ECB or your bank.' },
+        { q:'What does scientific notation mean (e.g. 1.23e+15)?', a:'For very large or very small numbers, the calculator automatically switches to scientific notation. "1.23e+15" means 1.23 × 10¹⁵.' },
+        { q:'How do I convert fuel consumption?', a:'Fuel consumption is non-linear: l/100km and km/l are reciprocals of each other. The calculator handles this automatically.' },
+      ]},
+      { id:'usage', label:'Usage', items:[
+        { q:'How do I change the language?', a:'Use the language bar at the very top of the page. Click the desired flag – the entire interface switches immediately. Your language choice is saved.' },
+        { q:'How do I save favorite units?', a:'Click the star ★ next to a category in the sidebar. The category is marked as a favorite and saved even after closing the browser.' },
+        { q:'How do I copy a result?', a:'Hover over a result card – a copy icon ⎘ appears. Click it to copy the value to the clipboard.' },
+        { q:'Where is the conversion history?', a:'At the bottom of the active category, the last 10 conversions are automatically displayed. It can be cleared via "Clear".' },
+      ]},
+      { id:'tech', label:'Tech & Privacy', items:[
+        { q:'Are my inputs saved or transmitted?', a:'No. All calculations run entirely in the browser (JavaScript). No input values are transmitted to servers. Favorites and history are only saved locally in browser storage (localStorage).' },
+        { q:'Why do I see ads?', a:'To finance free operation, we show ads via Google AdSense. These ads are non-invasive and only loaded after your consent via the cookie banner.' },
+        { q:'How can I reject cookies?', a:'A cookie banner appears on your first visit. There you can individually grant or reject consent for analytics and advertising cookies.' },
+        { q:'Which devices are supported?', a:'All modern devices: desktop, laptop, tablet, smartphone. Supported browsers: Chrome, Firefox, Safari, Edge (all current versions).' },
+      ]},
+    ]
+  },
+  fr: {
+    title:'FAQ', meta:'Questions fréquemment posées',
+    search_placeholder:'Rechercher dans la FAQ…', all:'Tout',
+    footer_converter:'⇢ Convertisseur', footer_faq:'FAQ', footer_help:'Aide',
+    footer_impressum:'Mentions légales', footer_datenschutz:'Confidentialité',
+    footer_copy:'© Universal-Converter · Tous les calculs sont effectués localement',
+    groups:[
+      { id:'general', label:'Général', items:[
+        { q:"Qu'est-ce que Universal-Converter ?", a:"Universal-Converter est un convertisseur d'unités en ligne gratuit avec plus de 35 catégories et 11 langues. Il permet la conversion instantanée de longueurs, poids, températures, devises et bien plus encore." },
+        { q:'Universal-Converter est-il gratuit ?', a:'Oui, entièrement gratuit. Pas de frais cachés, pas d\'inscription, pas d\'abonnement.' },
+        { q:'Quelles langues sont supportées ?', a:'Actuellement : allemand, anglais, français, espagnol, italien, portugais, néerlandais, polonais, turc, arabe et chinois.' },
+        { q:'Fonctionne-t-il hors ligne ?', a:'Oui ! Après le premier chargement, Universal-Converter fonctionne entièrement dans le navigateur. Toutes les conversions sont effectuées localement.' },
+      ]},
+      { id:'calc', label:'Calculs', items:[
+        { q:'Quelle est la précision des conversions ?', a:"Tous les calculs sont basés sur les unités SI reconnues internationalement. La précision est jusqu'à 8 chiffres significatifs." },
+        { q:'Pourquoi les taux de change diffèrent-ils ?', a:'La conversion de devises utilise des taux de référence statiques. Pour des transactions contraignantes, veuillez utiliser les taux actuels de la BCE.' },
+        { q:'Que signifie la notation scientifique ?', a:'"1.23e+15" signifie 1,23 × 10¹⁵. Le calculateur bascule automatiquement pour les très grands ou très petits nombres.' },
+        { q:'Comment convertir la consommation de carburant ?', a:'La consommation de carburant est non linéaire : l/100km et km/l sont des inverses l\'un de l\'autre. Le calculateur gère cela automatiquement.' },
+      ]},
+      { id:'usage', label:'Utilisation', items:[
+        { q:'Comment changer la langue ?', a:'Utilisez la barre de langue en haut de la page. Cliquez sur le drapeau souhaité – l\'interface change immédiatement.' },
+        { q:'Comment enregistrer des unités favorites ?', a:'Cliquez sur l\'étoile ★ à côté d\'une catégorie dans la barre latérale.' },
+        { q:'Comment copier un résultat ?', a:'Survolez une carte de résultat – une icône de copie ⎘ apparaît. Cliquez pour copier la valeur.' },
+        { q:"Où se trouve l'historique ?", a:'En bas de la catégorie active, les 10 dernières conversions sont affichées automatiquement.' },
+      ]},
+      { id:'tech', label:'Tech & Confidentialité', items:[
+        { q:'Mes données sont-elles transmises ?', a:'Non. Tous les calculs s\'exécutent dans le navigateur. Aucune valeur n\'est transmise à des serveurs.' },
+        { q:'Pourquoi y a-t-il des publicités ?', a:'Pour financer le service gratuit, nous affichons des annonces via Google AdSense, uniquement après votre consentement.' },
+        { q:'Comment refuser les cookies ?', a:'Une bannière de cookies apparaît lors de votre première visite. Vous pouvez accepter ou refuser individuellement.' },
+        { q:'Quels appareils sont supportés ?', a:'Tous les appareils modernes : ordinateur, tablette, smartphone. Navigateurs : Chrome, Firefox, Safari, Edge.' },
+      ]},
+    ]
+  },
+  es: {
+    title:'FAQ', meta:'Preguntas frecuentes',
+    search_placeholder:'Buscar en FAQ…', all:'Todo',
+    footer_converter:'⇢ Conversor', footer_faq:'FAQ', footer_help:'Ayuda',
+    footer_impressum:'Aviso legal', footer_datenschutz:'Privacidad',
+    footer_copy:'© Universal-Converter · Todos los cálculos se realizan localmente',
+    groups:[
+      { id:'general', label:'General', items:[
+        { q:'¿Qué es Universal-Converter?', a:'Universal-Converter es un convertidor de unidades en línea gratuito con más de 35 categorías y 11 idiomas. Permite la conversión instantánea de longitudes, pesos, temperaturas, divisas y mucho más.' },
+        { q:'¿Es gratuito?', a:'Sí, completamente gratuito. Sin costes ocultos, sin registro, sin suscripción.' },
+        { q:'¿Qué idiomas se admiten?', a:'Actualmente: alemán, inglés, francés, español, italiano, portugués, neerlandés, polaco, turco, árabe y chino.' },
+        { q:'¿Funciona sin conexión?', a:'¡Sí! Después de la primera carga, funciona completamente en el navegador sin conexión a internet.' },
+      ]},
+      { id:'calc', label:'Cálculos', items:[
+        { q:'¿Qué precisión tienen las conversiones?', a:'Todos los cálculos se basan en unidades SI reconocidas internacionalmente. La precisión es de hasta 8 dígitos significativos.' },
+        { q:'¿Por qué difieren los tipos de cambio?', a:'La conversión de divisas usa tipos de referencia estáticos. Para transacciones vinculantes, use los tipos actuales del BCE.' },
+        { q:'¿Qué significa la notación científica?', a:'"1.23e+15" significa 1,23 × 10¹⁵. La calculadora cambia automáticamente para números muy grandes o pequeños.' },
+        { q:'¿Cómo convierto el consumo de combustible?', a:'El consumo de combustible es no lineal: l/100km y km/l son recíprocos. La calculadora lo maneja automáticamente.' },
+      ]},
+      { id:'uso', label:'Uso', items:[
+        { q:'¿Cómo cambio el idioma?', a:'Use la barra de idiomas en la parte superior. Haga clic en la bandera deseada: la interfaz cambia inmediatamente.' },
+        { q:'¿Cómo guardo unidades favoritas?', a:'Haga clic en la estrella ★ junto a una categoría en la barra lateral.' },
+        { q:'¿Cómo copio un resultado?', a:'Pase el ratón sobre una tarjeta de resultado: aparece un icono de copia ⎘.' },
+        { q:'¿Dónde está el historial?', a:'Al final de la categoría activa se muestran automáticamente las últimas 10 conversiones.' },
+      ]},
+      { id:'tech', label:'Técnica y Privacidad', items:[
+        { q:'¿Se transmiten mis datos?', a:'No. Todos los cálculos se ejecutan en el navegador. No se transmiten valores a servidores.' },
+        { q:'¿Por qué veo publicidad?', a:'Para financiar el servicio gratuito, mostramos anuncios de Google AdSense, solo tras su consentimiento.' },
+        { q:'¿Cómo rechazo las cookies?', a:'Aparece un banner de cookies en su primera visita donde puede aceptar o rechazar individualmente.' },
+        { q:'¿Qué dispositivos son compatibles?', a:'Todos los dispositivos modernos: escritorio, tableta, smartphone. Navegadores: Chrome, Firefox, Safari, Edge.' },
+      ]},
+    ]
+  },
+  it: {
+    title:'FAQ', meta:'Domande frequenti',
+    search_placeholder:'Cerca nelle FAQ…', all:'Tutto',
+    footer_converter:'⇢ Convertitore', footer_faq:'FAQ', footer_help:'Aiuto',
+    footer_impressum:'Note legali', footer_datenschutz:'Privacy',
+    footer_copy:'© Universal-Converter · Tutti i calcoli vengono eseguiti localmente',
+    groups:[
+      { id:'general', label:'Generale', items:[
+        { q:'Cos\'è Universal-Converter?', a:'Universal-Converter è un convertitore di unità online gratuito con oltre 35 categorie e 11 lingue.' },
+        { q:'È gratuito?', a:'Sì, completamente gratuito. Nessun costo nascosto, nessuna registrazione, nessun abbonamento.' },
+        { q:'Quali lingue sono supportate?', a:'Attualmente: tedesco, inglese, francese, spagnolo, italiano, portoghese, olandese, polacco, turco, arabo e cinese.' },
+        { q:'Funziona offline?', a:'Sì! Dopo il primo caricamento, funziona completamente nel browser senza connessione internet.' },
+      ]},
+      { id:'calc', label:'Calcoli', items:[
+        { q:'Quanto sono accurate le conversioni?', a:'Tutti i calcoli si basano su unità SI riconosciute internazionalmente. La precisione arriva fino a 8 cifre significative.' },
+        { q:'Perché i tassi di cambio differiscono?', a:'La conversione valutaria utilizza tassi di riferimento statici. Per transazioni vincolanti, utilizzare i tassi attuali della BCE.' },
+        { q:'Cosa significa la notazione scientifica?', a:'"1.23e+15" significa 1,23 × 10¹⁵. La calcolatrice passa automaticamente per numeri molto grandi o piccoli.' },
+        { q:'Come converto il consumo di carburante?', a:'Il consumo di carburante è non lineare: l/100km e km/l sono reciproci. La calcolatrice gestisce questo automaticamente.' },
+      ]},
+      { id:'uso', label:'Utilizzo', items:[
+        { q:'Come cambio la lingua?', a:'Usa la barra delle lingue in cima alla pagina. Fai clic sulla bandiera desiderata.' },
+        { q:'Come salvo le unità preferite?', a:'Fai clic sulla stella ★ accanto a una categoria nella barra laterale.' },
+        { q:'Come copio un risultato?', a:'Passa il mouse su una scheda risultato: appare un\'icona di copia ⎘.' },
+        { q:'Dove si trova la cronologia?', a:'In fondo alla categoria attiva vengono mostrate automaticamente le ultime 10 conversioni.' },
+      ]},
+      { id:'tech', label:'Tecnica e Privacy', items:[
+        { q:'I miei dati vengono trasmessi?', a:'No. Tutti i calcoli vengono eseguiti nel browser. Nessun valore viene trasmesso ai server.' },
+        { q:'Perché vedo pubblicità?', a:'Per finanziare il servizio gratuito, mostriamo annunci tramite Google AdSense, solo dopo il tuo consenso.' },
+        { q:'Come rifiuto i cookie?', a:'Un banner cookie appare alla prima visita dove puoi accettare o rifiutare individualmente.' },
+        { q:'Quali dispositivi sono supportati?', a:'Tutti i dispositivi moderni: desktop, tablet, smartphone. Browser: Chrome, Firefox, Safari, Edge.' },
+      ]},
+    ]
+  },
+  pt:{title:'FAQ',meta:'Perguntas frequentes',search_placeholder:'Pesquisar FAQ…',all:'Tudo',footer_converter:'⇢ Conversor',footer_faq:'FAQ',footer_help:'Ajuda',footer_impressum:'Aviso legal',footer_datenschutz:'Privacidade',footer_copy:'© Universal-Converter · Todos os cálculos são executados localmente',groups:[{id:'g',label:'Geral',items:[{q:'O que é o Universal-Converter?',a:'O Universal-Converter é um conversor de unidades online gratuito com mais de 35 categorias e 11 idiomas.'},{q:'É gratuito?',a:'Sim, completamente gratuito. Sem custos ocultos, sem registo, sem subscrição.'},{q:'Quais idiomas são suportados?',a:'Alemão, inglês, francês, espanhol, italiano, português, holandês, polaco, turco, árabe e chinês.'},{q:'Funciona offline?',a:'Sim! Após o primeiro carregamento, funciona completamente no navegador.'}]},{id:'c',label:'Cálculos',items:[{q:'Qual é a precisão das conversões?',a:'Todos os cálculos baseiam-se em unidades SI reconhecidas internacionalmente. Precisão até 8 algarismos significativos.'},{q:'Por que as taxas de câmbio diferem?',a:'A conversão de moedas usa taxas de referência estáticas. Para transações vinculativas, use as taxas atuais do BCE.'},{q:'O que significa notação científica?',a:'"1.23e+15" significa 1,23 × 10¹⁵.'},{q:'Como converter consumo de combustível?',a:'O consumo de combustível é não linear: l/100km e km/l são recíprocos.'}]},{id:'u',label:'Utilização',items:[{q:'Como mudo o idioma?',a:'Use a barra de idiomas no topo. Clique na bandeira desejada.'},{q:'Como guardo favoritos?',a:'Clique na estrela ★ junto a uma categoria.'},{q:'Como copio um resultado?',a:'Passe o rato sobre um cartão: aparece o ícone ⎘.'},{q:'Onde está o histórico?',a:'No final da categoria ativa são mostradas as últimas 10 conversões.'}]},{id:'t',label:'Privacidade',items:[{q:'Os meus dados são transmitidos?',a:'Não. Todos os cálculos são executados no navegador.'},{q:'Por que vejo publicidade?',a:'Para financiar o serviço gratuito via Google AdSense, apenas após consentimento.'},{q:'Como recuso cookies?',a:'Um banner de cookies aparece na primeira visita.'},{q:'Que dispositivos são suportados?',a:'Todos os dispositivos modernos: desktop, tablet, smartphone.'}]}]},
+  nl:{title:'FAQ',meta:'Veelgestelde vragen',search_placeholder:'FAQ doorzoeken…',all:'Alles',footer_converter:'⇢ Omzetter',footer_faq:'FAQ',footer_help:'Hulp',footer_impressum:'Colofon',footer_datenschutz:'Privacy',footer_copy:'© Universal-Converter · Alle berekeningen worden lokaal uitgevoerd',groups:[{id:'g',label:'Algemeen',items:[{q:'Wat is Universal-Converter?',a:'Universal-Converter is een gratis online eenhedenomzetter met meer dan 35 categorieën en 11 talen.'},{q:'Is het gratis?',a:'Ja, volledig gratis. Geen verborgen kosten, geen registratie, geen abonnement.'},{q:'Welke talen worden ondersteund?',a:'Duits, Engels, Frans, Spaans, Italiaans, Portugees, Nederlands, Pools, Turks, Arabisch en Chinees.'},{q:'Werkt het offline?',a:'Ja! Na de eerste keer laden werkt het volledig in de browser.'}]},{id:'c',label:'Berekeningen',items:[{q:'Hoe nauwkeurig zijn de omzettingen?',a:'Alle berekeningen zijn gebaseerd op internationaal erkende SI-eenheden. Nauwkeurigheid tot 8 significante cijfers.'},{q:'Waarom wijken valutakoersen af?',a:'Valutaomzetting gebruikt statische referentiekoersen. Gebruik voor bindende transacties actuele koersen van de ECB.'},{q:'Wat betekent wetenschappelijke notatie?',a:'"1.23e+15" betekent 1,23 × 10¹⁵.'},{q:'Hoe zet ik brandstofverbruik om?',a:'Brandstofverbruik is niet-lineair: l/100km en km/l zijn elkaars keerwaarden.'}]},{id:'u',label:'Gebruik',items:[{q:'Hoe verander ik de taal?',a:'Gebruik de taalbalk bovenaan. Klik op de gewenste vlag.'},{q:'Hoe sla ik favorieten op?',a:'Klik op de ster ★ naast een categorie.'},{q:'Hoe kopieer ik een resultaat?',a:'Beweeg over een resultaatkaart: het kopieericon ⎘ verschijnt.'},{q:'Waar is de geschiedenis?',a:'Onderaan de actieve categorie worden de laatste 10 omzettingen getoond.'}]},{id:'t',label:'Privacy',items:[{q:'Worden mijn gegevens verzonden?',a:'Nee. Alle berekeningen worden in de browser uitgevoerd.'},{q:'Waarom zie ik advertenties?',a:'Om de gratis dienst te financieren via Google AdSense, alleen na uw toestemming.'},{q:'Hoe weiger ik cookies?',a:'Bij uw eerste bezoek verschijnt een cookiebanner.'},{q:'Welke apparaten worden ondersteund?',a:'Alle moderne apparaten: desktop, tablet, smartphone.'}]}]},
+  pl:{title:'FAQ',meta:'Często zadawane pytania',search_placeholder:'Szukaj w FAQ…',all:'Wszystko',footer_converter:'⇢ Przelicznik',footer_faq:'FAQ',footer_help:'Pomoc',footer_impressum:'Nota prawna',footer_datenschutz:'Prywatność',footer_copy:'© Universal-Converter · Wszystkie obliczenia są wykonywane lokalnie',groups:[{id:'g',label:'Ogólne',items:[{q:'Co to jest Universal-Converter?',a:'Universal-Converter to bezpłatny internetowy przelicznik jednostek z ponad 35 kategoriami i 11 językami.'},{q:'Czy jest bezpłatny?',a:'Tak, całkowicie bezpłatny. Bez ukrytych kosztów, bez rejestracji, bez subskrypcji.'},{q:'Jakie języki są obsługiwane?',a:'Niemiecki, angielski, francuski, hiszpański, włoski, portugalski, niderlandzki, polski, turecki, arabski i chiński.'},{q:'Czy działa offline?',a:'Tak! Po pierwszym załadowaniu działa całkowicie w przeglądarce.'}]},{id:'c',label:'Obliczenia',items:[{q:'Jak dokładne są przeliczenia?',a:'Wszystkie obliczenia opierają się na międzynarodowo uznanych jednostkach SI. Dokładność do 8 cyfr znaczących.'},{q:'Dlaczego kursy walut się różnią?',a:'Przeliczanie walut używa statycznych kursów referencyjnych. Do wiążących transakcji użyj aktualnych kursów EBC.'},{q:'Co oznacza notacja naukowa?',a:'"1.23e+15" oznacza 1,23 × 10¹⁵.'},{q:'Jak przeliczam zużycie paliwa?',a:'Zużycie paliwa jest nieliniowe: l/100km i km/l są odwrotnościami.'}]},{id:'u',label:'Użytkowanie',items:[{q:'Jak zmienić język?',a:'Użyj paska języka na górze. Kliknij wybraną flagę.'},{q:'Jak zapisać ulubione?',a:'Kliknij gwiazdkę ★ obok kategorii.'},{q:'Jak skopiować wynik?',a:'Najedź na kartę wyników: pojawi się ikona kopiowania ⎘.'},{q:'Gdzie jest historia?',a:'Na dole aktywnej kategorii wyświetlane są ostatnie 10 przeliczeń.'}]},{id:'t',label:'Prywatność',items:[{q:'Czy moje dane są przesyłane?',a:'Nie. Wszystkie obliczenia są wykonywane w przeglądarce.'},{q:'Dlaczego widzę reklamy?',a:'Aby sfinansować bezpłatną usługę przez Google AdSense, tylko po Twojej zgodzie.'},{q:'Jak odrzucić pliki cookie?',a:'Przy pierwszej wizycie pojawia się baner cookie.'},{q:'Jakie urządzenia są obsługiwane?',a:'Wszystkie nowoczesne urządzenia: komputer, tablet, smartfon.'}]}]},
+  tr:{title:'SSS',meta:'Sıkça Sorulan Sorular',search_placeholder:'SSS ara…',all:'Hepsi',footer_converter:'⇢ Dönüştürücü',footer_faq:'SSS',footer_help:'Yardım',footer_impressum:'Künye',footer_datenschutz:'Gizlilik',footer_copy:'© Universal-Converter · Tüm hesaplamalar yerel olarak gerçekleştirilir',groups:[{id:'g',label:'Genel',items:[{q:'Universal-Converter nedir?',a:'Universal-Converter, 35\'ten fazla kategori ve 11 dil ile ücretsiz bir çevrimiçi birim dönüştürücüdür.'},{q:'Ücretsiz mi?',a:'Evet, tamamen ücretsiz. Gizli ücret yok, kayıt yok, abonelik yok.'},{q:'Hangi diller destekleniyor?',a:'Almanca, İngilizce, Fransızca, İspanyolca, İtalyanca, Portekizce, Hollandaca, Lehçe, Türkçe, Arapça ve Çince.'},{q:'Çevrimdışı çalışıyor mu?',a:'Evet! İlk yüklemeden sonra tamamen tarayıcıda çalışır.'}]},{id:'c',label:'Hesaplamalar',items:[{q:'Dönüşümler ne kadar doğru?',a:'Tüm hesaplamalar uluslararası kabul görmüş SI birimlerine dayanmaktadır. 8 anlamlı basamağa kadar doğruluk.'},{q:'Döviz kurları neden farklı?',a:'Para birimi dönüşümü statik referans kurları kullanır. Bağlayıcı işlemler için ECB\'nin güncel kurlarını kullanın.'},{q:'Bilimsel gösterim ne anlama gelir?',a:'"1.23e+15", 1,23 × 10¹⁵ anlamına gelir.'},{q:'Yakıt tüketimini nasıl dönüştürürüm?',a:'Yakıt tüketimi doğrusal değildir: l/100km ve km/l birbirinin tersidir.'}]},{id:'u',label:'Kullanım',items:[{q:'Dili nasıl değiştiririm?',a:'Sayfanın üst kısmındaki dil çubuğunu kullanın. İstediğiniz bayrağa tıklayın.'},{q:'Favori birimleri nasıl kaydederim?',a:'Kenar çubuğundaki bir kategorinin yanındaki yıldıza ★ tıklayın.'},{q:'Sonucu nasıl kopyalarım?',a:'Bir sonuç kartının üzerine gelin: kopyalama simgesi ⎘ görünür.'},{q:'Geçmiş nerede?',a:'Aktif kategorinin altında son 10 dönüşüm otomatik olarak gösterilir.'}]},{id:'t',label:'Gizlilik',items:[{q:'Verilerim iletiliyor mu?',a:'Hayır. Tüm hesaplamalar tarayıcıda gerçekleştirilir.'},{q:'Neden reklam görüyorum?',a:'Ücretsiz hizmeti finanse etmek için Google AdSense aracılığıyla reklam gösteriyoruz, yalnızca onayınızdan sonra.'},{q:'Çerezleri nasıl reddedebilirim?',a:'İlk ziyaretinizde bir çerez afişi görünür.'},{q:'Hangi cihazlar destekleniyor?',a:'Tüm modern cihazlar: masaüstü, tablet, akıllı telefon.'}]}]},
+  ar:{title:'الأسئلة الشائعة',meta:'الأسئلة المتكررة',search_placeholder:'البحث في الأسئلة…',all:'الكل',footer_converter:'⇢ المحوّل',footer_faq:'الأسئلة الشائعة',footer_help:'المساعدة',footer_impressum:'إشعار قانوني',footer_datenschutz:'الخصوصية',footer_copy:'© Universal-Converter · جميع الحسابات تتم محلياً',groups:[{id:'g',label:'عام',items:[{q:'ما هو Universal-Converter؟',a:'Universal-Converter هو محوّل وحدات مجاني عبر الإنترنت يضم أكثر من 35 فئة و11 لغة.'},{q:'هل هو مجاني؟',a:'نعم، مجاني تماماً. لا تكاليف خفية، ولا تسجيل، ولا اشتراك.'},{q:'ما اللغات المدعومة؟',a:'الألمانية والإنجليزية والفرنسية والإسبانية والإيطالية والبرتغالية والهولندية والبولندية والتركية والعربية والصينية.'},{q:'هل يعمل بدون اتصال؟',a:'نعم! بعد أول تحميل، يعمل بالكامل في المتصفح.'}]},{id:'c',label:'الحسابات',items:[{q:'ما مدى دقة التحويلات؟',a:'تستند جميع الحسابات إلى وحدات SI المعترف بها دولياً. الدقة تصل إلى 8 أرقام معنوية.'},{q:'لماذا تختلف أسعار الصرف؟',a:'يستخدم تحويل العملات أسعار مرجعية ثابتة. للمعاملات الملزمة، استخدم الأسعار الحالية من البنك المركزي الأوروبي.'},{q:'ماذا تعني الترميز العلمي؟',a:'"1.23e+15" يعني 1.23 × 10¹⁵.'},{q:'كيف أحوّل استهلاك الوقود؟',a:'استهلاك الوقود غير خطي: l/100km وkm/l هما عكس بعضهما البعض.'}]},{id:'u',label:'الاستخدام',items:[{q:'كيف أغير اللغة؟',a:'استخدم شريط اللغة في أعلى الصفحة. انقر على العلم المطلوب.'},{q:'كيف أحفظ المفضلات؟',a:'انقر على النجمة ★ بجانب فئة في الشريط الجانبي.'},{q:'كيف أنسخ نتيجة؟',a:'مرر فوق بطاقة النتيجة: ستظهر أيقونة النسخ ⎘.'},{q:'أين السجل؟',a:'في أسفل الفئة النشطة، تظهر آخر 10 تحويلات تلقائياً.'}]},{id:'t',label:'الخصوصية',items:[{q:'هل يتم نقل بياناتي؟',a:'لا. جميع الحسابات تُنفَّذ في المتصفح.'},{q:'لماذا أرى إعلانات؟',a:'لتمويل الخدمة المجانية عبر Google AdSense، فقط بعد موافقتك.'},{q:'كيف أرفض ملفات تعريف الارتباط؟',a:'تظهر لافتة ملفات تعريف الارتباط في أول زيارة.'},{q:'ما الأجهزة المدعومة؟',a:'جميع الأجهزة الحديثة: سطح المكتب والجهاز اللوحي والهاتف الذكي.'}]}]},
+  zh:{title:'常见问题',meta:'常见问题解答',search_placeholder:'搜索常见问题…',all:'全部',footer_converter:'⇢ 转换器',footer_faq:'常见问题',footer_help:'帮助',footer_impressum:'法律声明',footer_datenschutz:'隐私',footer_copy:'© Universal-Converter · 所有计算均在本地执行',groups:[{id:'g',label:'一般',items:[{q:'什么是 Universal-Converter？',a:'Universal-Converter 是一个免费的在线单位转换器，拥有超过35个类别和11种语言。'},{q:'它是免费的吗？',a:'是的，完全免费。没有隐藏费用，无需注册，无需订阅。'},{q:'支持哪些语言？',a:'德语、英语、法语、西班牙语、意大利语、葡萄牙语、荷兰语、波兰语、土耳其语、阿拉伯语和中文。'},{q:'离线可以使用吗？',a:'可以！首次加载后，完全在浏览器中运行，无需互联网连接。'}]},{id:'c',label:'计算',items:[{q:'转换的精度如何？',a:'所有计算均基于国际认可的SI单位。精度高达8位有效数字。'},{q:'为什么汇率会有差异？',a:'货币转换使用静态参考汇率。对于具有约束力的交易，请使用欧洲央行的最新汇率。'},{q:'科学计数法是什么意思？',a:'"1.23e+15"表示1.23 × 10¹⁵。'},{q:'如何转换油耗？',a:'油耗是非线性的：l/100km和km/l互为倒数，计算器自动处理。'}]},{id:'u',label:'使用',items:[{q:'如何切换语言？',a:'使用页面顶部的语言栏，点击所需旗帜即可。'},{q:'如何保存收藏单位？',a:'点击侧边栏中类别旁边的星号★。'},{q:'如何复制结果？',a:'将鼠标悬停在结果卡片上，会出现复制图标⎘。'},{q:'历史记录在哪里？',a:'在活动类别底部自动显示最近10次转换。'}]},{id:'t',label:'隐私',items:[{q:'我的数据会被传输吗？',a:'不会。所有计算均在浏览器中执行，不向服务器传输任何值。'},{q:'为什么我看到广告？',a:'为了通过Google AdSense为免费服务提供资金，仅在您同意后加载。'},{q:'如何拒绝Cookie？',a:'首次访问时会出现Cookie横幅，您可以单独接受或拒绝。'},{q:'支持哪些设备？',a:'所有现代设备：台式机、平板电脑、智能手机。'}]}]},
+};
+
+let currentLang = localStorage.getItem('uc_lang') || 'de';
+let activeGroup = 'all';
+
+function buildLangBar() {
+  const bar = document.getElementById('lang-bar');
+  bar.innerHTML = LANGS.map(l =>
+    `<button class="lang-btn${l.code===currentLang?' active':''}" data-lang="${l.code}" title="${l.name}">
+      <span>${l.flag}</span><span>${l.code.toUpperCase()}</span>
+    </button>`
+  ).join('');
+  bar.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+}
+
+function setLang(code) {
+  currentLang = code;
+  localStorage.setItem('uc_lang', code);
+  const lang = LANGS.find(l=>l.code===code);
+  document.documentElement.dir = lang?.rtl ? 'rtl' : 'ltr';
+  document.documentElement.lang = code;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===code));
+  activeGroup = 'all';
+  render();
+}
+
+function render() {
+  const d = FAQ_DATA[currentLang] || FAQ_DATA['de'];
+  document.getElementById('page-title').textContent = d.title;
+  document.getElementById('page-meta').textContent = d.meta + ' · Universal-Converter';
+  document.getElementById('faq-search').placeholder = d.search_placeholder;
+  document.getElementById('footer-converter').textContent = d.footer_converter;
+  document.getElementById('footer-faq').textContent = d.footer_faq;
+  document.getElementById('footer-help').textContent = d.footer_help;
+  document.getElementById('footer-impressum').textContent = d.footer_impressum;
+  document.getElementById('footer-datenschutz').textContent = d.footer_datenschutz;
+  document.getElementById('footer-copy').textContent = d.footer_copy;
+
+  // Category buttons
+  const cats = document.getElementById('faq-cats');
+  cats.innerHTML = `<button class="faq-cat-btn${activeGroup==='all'?' active':''}" data-group="all">${d.all}</button>` +
+    d.groups.map(g => `<button class="faq-cat-btn${activeGroup===g.id?' active':''}" data-group="${g.id}">${g.label}</button>`).join('');
+  cats.querySelectorAll('.faq-cat-btn').forEach(b => b.addEventListener('click', () => {
+    activeGroup = b.dataset.group;
+    render();
+  }));
+
+  renderFAQ(d, '');
+}
+
+function renderFAQ(d, query) {
+  const q = query.toLowerCase().trim();
+  const content = document.getElementById('faq-content');
+  let html = '';
+  let total = 0;
+  d.groups.forEach(group => {
+    if(activeGroup !== 'all' && activeGroup !== group.id) return;
+    const items = group.items.filter(item =>
+      !q || item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q)
+    );
+    if(!items.length) return;
+    total += items.length;
+    html += `<div class="faq-group"><div class="faq-group-title">${group.label}</div>`;
+    items.forEach((item, i) => {
+      const qhl = q ? item.q.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<mark style="background:rgba(0,200,255,0.2);color:var(--blue-bright);border-radius:2px">$1</mark>') : item.q;
+      const ahl = q ? item.a.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<mark style="background:rgba(0,200,255,0.2);color:var(--blue-bright);border-radius:2px">$1</mark>') : item.a;
+      html += `<div class="faq-item" id="faq-${group.id}-${i}">
+        <div class="faq-q" onclick="toggleFAQ('faq-${group.id}-${i}')">
+          <span>${qhl}</span><span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-a">${ahl}</div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  content.innerHTML = total ? html : `<div class="no-results">Keine Ergebnisse gefunden.</div>`;
+}
+
+window.toggleFAQ = function(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+};
+
+document.getElementById('faq-search').addEventListener('input', function() {
+  const d = FAQ_DATA[currentLang] || FAQ_DATA['de'];
+  renderFAQ(d, this.value);
+});
+
+buildLangBar();
+render();
+</script>
+</body>
+</html>

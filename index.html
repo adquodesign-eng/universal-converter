@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="refresh" content="3;url=universal-calculator.html">
-<title>UNIVERSAL-CALCULATOR — Einheitenumrechner</title>
+<meta http-equiv="refresh" content="3;url=universal-converter.html">
+<title>UNIVERSAL-CONVERTER — Einheitenumrechner</title>
 <meta name="description" content="Kostenloser Einheitenumrechner für Länge, Gewicht, Temperatur, Währung und über 50 weitere Kategorien — in 11 Sprachen.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -183,7 +183,7 @@ body::after  { bottom: 20px; right: 20px; border-left: none; border-top: none; }
 <body>
 
 <div class="card">
-  <a class="logo" href="universal-calculator.html">UNIVERSAL-<span>CALCULATOR</span></a>
+  <a class="logo" href="universal-converter.html">UNIVERSAL-<span>CONVERTER</span></a>
   <div class="tagline">Einheitenumrechner · 11 Sprachen · 50+ Kategorien</div>
 
   <div class="features">
@@ -218,7 +218,7 @@ body::after  { bottom: 20px; right: 20px; border-left: none; border-top: none; }
   </div>
 
   <div class="cta-wrap">
-    <a class="cta" href="universal-calculator.html">
+    <a class="cta" href="universal-converter.html">
       Zum Rechner starten
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -246,7 +246,7 @@ const iv = setInterval(() => {
   if (secs <= 0) {
     clearInterval(iv);
     txt.textContent = 'Weiterleitung …';
-    window.location.href = 'universal-calculator.html';
+    window.location.href = 'universal-converter.html';
   } else {
     txt.textContent = `Weiterleitung in ${secs} s …`;
   }

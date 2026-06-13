@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hilfe — UNIVERSAL-CONVERTER</title>
+<meta name="description" content="Hilfeseite für Universal-Converter – Anleitung zur Nutzung des Einheitenrechners.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg-deep:#050c1a;--bg-panel:#081428;--bg-card:#0a1930;--blue-bright:#00c8ff;--blue-mid:#0077aa;--blue-dim:#003355;--copper:#d4824a;--copper-light:#f0a060;--copper-dim:#7a3a1a;--grid-line:rgba(0,150,200,0.08);--text-primary:#c8e8ff;--text-secondary:#5a90b0;--border:rgba(0,150,200,0.2);--success:#00e5a0;--lang-bar-h:32px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:15px;scroll-behavior:smooth;}
+body{background:var(--bg-deep);color:var(--text-primary);font-family:'IBM Plex Mono',monospace;min-height:100vh;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:40px 40px;padding-top:var(--lang-bar-h);}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg-deep);}::-webkit-scrollbar-thumb{background:var(--blue-dim);border-radius:3px;}
+#lang-bar{position:fixed;top:0;left:0;right:0;height:var(--lang-bar-h);background:rgba(4,10,22,0.98);border-bottom:1px solid rgba(212,130,74,0.25);display:flex;align-items:center;justify-content:center;gap:3px;z-index:200;padding:0 12px;overflow-x:auto;scrollbar-width:none;}
+#lang-bar::-webkit-scrollbar{display:none;}
+.lang-btn{background:none;border:1px solid transparent;border-radius:3px;cursor:pointer;padding:2px 7px;font-size:0.72rem;color:var(--text-secondary);font-family:'IBM Plex Mono',monospace;transition:all 0.15s;white-space:nowrap;display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.lang-btn:hover{border-color:var(--border);color:var(--text-primary);}
+.lang-btn.active{border-color:var(--copper);color:var(--copper);background:rgba(212,130,74,0.1);}
+.page-wrap{max-width:820px;margin:0 auto;padding:40px 20px 80px;}
+.page-header{margin-bottom:36px;padding-bottom:20px;border-bottom:1px solid var(--border);position:relative;}
+.page-header::after{content:'';position:absolute;bottom:-1px;left:0;width:120px;height:2px;background:linear-gradient(90deg,var(--copper),transparent);}
+.logo{font-family:'Orbitron',monospace;font-weight:900;font-size:0.95rem;color:var(--blue-bright);letter-spacing:0.15em;margin-bottom:12px;display:block;text-decoration:none;}
+.logo span{color:var(--copper);}
+.page-title{font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:700;color:var(--text-primary);letter-spacing:0.06em;margin-bottom:6px;}
+.page-meta{font-size:0.7rem;color:var(--text-secondary);letter-spacing:0.15em;text-transform:uppercase;}
+.help-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:32px;}
+.help-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:4px;padding:20px;position:relative;transition:border-color 0.15s;}
+.help-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue-dim),transparent);}
+.help-card:hover{border-color:var(--blue-mid);}
+.help-card-icon{font-size:1.8rem;margin-bottom:12px;}
+.help-card-title{font-family:'Orbitron',monospace;font-size:0.85rem;font-weight:700;color:var(--blue-bright);letter-spacing:0.08em;margin-bottom:8px;}
+.help-card-text{font-size:0.78rem;color:var(--text-secondary);line-height:1.8;}
+.help-section{background:var(--bg-panel);border:1px solid var(--border);border-radius:4px;margin-bottom:16px;overflow:hidden;position:relative;}
+.help-section::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--copper-dim),transparent);}
+.help-section-head{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.help-section-icon{font-size:1rem;}
+.help-section-title{font-size:0.65rem;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--copper);}
+.help-section-body{padding:18px 20px;display:flex;flex-direction:column;gap:14px;}
+.help-step{display:flex;gap:14px;align-items:flex-start;}
+.help-step-num{width:28px;height:28px;border-radius:50%;background:rgba(0,100,150,0.2);border:1px solid var(--blue-dim);color:var(--blue-bright);font-size:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Orbitron',monospace;}
+.help-step-content{flex:1;}
+.help-step-title{font-size:0.82rem;color:var(--text-primary);margin-bottom:4px;font-weight:500;}
+.help-step-text{font-size:0.77rem;color:var(--text-secondary);line-height:1.7;}
+.help-tip{background:rgba(0,200,255,0.06);border:1px solid var(--blue-dim);border-radius:3px;padding:10px 14px;font-size:0.78rem;color:var(--text-secondary);line-height:1.7;display:flex;gap:8px;align-items:flex-start;}
+.help-tip strong{color:var(--blue-bright);}
+kbd{background:var(--bg-card);border:1px solid var(--blue-dim);border-radius:3px;padding:1px 6px;font-size:0.8em;color:var(--blue-bright);font-family:'IBM Plex Mono',monospace;}
+.shortcut-grid{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;align-items:center;}
+.shortcut-key{font-size:0.8rem;}
+.shortcut-desc{font-size:0.78rem;color:var(--text-secondary);}
+.site-footer{margin-top:48px;padding:20px 0 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-brand{font-family:'Orbitron',monospace;font-size:0.7rem;font-weight:700;color:var(--blue-bright);letter-spacing:0.15em;text-decoration:none;}
+.footer-brand span{color:var(--copper);}
+.footer-links{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.footer-link{font-size:0.68rem;color:var(--text-secondary);text-decoration:none;letter-spacing:0.08em;padding:5px 10px;border:1px solid transparent;border-radius:3px;transition:all 0.15s;}
+.footer-link:hover{color:var(--blue-bright);border-color:var(--border);}
+.footer-link.active{color:var(--copper);border-color:rgba(212,130,74,0.3);}
+.footer-sep{color:var(--border);font-size:0.65rem;}
+.footer-copy{width:100%;font-size:0.6rem;color:var(--text-secondary);letter-spacing:0.1em;padding:10px 0 4px;opacity:0.55;}
+@media(max-width:600px){.page-wrap{padding:24px 14px 60px;}.page-title{font-size:1.3rem;}.help-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="lang-bar"></div>
+<div class="page-wrap">
+  <header class="page-header">
+    <a class="logo" href="/">UNIVERSAL-<span>CONVERTER</span></a>
+    <h1 class="page-title" id="page-title">Hilfe</h1>
+    <div class="page-meta" id="page-meta">Anleitung & Tipps · Universal-Converter</div>
+  </header>
+
+  <div class="help-grid" id="help-cards"></div>
+  <div id="help-sections"></div>
+
+  <footer class="site-footer">
+    <a class="footer-brand" href="/">UNIVERSAL-<span>CONVERTER</span></a>
+    <nav class="footer-links">
+      <a class="footer-link" href="/universal-converter.html" id="footer-converter">⇢ Rechner</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link" href="/faq.html" id="footer-faq">FAQ</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link active" href="/hilfe.html" id="footer-help">Hilfe</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link" href="/impressum.html" id="footer-impressum">Impressum</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link" href="/datenschutz.html" id="footer-datenschutz">Datenschutz</a>
+    </nav>
+    <div class="footer-copy" id="footer-copy">© Universal-Converter · Alle Berechnungen erfolgen lokal im Browser</div>
+  </footer>
+</div>
+
+<script>
+const LANGS=[{code:'de',flag:'🇩🇪',name:'Deutsch'},{code:'en',flag:'🇬🇧',name:'English'},{code:'fr',flag:'🇫🇷',name:'Français'},{code:'es',flag:'🇪🇸',name:'Español'},{code:'it',flag:'🇮🇹',name:'Italiano'},{code:'pt',flag:'🇵🇹',name:'Português'},{code:'nl',flag:'🇳🇱',name:'Nederlands'},{code:'pl',flag:'🇵🇱',name:'Polski'},{code:'tr',flag:'🇹🇷',name:'Türkçe'},{code:'ar',flag:'🇸🇦',name:'العربية',rtl:true},{code:'zh',flag:'🇨🇳',name:'中文'}];
+
+const HELP={
+  de:{title:'Hilfe',meta:'Anleitung & Tipps',footer_converter:'⇢ Rechner',footer_faq:'FAQ',footer_help:'Hilfe',footer_impressum:'Impressum',footer_datenschutz:'Datenschutz',footer_copy:'© Universal-Converter · Alle Berechnungen lokal im Browser',
+    cards:[
+      {icon:'🚀',title:'Schnellstart',text:'Wähle eine Kategorie in der Seitenleiste → Wert eingeben → Alle Ergebnisse erscheinen sofort. Kein Button-Klick nötig.'},
+      {icon:'🌍',title:'Sprache wechseln',text:'Klicke auf eine Flagge in der Leiste ganz oben. Die Sprache wird gespeichert und beim nächsten Besuch automatisch genutzt.'},
+      {icon:'⭐',title:'Favoriten',text:'Klicke auf ★ neben einer Kategorie, um sie als Favorit zu speichern. Favoriten bleiben auch nach dem Schließen des Browsers erhalten.'},
+      {icon:'📋',title:'Ergebnis kopieren',text:'Fahre mit der Maus über eine Ergebniskarte → Kopier-Symbol ⎘ erscheint → Klicken zum Kopieren in die Zwischenablage.'},
+    ],
+    sections:[
+      {icon:'📏',title:'Kategorien & Einheiten',steps:[
+        {num:'1',title:'Kategorie auswählen',text:'Klicke links in der Seitenleiste (Desktop) oder unten in der Navigation (Mobil) auf eine Kategorie wie „Länge & Entfernung".'},
+        {num:'2',title:'Wert eingeben',text:'Gib deinen Ausgangswert in das Eingabefeld ein. Die Umrechnung erfolgt sofort – alle Einheiten der Kategorie werden gleichzeitig angezeigt.'},
+        {num:'3',title:'Quelleinheit wählen',text:'Wähle deine Ausgangseinheit aus dem Dropdown-Menü. Zum Beispiel „Meter (m)" wenn du Meter umrechnen möchtest.'},
+        {num:'4',title:'Ergebnisse lesen',text:'Alle Zieleinheiten werden als Karten angezeigt. Die Quelleinheit ist mit „▶ QUELLE" markiert. Fahre über eine Karte um den Kopier-Button zu sehen.'},
+      ]},
+      {icon:'🔍',title:'Suche & Navigation',steps:[
+        {num:'1',title:'Globale Suche nutzen',text:'Klicke auf das Suchfeld im Header und gib einen Einheitennamen ein (z.B. „Fuß" oder „Inch"). Alle passenden Kategorien werden sofort angezeigt.'},
+        {num:'2',title:'Suchergebnis öffnen',text:'Klicke auf ein Suchergebnis um direkt zur passenden Kategorie zu springen.'},
+        {num:'3',title:'Seitenleiste auf Mobil',text:'Auf dem Smartphone: Tippe auf das Hamburger-Menü (☰) oben rechts um die Kategorienliste zu öffnen.'},
+      ]},
+      {icon:'⏱️',title:'Verlauf & Favoriten',steps:[
+        {num:'1',title:'Verlauf nutzen',text:'Die letzten 10 Umrechnungen werden am unteren Rand der aktuellen Kategorie angezeigt. Klicke auf einen Eintrag um ihn wiederzuverwenden.'},
+        {num:'2',title:'Verlauf löschen',text:'Klicke auf „Löschen" neben dem Verlaufstitel um alle gespeicherten Einträge zu entfernen.'},
+        {num:'3',title:'Favoriten verwalten',text:'Klicke den Stern ★ neben einer Kategorie um sie als Favorit zu markieren oder die Markierung zu entfernen.'},
+      ]},
+      {icon:'💡',title:'Tipps & Tricks',steps:[
+        {num:'💡',title:'Sehr große/kleine Zahlen',text:'Der Rechner wechselt automatisch zur wissenschaftlichen Notation (z.B. 1.23e+15). Das ist normal und bedeutet 1,23 × 10¹⁵.'},
+        {num:'💡',title:'Temperatur ist nicht-linear',text:'Celsius, Fahrenheit und Kelvin können nicht mit einem einfachen Multiplikationsfaktor umgerechnet werden. Der Rechner berücksichtigt die Offset-Formeln automatisch.'},
+        {num:'💡',title:'Kraftstoffverbrauch',text:'l/100km und km/l sind Kehrwerte. Der Rechner erkennt das automatisch und rechnet korrekt um.'},
+        {num:'💡',title:'Währungen',text:'Die Währungskurse sind statische Referenzwerte. Für aktuelle Kurse nutze die EZB-Website oder deine Bank.'},
+      ]},
+    ]
+  },
+  en:{title:'Help',meta:'Guide & Tips',footer_converter:'⇢ Converter',footer_faq:'FAQ',footer_help:'Help',footer_impressum:'Imprint',footer_datenschutz:'Privacy',footer_copy:'© Universal-Converter · All calculations run locally',
+    cards:[
+      {icon:'🚀',title:'Quick Start',text:'Select a category in the sidebar → Enter a value → All results appear instantly. No button click needed.'},
+      {icon:'🌍',title:'Change Language',text:'Click a flag in the bar at the very top. Your language choice is saved for your next visit.'},
+      {icon:'⭐',title:'Favorites',text:'Click ★ next to a category to save it as a favorite. Favorites persist even after closing the browser.'},
+      {icon:'📋',title:'Copy Result',text:'Hover over a result card → Copy icon ⎘ appears → Click to copy to clipboard.'},
+    ],
+    sections:[
+      {icon:'📏',title:'Categories & Units',steps:[
+        {num:'1',title:'Select a category',text:'Click on a category in the left sidebar (desktop) or bottom navigation (mobile), e.g. "Length & Distance".'},
+        {num:'2',title:'Enter a value',text:'Type your starting value in the input field. Conversion happens instantly – all units in the category are shown simultaneously.'},
+        {num:'3',title:'Choose source unit',text:'Select your source unit from the dropdown. E.g. "Meter (m)" if you want to convert meters.'},
+        {num:'4',title:'Read results',text:'All target units are shown as cards. The source unit is marked with "▶ SOURCE". Hover over a card to see the copy button.'},
+      ]},
+      {icon:'🔍',title:'Search & Navigation',steps:[
+        {num:'1',title:'Use global search',text:'Click the search field in the header and type a unit name (e.g. "foot" or "inch"). Matching categories appear instantly.'},
+        {num:'2',title:'Open a search result',text:'Click a result to jump directly to the matching category.'},
+        {num:'3',title:'Sidebar on mobile',text:'On smartphones: tap the hamburger menu (☰) top right to open the category list.'},
+      ]},
+      {icon:'⏱️',title:'History & Favorites',steps:[
+        {num:'1',title:'Use history',text:'The last 10 conversions are shown at the bottom of the current category. Click an entry to reuse it.'},
+        {num:'2',title:'Clear history',text:'Click "Clear" next to the history title to remove all saved entries.'},
+        {num:'3',title:'Manage favorites',text:'Click the star ★ next to a category to mark or unmark it as a favorite.'},
+      ]},
+      {icon:'💡',title:'Tips & Tricks',steps:[
+        {num:'💡',title:'Very large/small numbers',text:'The calculator automatically switches to scientific notation (e.g. 1.23e+15). This is normal and means 1.23 × 10¹⁵.'},
+        {num:'💡',title:'Temperature is non-linear',text:'Celsius, Fahrenheit and Kelvin cannot be converted with a simple multiplication factor. The calculator handles the offset formulas automatically.'},
+        {num:'💡',title:'Fuel consumption',text:'l/100km and km/l are reciprocals. The calculator recognizes this automatically and converts correctly.'},
+        {num:'💡',title:'Currencies',text:'Currency rates are static reference values. For current rates, use the ECB website or your bank.'},
+      ]},
+    ]
+  },
+  fr:{title:'Aide',meta:'Guide & Conseils',footer_converter:'⇢ Convertisseur',footer_faq:'FAQ',footer_help:'Aide',footer_impressum:'Mentions légales',footer_datenschutz:'Confidentialité',footer_copy:'© Universal-Converter · Tous les calculs localement',cards:[{icon:'🚀',title:'Démarrage rapide',text:'Sélectionnez une catégorie → Entrez une valeur → Les résultats apparaissent instantanément.'},{icon:'🌍',title:'Changer de langue',text:'Cliquez sur un drapeau en haut. Votre choix est sauvegardé.'},{icon:'⭐',title:'Favoris',text:'Cliquez sur ★ à côté d\'une catégorie pour la sauvegarder.'},{icon:'📋',title:'Copier un résultat',text:'Survolez une carte → l\'icône ⎘ apparaît → Cliquez pour copier.'}],sections:[{icon:'📏',title:'Catégories & Unités',steps:[{num:'1',title:'Sélectionner une catégorie',text:'Cliquez sur une catégorie dans la barre latérale gauche.'},{num:'2',title:'Entrer une valeur',text:'Tapez votre valeur dans le champ. La conversion est instantanée.'},{num:'3',title:'Choisir l\'unité source',text:'Sélectionnez votre unité source dans le menu déroulant.'},{num:'4',title:'Lire les résultats',text:'Toutes les unités cibles s\'affichent comme des cartes.'}]},{icon:'💡',title:'Conseils',steps:[{num:'💡',title:'Grands/petits nombres',text:'La calculatrice passe automatiquement en notation scientifique.'},{num:'💡',title:'Température non linéaire',text:'La calculatrice gère automatiquement les formules de décalage.'},{num:'💡',title:'Consommation carburant',text:'l/100km et km/l sont des inverses, gérés automatiquement.'},{num:'💡',title:'Devises',text:'Les taux sont des valeurs de référence statiques.'}]}]},
+  es:{title:'Ayuda',meta:'Guía y Consejos',footer_converter:'⇢ Conversor',footer_faq:'FAQ',footer_help:'Ayuda',footer_impressum:'Aviso legal',footer_datenschutz:'Privacidad',footer_copy:'© Universal-Converter · Todos los cálculos localmente',cards:[{icon:'🚀',title:'Inicio rápido',text:'Selecciona una categoría → Introduce un valor → Los resultados aparecen al instante.'},{icon:'🌍',title:'Cambiar idioma',text:'Haz clic en una bandera arriba. Tu elección se guarda.'},{icon:'⭐',title:'Favoritos',text:'Haz clic en ★ junto a una categoría para guardarla.'},{icon:'📋',title:'Copiar resultado',text:'Pasa el ratón sobre una tarjeta → aparece ⎘ → clic para copiar.'}],sections:[{icon:'📏',title:'Categorías y Unidades',steps:[{num:'1',title:'Seleccionar categoría',text:'Haz clic en una categoría en la barra lateral izquierda.'},{num:'2',title:'Introducir valor',text:'Escribe tu valor. La conversión es instantánea.'},{num:'3',title:'Elegir unidad de origen',text:'Selecciona tu unidad de origen en el menú desplegable.'},{num:'4',title:'Leer resultados',text:'Todas las unidades de destino se muestran como tarjetas.'}]},{icon:'💡',title:'Consejos',steps:[{num:'💡',title:'Números grandes/pequeños',text:'La calculadora cambia automáticamente a notación científica.'},{num:'💡',title:'Temperatura no lineal',text:'La calculadora maneja las fórmulas automáticamente.'},{num:'💡',title:'Consumo de combustible',text:'l/100km y km/l son recíprocos, gestionados automáticamente.'},{num:'💡',title:'Divisas',text:'Los tipos de cambio son valores de referencia estáticos.'}]}]},
+  it:{title:'Aiuto',meta:'Guida e Suggerimenti',footer_converter:'⇢ Convertitore',footer_faq:'FAQ',footer_help:'Aiuto',footer_impressum:'Note legali',footer_datenschutz:'Privacy',footer_copy:'© Universal-Converter · Tutti i calcoli localmente',cards:[{icon:'🚀',title:'Avvio rapido',text:'Seleziona una categoria → Inserisci un valore → I risultati appaiono immediatamente.'},{icon:'🌍',title:'Cambia lingua',text:'Clicca su una bandiera in alto. La scelta viene salvata.'},{icon:'⭐',title:'Preferiti',text:'Clicca su ★ accanto a una categoria per salvarla.'},{icon:'📋',title:'Copia risultato',text:'Passa il mouse su una scheda → appare ⎘ → clicca per copiare.'}],sections:[{icon:'📏',title:'Categorie e Unità',steps:[{num:'1',title:'Seleziona categoria',text:'Clicca su una categoria nella barra laterale sinistra.'},{num:'2',title:'Inserisci valore',text:'Digita il tuo valore. La conversione è istantanea.'},{num:'3',title:'Scegli unità sorgente',text:'Seleziona la tua unità sorgente dal menu a tendina.'},{num:'4',title:'Leggi i risultati',text:'Tutte le unità target vengono mostrate come schede.'}]},{icon:'💡',title:'Suggerimenti',steps:[{num:'💡',title:'Numeri grandi/piccoli',text:'La calcolatrice passa automaticamente alla notazione scientifica.'},{num:'💡',title:'Temperatura non lineare',text:'La calcolatrice gestisce automaticamente le formule.'},{num:'💡',title:'Consumo carburante',text:'l/100km e km/l sono reciproci, gestiti automaticamente.'},{num:'💡',title:'Valute',text:'I tassi di cambio sono valori di riferimento statici.'}]}]},
+  pt:{title:'Ajuda',meta:'Guia e Dicas',footer_converter:'⇢ Conversor',footer_faq:'FAQ',footer_help:'Ajuda',footer_impressum:'Aviso legal',footer_datenschutz:'Privacidade',footer_copy:'© Universal-Converter · Todos os cálculos localmente',cards:[{icon:'🚀',title:'Início rápido',text:'Selecione uma categoria → Insira um valor → Os resultados aparecem instantaneamente.'},{icon:'🌍',title:'Mudar idioma',text:'Clique numa bandeira em cima. A sua escolha é guardada.'},{icon:'⭐',title:'Favoritos',text:'Clique em ★ ao lado de uma categoria para guardá-la.'},{icon:'📋',title:'Copiar resultado',text:'Passe o rato sobre um cartão → aparece ⎘ → clique para copiar.'}],sections:[{icon:'📏',title:'Categorias e Unidades',steps:[{num:'1',title:'Selecionar categoria',text:'Clique numa categoria na barra lateral esquerda.'},{num:'2',title:'Inserir valor',text:'Digite o seu valor. A conversão é instantânea.'},{num:'3',title:'Escolher unidade de origem',text:'Selecione a sua unidade de origem no menu suspenso.'},{num:'4',title:'Ler resultados',text:'Todas as unidades de destino são mostradas como cartões.'}]},{icon:'💡',title:'Dicas',steps:[{num:'💡',title:'Números grandes/pequenos',text:'A calculadora muda automaticamente para notação científica.'},{num:'💡',title:'Temperatura não linear',text:'A calculadora trata as fórmulas automaticamente.'},{num:'💡',title:'Consumo de combustível',text:'l/100km e km/l são recíprocos, tratados automaticamente.'},{num:'💡',title:'Moedas',text:'As taxas de câmbio são valores de referência estáticos.'}]}]},
+  nl:{title:'Hulp',meta:'Gids en Tips',footer_converter:'⇢ Omzetter',footer_faq:'FAQ',footer_help:'Hulp',footer_impressum:'Colofon',footer_datenschutz:'Privacy',footer_copy:'© Universal-Converter · Alle berekeningen lokaal',cards:[{icon:'🚀',title:'Snel starten',text:'Selecteer een categorie → Voer een waarde in → Resultaten verschijnen direct.'},{icon:'🌍',title:'Taal wijzigen',text:'Klik op een vlag bovenaan. Uw keuze wordt opgeslagen.'},{icon:'⭐',title:'Favorieten',text:'Klik op ★ naast een categorie om hem op te slaan.'},{icon:'📋',title:'Resultaat kopiëren',text:'Beweeg over een kaart → ⎘ verschijnt → klik om te kopiëren.'}],sections:[{icon:'📏',title:'Categorieën & Eenheden',steps:[{num:'1',title:'Categorie selecteren',text:'Klik op een categorie in de linker zijbalk.'},{num:'2',title:'Waarde invoeren',text:'Typ uw waarde. De omzetting is direct.'},{num:'3',title:'Broneenheid kiezen',text:'Selecteer uw broneenheid in het vervolgkeuzemenu.'},{num:'4',title:'Resultaten lezen',text:'Alle doeleenheden worden als kaarten weergegeven.'}]},{icon:'💡',title:'Tips',steps:[{num:'💡',title:'Grote/kleine getallen',text:'De rekenmachine schakelt automatisch naar wetenschappelijke notatie.'},{num:'💡',title:'Temperatuur is niet-lineair',text:'De rekenmachine verwerkt de formules automatisch.'},{num:'💡',title:'Brandstofverbruik',text:'l/100km en km/l zijn keerwaarden, automatisch verwerkt.'},{num:'💡',title:'Valuta\'s',text:'Wisselkoersen zijn statische referentiewaarden.'}]}]},
+  pl:{title:'Pomoc',meta:'Przewodnik i Wskazówki',footer_converter:'⇢ Przelicznik',footer_faq:'FAQ',footer_help:'Pomoc',footer_impressum:'Nota prawna',footer_datenschutz:'Prywatność',footer_copy:'© Universal-Converter · Wszystkie obliczenia lokalnie',cards:[{icon:'🚀',title:'Szybki start',text:'Wybierz kategorię → Wprowadź wartość → Wyniki pojawiają się natychmiast.'},{icon:'🌍',title:'Zmień język',text:'Kliknij flagę na górze. Twój wybór jest zapisywany.'},{icon:'⭐',title:'Ulubione',text:'Kliknij ★ obok kategorii, aby ją zapisać.'},{icon:'📋',title:'Kopiuj wynik',text:'Najedź na kartę → pojawi się ⎘ → kliknij, aby skopiować.'}],sections:[{icon:'📏',title:'Kategorie i Jednostki',steps:[{num:'1',title:'Wybierz kategorię',text:'Kliknij kategorię w lewym pasku bocznym.'},{num:'2',title:'Wprowadź wartość',text:'Wpisz swoją wartość. Przeliczanie jest natychmiastowe.'},{num:'3',title:'Wybierz jednostkę źródłową',text:'Wybierz jednostkę źródłową z menu rozwijanego.'},{num:'4',title:'Odczytaj wyniki',text:'Wszystkie jednostki docelowe są wyświetlane jako karty.'}]},{icon:'💡',title:'Wskazówki',steps:[{num:'💡',title:'Duże/małe liczby',text:'Kalkulator automatycznie przełącza się na notację naukową.'},{num:'💡',title:'Temperatura jest nieliniowa',text:'Kalkulator automatycznie obsługuje wzory.'},{num:'💡',title:'Zużycie paliwa',text:'l/100km i km/l są odwrotnościami, obsługiwanymi automatycznie.'},{num:'💡',title:'Waluty',text:'Kursy walut są statycznymi wartościami referencyjnymi.'}]}]},
+  tr:{title:'Yardım',meta:'Kılavuz ve İpuçları',footer_converter:'⇢ Dönüştürücü',footer_faq:'SSS',footer_help:'Yardım',footer_impressum:'Künye',footer_datenschutz:'Gizlilik',footer_copy:'© Universal-Converter · Tüm hesaplamalar yerel olarak',cards:[{icon:'🚀',title:'Hızlı Başlangıç',text:'Bir kategori seçin → Değer girin → Sonuçlar anında görünür.'},{icon:'🌍',title:'Dil Değiştir',text:'Üstteki bir bayrağa tıklayın. Seçiminiz kaydedilir.'},{icon:'⭐',title:'Favoriler',text:'Kaydetmek için bir kategorinin yanındaki ★ simgesine tıklayın.'},{icon:'📋',title:'Sonuç Kopyala',text:'Bir kartın üzerine gelin → ⎘ görünür → kopyalamak için tıklayın.'}],sections:[{icon:'📏',title:'Kategoriler ve Birimler',steps:[{num:'1',title:'Kategori seçin',text:'Sol kenar çubuğunda bir kategoriye tıklayın.'},{num:'2',title:'Değer girin',text:'Değerinizi yazın. Dönüşüm anında gerçekleşir.'},{num:'3',title:'Kaynak birimi seçin',text:'Açılır menüden kaynak biriminizi seçin.'},{num:'4',title:'Sonuçları okuyun',text:'Tüm hedef birimler kart olarak gösterilir.'}]},{icon:'💡',title:'İpuçları',steps:[{num:'💡',title:'Büyük/küçük sayılar',text:'Hesap makinesi otomatik olarak bilimsel gösterime geçer.'},{num:'💡',title:'Sıcaklık doğrusal değildir',text:'Hesap makinesi formülleri otomatik olarak işler.'},{num:'💡',title:'Yakıt tüketimi',text:'l/100km ve km/l birbirinin tersidir, otomatik olarak işlenir.'},{num:'💡',title:'Dövizler',text:'Döviz kurları statik referans değerleridir.'}]}]},
+  ar:{title:'المساعدة',meta:'الدليل والنصائح',footer_converter:'⇢ المحوّل',footer_faq:'الأسئلة الشائعة',footer_help:'المساعدة',footer_impressum:'إشعار قانوني',footer_datenschutz:'الخصوصية',footer_copy:'© Universal-Converter · جميع الحسابات محلياً',cards:[{icon:'🚀',title:'بداية سريعة',text:'اختر فئة ← أدخل قيمة ← تظهر النتائج فوراً.'},{icon:'🌍',title:'تغيير اللغة',text:'انقر على علم في الأعلى. يتم حفظ اختيارك.'},{icon:'⭐',title:'المفضلة',text:'انقر على ★ بجانب فئة لحفظها.'},{icon:'📋',title:'نسخ النتيجة',text:'مرر فوق بطاقة ← يظهر ⎘ ← انقر للنسخ.'}],sections:[{icon:'📏',title:'الفئات والوحدات',steps:[{num:'1',title:'اختر فئة',text:'انقر على فئة في الشريط الجانبي الأيسر.'},{num:'2',title:'أدخل قيمة',text:'اكتب قيمتك. التحويل فوري.'},{num:'3',title:'اختر الوحدة المصدر',text:'اختر وحدتك المصدر من القائمة المنسدلة.'},{num:'4',title:'اقرأ النتائج',text:'تُعرض جميع وحدات الهدف كبطاقات.'}]},{icon:'💡',title:'نصائح',steps:[{num:'💡',title:'أرقام كبيرة/صغيرة',text:'تتحول الآلة الحاسبة تلقائياً إلى الترميز العلمي.'},{num:'💡',title:'درجة الحرارة غير خطية',text:'تتعامل الآلة الحاسبة مع الصيغ تلقائياً.'},{num:'💡',title:'استهلاك الوقود',text:'l/100km وkm/l عكس بعضهما، يُعالج تلقائياً.'},{num:'💡',title:'العملات',text:'أسعار الصرف قيم مرجعية ثابتة.'}]}]},
+  zh:{title:'帮助',meta:'指南和技巧',footer_converter:'⇢ 转换器',footer_faq:'常见问题',footer_help:'帮助',footer_impressum:'法律声明',footer_datenschutz:'隐私',footer_copy:'© Universal-Converter · 所有计算本地执行',cards:[{icon:'🚀',title:'快速开始',text:'选择类别 → 输入值 → 结果立即显示。'},{icon:'🌍',title:'切换语言',text:'点击顶部的国旗。您的选择将被保存。'},{icon:'⭐',title:'收藏夹',text:'点击类别旁边的★将其保存。'},{icon:'📋',title:'复制结果',text:'将鼠标悬停在卡片上 → 出现⎘ → 点击复制。'}],sections:[{icon:'📏',title:'类别和单位',steps:[{num:'1',title:'选择类别',text:'在左侧边栏中点击一个类别。'},{num:'2',title:'输入值',text:'输入您的值。转换是即时的。'},{num:'3',title:'选择源单位',text:'从下拉菜单中选择您的源单位。'},{num:'4',title:'读取结果',text:'所有目标单位都以卡片形式显示。'}]},{icon:'💡',title:'技巧',steps:[{num:'💡',title:'大/小数字',text:'计算器自动切换到科学计数法。'},{num:'💡',title:'温度是非线性的',text:'计算器自动处理公式。'},{num:'💡',title:'油耗',text:'l/100km和km/l互为倒数，自动处理。'},{num:'💡',title:'货币',text:'汇率是静态参考值。'}]}]},
+};
+
+let currentLang = localStorage.getItem('uc_lang') || 'de';
+
+function buildLangBar(){
+  const bar=document.getElementById('lang-bar');
+  bar.innerHTML=LANGS.map(l=>`<button class="lang-btn${l.code===currentLang?' active':''}" data-lang="${l.code}" title="${l.name}"><span>${l.flag}</span><span>${l.code.toUpperCase()}</span></button>`).join('');
+  bar.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+}
+
+function setLang(code){
+  currentLang=code;
+  localStorage.setItem('uc_lang',code);
+  const lang=LANGS.find(l=>l.code===code);
+  document.documentElement.dir=lang?.rtl?'rtl':'ltr';
+  document.documentElement.lang=code;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===code));
+  render();
+}
+
+function render(){
+  const d=HELP[currentLang]||HELP['de'];
+  document.getElementById('page-title').textContent=d.title;
+  document.getElementById('page-meta').textContent=d.meta+' · Universal-Converter';
+  document.getElementById('footer-converter').textContent=d.footer_converter;
+  document.getElementById('footer-faq').textContent=d.footer_faq;
+  document.getElementById('footer-help').textContent=d.footer_help;
+  document.getElementById('footer-impressum').textContent=d.footer_impressum;
+  document.getElementById('footer-datenschutz').textContent=d.footer_datenschutz;
+  document.getElementById('footer-copy').textContent=d.footer_copy;
+
+  // Cards
+  document.getElementById('help-cards').innerHTML=d.cards.map(c=>`
+    <div class="help-card">
+      <div class="help-card-icon">${c.icon}</div>
+      <div class="help-card-title">${c.title}</div>
+      <div class="help-card-text">${c.text}</div>
+    </div>`).join('');
+
+  // Sections
+  document.getElementById('help-sections').innerHTML=d.sections.map(s=>`
+    <div class="help-section">
+      <div class="help-section-head"><span class="help-section-icon">${s.icon}</span><span class="help-section-title">${s.title}</span></div>
+      <div class="help-section-body">
+        ${s.steps.map(step=>`
+          <div class="help-step">
+            <div class="help-step-num">${step.num}</div>
+            <div class="help-step-content">
+              <div class="help-step-title">${step.title}</div>
+              <div class="help-step-text">${step.text}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+buildLangBar();
+render();
+</script>
+</body>
+</html>
