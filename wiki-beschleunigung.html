@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beschleunigung — Universal-Converter</title>
+<meta name="description" content="Hintergrundwissen, Tabellen und Quiz zu Beschleunigung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg-deep:#050c1a;--bg-panel:#081428;--bg-card:#0a1930;--blue-bright:#00c8ff;--blue-mid:#0077aa;--blue-dim:#003355;--copper:#d4824a;--copper-light:#f0a060;--grid-line:rgba(0,150,200,0.08);--text-primary:#c8e8ff;--text-secondary:#5a90b0;--border:rgba(0,150,200,0.2);--success:#00e5a0;--lang-bar-h:32px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:var(--bg-deep);color:var(--text-primary);font-family:'IBM Plex Mono',monospace;min-height:100vh;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:40px 40px;padding-top:var(--lang-bar-h);}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg-deep);}::-webkit-scrollbar-thumb{background:var(--blue-dim);border-radius:3px;}
+#lang-bar{position:fixed;top:0;left:0;right:0;height:var(--lang-bar-h);background:rgba(4,10,22,0.98);border-bottom:1px solid rgba(212,130,74,0.25);display:flex;align-items:center;justify-content:center;gap:3px;z-index:200;padding:0 12px;overflow-x:auto;scrollbar-width:none;}
+#lang-bar::-webkit-scrollbar{display:none;}
+.lang-btn{background:none;border:1px solid transparent;border-radius:3px;cursor:pointer;padding:2px 7px;font-size:0.75rem;color:var(--text-secondary);font-family:'IBM Plex Mono',monospace;transition:all 0.15s;white-space:nowrap;display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.lang-btn:hover{border-color:var(--border);color:var(--text-primary);}
+.lang-btn.active{border-color:var(--copper);color:var(--copper);background:rgba(212,130,74,0.1);}
+.page-wrap{max-width:860px;margin:0 auto;padding:40px 20px 80px;}
+.page-header{margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--border);position:relative;}
+.page-header::after{content:'';position:absolute;bottom:-1px;left:0;width:120px;height:2px;background:linear-gradient(90deg,var(--copper),transparent);}
+.logo{font-family:'Orbitron',monospace;font-weight:900;font-size:0.95rem;color:var(--blue-bright);letter-spacing:0.15em;margin-bottom:12px;display:block;text-decoration:none;}
+.logo span{color:var(--copper);}
+.breadcrumb{font-size:0.72rem;color:var(--text-secondary);margin-bottom:10px;}
+.breadcrumb a{color:var(--text-secondary);text-decoration:none;}
+.breadcrumb a:hover{color:var(--blue-bright);}
+.article-icon{font-size:2.5rem;margin-bottom:10px;display:block;}
+.article-title{font-family:'Orbitron',monospace;font-size:1.6rem;font-weight:700;color:var(--blue-bright);letter-spacing:0.06em;margin-bottom:6px;line-height:1.3;}
+.article-meta{font-size:0.72rem;color:var(--text-secondary);letter-spacing:0.1em;}
+.article-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.tag{font-size:0.65rem;background:rgba(0,100,150,0.15);border:1px solid var(--blue-dim);border-radius:2px;padding:2px 8px;color:var(--text-secondary);}
+.section{background:var(--bg-panel);border:1px solid var(--border);border-radius:4px;margin-bottom:16px;overflow:hidden;position:relative;}
+.section::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue-dim),transparent);}
+.section-head{padding:14px 20px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.section-icon{font-size:1rem;}
+.section-title{font-size:0.65rem;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--copper);}
+.section-body{padding:18px 20px;font-size:0.88rem;color:var(--text-secondary);line-height:1.85;}
+.section-body p{margin-bottom:10px;}
+.section-body p:last-child{margin-bottom:0;}
+.section-body strong{color:var(--text-primary);}
+.section-body a{color:var(--blue-bright);text-decoration:none;}
+.section-body a:hover{text-decoration:underline;}
+.data-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:4px;}
+.data-table thead th{background:var(--bg-card);color:var(--copper);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
+.data-table tbody tr{border-bottom:1px solid rgba(0,150,200,0.08);transition:background 0.1s;}
+.data-table tbody tr:last-child{border-bottom:none;}
+.data-table tbody tr:hover{background:rgba(0,200,255,0.04);}
+.data-table tbody td{padding:8px 12px;color:var(--text-primary);}
+.data-table tbody td:first-child{color:var(--blue-bright);font-weight:500;}
+.source-box{background:rgba(0,100,150,0.08);border:1px solid var(--blue-dim);border-radius:3px;padding:10px 14px;font-size:0.75rem;color:var(--text-secondary);line-height:1.7;margin-bottom:6px;}
+.source-box strong{color:var(--blue-bright);}
+.quiz-section{background:var(--bg-panel);border:2px solid var(--copper-dim, #7a3a1a);border-radius:4px;margin-bottom:16px;overflow:hidden;position:relative;}
+.quiz-section::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--copper),transparent);}
+.quiz-head{padding:14px 20px 10px;border-bottom:1px solid var(--border);}
+.quiz-title{font-size:0.65rem;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--copper);}
+.quiz-body{padding:18px 20px;display:flex;flex-direction:column;gap:20px;}
+.quiz-q{font-size:0.88rem;color:var(--text-primary);font-weight:500;margin-bottom:10px;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:6px;}
+.quiz-option{background:var(--bg-card);border:1px solid var(--border);border-radius:3px;padding:9px 14px;cursor:pointer;font-size:0.82rem;color:var(--text-secondary);transition:all 0.15s;display:flex;align-items:center;gap:8px;}
+.quiz-option:hover{border-color:var(--blue-mid);color:var(--text-primary);}
+.quiz-option.correct{border-color:var(--success);color:var(--success);background:rgba(0,229,160,0.08);}
+.quiz-option.wrong{border-color:#ff5555;color:#ff5555;background:rgba(255,85,85,0.08);}
+.quiz-option.disabled{cursor:default;}
+.quiz-feedback{font-size:0.78rem;margin-top:6px;padding:8px 12px;border-radius:3px;display:none;}
+.quiz-feedback.show{display:block;}
+.quiz-feedback.correct{background:rgba(0,229,160,0.1);border:1px solid var(--success);color:var(--success);}
+.quiz-feedback.wrong{background:rgba(255,85,85,0.1);border:1px solid #ff5555;color:#ff5555;}
+.quiz-score{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;color:var(--blue-bright);text-align:center;padding:16px;display:none;}
+.quiz-score.show{display:block;}
+.quiz-reset{background:transparent;border:1px solid var(--copper);border-radius:3px;color:var(--copper);font-family:'IBM Plex Mono',monospace;font-size:0.78rem;padding:6px 16px;cursor:pointer;transition:all 0.15s;display:none;}
+.quiz-reset.show{display:inline-block;}
+.quiz-reset:hover{background:rgba(212,130,74,0.1);}
+.converter-link{background:rgba(0,100,150,0.1);border:1px solid var(--blue-mid);border-radius:3px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-decoration:none;margin-bottom:16px;transition:all 0.15s;}
+.converter-link:hover{border-color:var(--blue-bright);background:rgba(0,200,255,0.08);}
+.converter-link-text{font-size:0.82rem;color:var(--text-secondary);}
+.converter-link-text strong{color:var(--blue-bright);display:block;margin-bottom:2px;}
+.converter-link-arrow{color:var(--blue-bright);font-size:1.2rem;flex-shrink:0;}
+.site-footer{margin-top:48px;padding:20px 0 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-brand{font-family:'Orbitron',monospace;font-size:0.7rem;font-weight:700;color:var(--blue-bright);letter-spacing:0.15em;text-decoration:none;}
+.footer-brand span{color:var(--copper);}
+.footer-links{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.footer-link{font-size:0.75rem;color:var(--text-secondary);text-decoration:none;padding:5px 10px;border:1px solid transparent;border-radius:3px;transition:all 0.15s;}
+.footer-link:hover{color:var(--blue-bright);border-color:var(--border);}
+.footer-sep{color:var(--border);font-size:0.7rem;}
+.footer-copy{width:100%;font-size:0.65rem;color:var(--text-secondary);padding:10px 0 4px;opacity:0.6;}
+@media(max-width:600px){.page-wrap{padding:24px 14px 60px;}.article-title{font-size:1.2rem;}.section-body,.quiz-body{padding:14px 14px;}}
+</style>
+</head>
+<body>
+<div id="lang-bar"></div>
+<div class="page-wrap">
+  <header class="page-header">
+    <a class="logo" href="/">UNIVERSAL-<span>CONVERTER</span></a>
+    <div class="breadcrumb" id="bc"></div>
+    <span class="article-icon">🏎️</span>
+    <h1 class="article-title" id="ttl"></h1>
+    <div class="article-meta">Universal-Converter · 2026</div>
+    <div class="article-tags" id="atags"></div>
+  </header>
+  <a class="converter-link" href="/universal-converter.html#beschleunigung">
+    <div class="converter-link-text"><strong id="cv"></strong><span id="cv-sub"></span></div>
+    <span class="converter-link-arrow">⇢</span>
+  </a>
+  <div id="secs"></div>
+  <div id="tbl"></div>
+  <div class="quiz-section" id="quiz">
+    <div class="quiz-head"><div class="quiz-title" id="qt"></div></div>
+    <div class="quiz-body" id="qb"></div>
+  </div>
+  <div class="section">
+    <div class="section-head"><span class="section-icon">📚</span><span class="section-title" id="stitle"></span></div>
+    <div class="section-body" id="sbody"></div>
+  </div>
+  <footer class="site-footer">
+    <a class="footer-brand" href="/">UNIVERSAL-<span>CONVERTER</span></a>
+    <nav class="footer-links">
+      <a class="footer-link" href="/universal-converter.html" id="f1">⇢ Rechner</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link active" href="/blog.html" id="f2">Wissenswertes</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link" href="/faq.html" id="f3">FAQ</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link" href="/impressum.html" id="f4">Impressum</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link" href="/datenschutz.html" id="f5">Datenschutz</a>
+    </nav>
+    <div class="footer-copy">© 2026 Universal-Converter</div>
+  </footer>
+</div>
+<script>
+const LANGS=[{code:'de',flag:'🇩🇪'},{code:'en',flag:'🇬🇧'},{code:'fr',flag:'🇫🇷'},{code:'es',flag:'🇪🇸'},{code:'it',flag:'🇮🇹'},{code:'pt',flag:'🇵🇹'},{code:'nl',flag:'🇳🇱'},{code:'pl',flag:'🇵🇱'},{code:'tr',flag:'🇹🇷'},{code:'ar',flag:'🇸🇦',rtl:true},{code:'zh',flag:'🇨🇳'}];
+const C = {
+  de: {
+    title: "Beschleunigung",
+    breadcrumb: "Wissenswertes",
+    cv: "Direkt zum Umrechner \u2192",
+    cv_sub: "Universal-Converter \u00b7 Beschleunigung",
+    score_tpl: "Ergebnis: {score} von {total} richtig!",
+    reset: "Neu versuchen",
+    qt: "\ud83d\udcdd QUIZ",
+    src: "Quellen & Referenzen",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Beschleunigung", "body": "<p><strong>Beschleunigung a</strong> = \u00c4nderung der Geschwindigkeit pro Zeit (m/s\u00b2). Erdbeschleunigung g = 9,80665 m/s\u00b2. <strong>1 g</strong> = Schwerkraft auf Meeresh\u00f6he. Formel 1 in Kurven: bis 6 g. Raketenstart: 3\u20134 g. Achterbahnen: 3\u20135 g. Kurzzeitig \u00fcberlebbare Beschleunigung: ca. 20\u201340 g (Schutzausr\u00fcstung). Licht: keine Beschleunigung m\u00f6glich \u2013 bereits auf Maximalgeschwindigkeit.</p>"}],
+    th: ["Anwendung", "Beschleunigung"],
+    tc: "Beschleunigungen im Alltag und Technik",
+    quiz: [{"q": "Was ist die Erdbeschleunigung g?", "options": ["9,80665 m/s\u00b2", "9,5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9,80665 m/s\u00b2 (Standardwert). Variiert: Pol 9,83, \u00c4quator 9,78 m/s\u00b2.", "fw": "\u2717 g = 9,80665 m/s\u00b2 (exakt). H\u00e4ufige N\u00e4herung: 10 m/s\u00b2."}, {"q": "Was bedeutet \"2 g\" Belastung?", "options": ["Doppelte Erdgravitation = 19,6 m/s\u00b2", "2 mal Lichtgeschwindigkeit", "2 kg pro m\u00b2", "Doppelte Schallgeschwindigkeit"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9,81 m/s\u00b2 = 19,62 m/s\u00b2. F\u00fchlt sich an wie doppeltes K\u00f6rpergewicht.", "fw": "\u2717 2 g = 2 \u00d7 Erdgravitation = 19,6 m/s\u00b2. Formel 1: bis 6 g in Kurven!"}, {"q": "Wie berechnet sich die Beschleunigung beim Freien Fall nach 3 s?", "options": ["v = g \u00d7 t = 9,81 \u00d7 3 = 29,43 m/s", "v = g + t = 12,81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3,27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9,81 \u00d7 3 = 29,43 m/s \u2248 105,9 km/h (ohne Luftwiderstand).", "fw": "\u2717 v = g \u00d7 t (Grundformel). Nach 3 s: 29,43 m/s \u2248 106 km/h."}, {"q": "Welche g-Belastung erleben F1-Fahrer in schnellen Kurven?", "options": ["Bis zu 6 g", "Ca. 2 g", "Ca. 10 g", "Ca. 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in Kurven bis 6 g (z.B. Suzuka 130R). Nacken trainiert daf\u00fcr.", "fw": "\u2717 F1-Fahrer: bis 6 g in Kurven. Davon 1 g = Schwerkraft, 5 g = Kurvenbelastung."}, {"q": "Wie gro\u00df ist die Fallbeschleunigung auf dem Mond?", "options": ["1,62 m/s\u00b2 (ca. 1/6 g)", "3,72 m/s\u00b2 (ca. 1/3 g)", "9,81 m/s\u00b2", "0,1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Mond: g = 1,62 m/s\u00b2 \u2248 1/6 Erdgravitation. Mars: 3,72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Mond: 1,62 m/s\u00b2 (1/6 Erde). Mars: 3,72 m/s\u00b2 (1/3 Erde). Venus: 8,87 m/s\u00b2."}],
+  },
+  en: {
+    title: "Acceleration",
+    breadcrumb: "Knowledge Base",
+    cv: "Go to Converter \u2192",
+    cv_sub: "Universal-Converter \u00b7 Acceleration",
+    score_tpl: "Score: {score} of {total} correct!",
+    reset: "Try again",
+    qt: "\ud83d\udcdd QUIZ",
+    src: "Sources & References",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Acceleration", "body": "<p><strong>Acceleration a</strong> = change in velocity per time (m/s\u00b2). Gravitational acceleration g = 9.80665 m/s\u00b2. <strong>1 g</strong> = gravity at sea level. Formula 1 in corners: up to 6 g. Rocket launch: 3\u20134 g. Roller coasters: 3\u20135 g. Briefly survivable acceleration: about 20\u201340 g (with protection). Light: no acceleration possible \u2013 already at maximum speed.</p>"}],
+    th: ["Application", "Acceleration"],
+    tc: "Accelerations in Everyday Life and Technology",
+    quiz: [{"q": "What is gravitational acceleration g?", "options": ["9.80665 m/s\u00b2", "9.5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9.80665 m/s\u00b2 (standard value). Varies: pole 9.83, equator 9.78 m/s\u00b2.", "fw": "\u2717 g = 9.80665 m/s\u00b2 (exact). Common approximation: 10 m/s\u00b2."}, {"q": "What does \"2 g\" load mean?", "options": ["Double Earth gravity = 19.6 m/s\u00b2", "Twice the speed of light", "2 kg per m\u00b2", "Double the speed of sound"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9.81 m/s\u00b2 = 19.62 m/s\u00b2. Feels like double body weight.", "fw": "\u2717 2 g = 2 \u00d7 Earth gravity = 19.6 m/s\u00b2. Formula 1: up to 6 g in corners!"}, {"q": "How do you calculate velocity in free fall after 3 s?", "options": ["v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s", "v = g + t = 12.81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3.27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s \u2248 105.9 km/h (ignoring air resistance).", "fw": "\u2717 v = g \u00d7 t (basic formula). After 3 s: 29.43 m/s \u2248 106 km/h."}, {"q": "What g-force do F1 drivers experience in fast corners?", "options": ["Up to 6 g", "About 2 g", "About 10 g", "About 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in corners up to 6 g (e.g. Suzuka 130R). Neck trained for this.", "fw": "\u2717 F1 drivers: up to 6 g in corners. Of which 1 g = gravity, 5 g = cornering load."}, {"q": "How large is the gravitational acceleration on the Moon?", "options": ["1.62 m/s\u00b2 (about 1/6 g)", "3.72 m/s\u00b2 (about 1/3 g)", "9.81 m/s\u00b2", "0.1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Moon: g = 1.62 m/s\u00b2 \u2248 1/6 Earth gravity. Mars: 3.72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Moon: 1.62 m/s\u00b2 (1/6 Earth). Mars: 3.72 m/s\u00b2 (1/3 Earth). Venus: 8.87 m/s\u00b2."}],
+  },
+  fr: {
+    title: "Acceleration",
+    breadcrumb: "Connaissances",
+    cv: "Aller au convertisseur \u2192",
+    cv_sub: "Universal-Converter \u00b7 Acceleration",
+    score_tpl: "Score: {score}/{total} correct!",
+    reset: "R\u00e9essayer",
+    qt: "\ud83d\udcdd QUIZ",
+    src: "Sources & R\u00e9f\u00e9rences",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Acceleration", "body": "<p><strong>Acceleration a</strong> = change in velocity per time (m/s\u00b2). Gravitational acceleration g = 9.80665 m/s\u00b2. <strong>1 g</strong> = gravity at sea level. Formula 1 in corners: up to 6 g. Rocket launch: 3\u20134 g. Roller coasters: 3\u20135 g. Briefly survivable acceleration: about 20\u201340 g (with protection). Light: no acceleration possible \u2013 already at maximum speed.</p>"}],
+    th: ["Application", "Acceleration"],
+    tc: "Accelerations in Everyday Life and Technology",
+    quiz: [{"q": "What is gravitational acceleration g?", "options": ["9.80665 m/s\u00b2", "9.5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9.80665 m/s\u00b2 (standard value). Varies: pole 9.83, equator 9.78 m/s\u00b2.", "fw": "\u2717 g = 9.80665 m/s\u00b2 (exact). Common approximation: 10 m/s\u00b2."}, {"q": "What does \"2 g\" load mean?", "options": ["Double Earth gravity = 19.6 m/s\u00b2", "Twice the speed of light", "2 kg per m\u00b2", "Double the speed of sound"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9.81 m/s\u00b2 = 19.62 m/s\u00b2. Feels like double body weight.", "fw": "\u2717 2 g = 2 \u00d7 Earth gravity = 19.6 m/s\u00b2. Formula 1: up to 6 g in corners!"}, {"q": "How do you calculate velocity in free fall after 3 s?", "options": ["v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s", "v = g + t = 12.81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3.27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s \u2248 105.9 km/h (ignoring air resistance).", "fw": "\u2717 v = g \u00d7 t (basic formula). After 3 s: 29.43 m/s \u2248 106 km/h."}, {"q": "What g-force do F1 drivers experience in fast corners?", "options": ["Up to 6 g", "About 2 g", "About 10 g", "About 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in corners up to 6 g (e.g. Suzuka 130R). Neck trained for this.", "fw": "\u2717 F1 drivers: up to 6 g in corners. Of which 1 g = gravity, 5 g = cornering load."}, {"q": "How large is the gravitational acceleration on the Moon?", "options": ["1.62 m/s\u00b2 (about 1/6 g)", "3.72 m/s\u00b2 (about 1/3 g)", "9.81 m/s\u00b2", "0.1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Moon: g = 1.62 m/s\u00b2 \u2248 1/6 Earth gravity. Mars: 3.72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Moon: 1.62 m/s\u00b2 (1/6 Earth). Mars: 3.72 m/s\u00b2 (1/3 Earth). Venus: 8.87 m/s\u00b2."}],
+  },
+  es: {
+    title: "Acceleration",
+    breadcrumb: "Conocimiento",
+    cv: "Ir al conversor \u2192",
+    cv_sub: "Universal-Converter \u00b7 Acceleration",
+    score_tpl: "Puntuaci\u00f3n: {score}/{total}!",
+    reset: "Intentar de nuevo",
+    qt: "\ud83d\udcdd QUIZ",
+    src: "Fuentes & Referencias",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Acceleration", "body": "<p><strong>Acceleration a</strong> = change in velocity per time (m/s\u00b2). Gravitational acceleration g = 9.80665 m/s\u00b2. <strong>1 g</strong> = gravity at sea level. Formula 1 in corners: up to 6 g. Rocket launch: 3\u20134 g. Roller coasters: 3\u20135 g. Briefly survivable acceleration: about 20\u201340 g (with protection). Light: no acceleration possible \u2013 already at maximum speed.</p>"}],
+    th: ["Application", "Acceleration"],
+    tc: "Accelerations in Everyday Life and Technology",
+    quiz: [{"q": "What is gravitational acceleration g?", "options": ["9.80665 m/s\u00b2", "9.5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9.80665 m/s\u00b2 (standard value). Varies: pole 9.83, equator 9.78 m/s\u00b2.", "fw": "\u2717 g = 9.80665 m/s\u00b2 (exact). Common approximation: 10 m/s\u00b2."}, {"q": "What does \"2 g\" load mean?", "options": ["Double Earth gravity = 19.6 m/s\u00b2", "Twice the speed of light", "2 kg per m\u00b2", "Double the speed of sound"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9.81 m/s\u00b2 = 19.62 m/s\u00b2. Feels like double body weight.", "fw": "\u2717 2 g = 2 \u00d7 Earth gravity = 19.6 m/s\u00b2. Formula 1: up to 6 g in corners!"}, {"q": "How do you calculate velocity in free fall after 3 s?", "options": ["v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s", "v = g + t = 12.81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3.27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s \u2248 105.9 km/h (ignoring air resistance).", "fw": "\u2717 v = g \u00d7 t (basic formula). After 3 s: 29.43 m/s \u2248 106 km/h."}, {"q": "What g-force do F1 drivers experience in fast corners?", "options": ["Up to 6 g", "About 2 g", "About 10 g", "About 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in corners up to 6 g (e.g. Suzuka 130R). Neck trained for this.", "fw": "\u2717 F1 drivers: up to 6 g in corners. Of which 1 g = gravity, 5 g = cornering load."}, {"q": "How large is the gravitational acceleration on the Moon?", "options": ["1.62 m/s\u00b2 (about 1/6 g)", "3.72 m/s\u00b2 (about 1/3 g)", "9.81 m/s\u00b2", "0.1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Moon: g = 1.62 m/s\u00b2 \u2248 1/6 Earth gravity. Mars: 3.72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Moon: 1.62 m/s\u00b2 (1/6 Earth). Mars: 3.72 m/s\u00b2 (1/3 Earth). Venus: 8.87 m/s\u00b2."}],
+  },
+  it: {
+    title: "Acceleration",
+    breadcrumb: "Conoscenza",
+    cv: "Vai al convertitore \u2192",
+    cv_sub: "Universal-Converter \u00b7 Acceleration",
+    score_tpl: "Punteggio: {score}/{total}!",
+    reset: "Riprova",
+    qt: "\ud83d\udcdd QUIZ",
+    src: "Fonti & Riferimenti",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Acceleration", "body": "<p><strong>Acceleration a</strong> = change in velocity per time (m/s\u00b2). Gravitational acceleration g = 9.80665 m/s\u00b2. <strong>1 g</strong> = gravity at sea level. Formula 1 in corners: up to 6 g. Rocket launch: 3\u20134 g. Roller coasters: 3\u20135 g. Briefly survivable acceleration: about 20\u201340 g (with protection). Light: no acceleration possible \u2013 already at maximum speed.</p>"}],
+    th: ["Application", "Acceleration"],
+    tc: "Accelerations in Everyday Life and Technology",
+    quiz: [{"q": "What is gravitational acceleration g?", "options": ["9.80665 m/s\u00b2", "9.5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9.80665 m/s\u00b2 (standard value). Varies: pole 9.83, equator 9.78 m/s\u00b2.", "fw": "\u2717 g = 9.80665 m/s\u00b2 (exact). Common approximation: 10 m/s\u00b2."}, {"q": "What does \"2 g\" load mean?", "options": ["Double Earth gravity = 19.6 m/s\u00b2", "Twice the speed of light", "2 kg per m\u00b2", "Double the speed of sound"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9.81 m/s\u00b2 = 19.62 m/s\u00b2. Feels like double body weight.", "fw": "\u2717 2 g = 2 \u00d7 Earth gravity = 19.6 m/s\u00b2. Formula 1: up to 6 g in corners!"}, {"q": "How do you calculate velocity in free fall after 3 s?", "options": ["v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s", "v = g + t = 12.81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3.27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s \u2248 105.9 km/h (ignoring air resistance).", "fw": "\u2717 v = g \u00d7 t (basic formula). After 3 s: 29.43 m/s \u2248 106 km/h."}, {"q": "What g-force do F1 drivers experience in fast corners?", "options": ["Up to 6 g", "About 2 g", "About 10 g", "About 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in corners up to 6 g (e.g. Suzuka 130R). Neck trained for this.", "fw": "\u2717 F1 drivers: up to 6 g in corners. Of which 1 g = gravity, 5 g = cornering load."}, {"q": "How large is the gravitational acceleration on the Moon?", "options": ["1.62 m/s\u00b2 (about 1/6 g)", "3.72 m/s\u00b2 (about 1/3 g)", "9.81 m/s\u00b2", "0.1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Moon: g = 1.62 m/s\u00b2 \u2248 1/6 Earth gravity. Mars: 3.72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Moon: 1.62 m/s\u00b2 (1/6 Earth). Mars: 3.72 m/s\u00b2 (1/3 Earth). Venus: 8.87 m/s\u00b2."}],
+  },
+  pt: {
+    title: "Acceleration",
+    breadcrumb: "Conhecimento",
+    cv: "Ir ao conversor \u2192",
+    cv_sub: "Universal-Converter \u00b7 Acceleration",
+    score_tpl: "Pontua\u00e7\u00e3o: {score}/{total}!",
+    reset: "Tentar novamente",
+    qt: "\ud83d\udcdd QUIZ",
+    src: "Fontes & Refer\u00eancias",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Acceleration", "body": "<p><strong>Acceleration a</strong> = change in velocity per time (m/s\u00b2). Gravitational acceleration g = 9.80665 m/s\u00b2. <strong>1 g</strong> = gravity at sea level. Formula 1 in corners: up to 6 g. Rocket launch: 3\u20134 g. Roller coasters: 3\u20135 g. Briefly survivable acceleration: about 20\u201340 g (with protection). Light: no acceleration possible \u2013 already at maximum speed.</p>"}],
+    th: ["Application", "Acceleration"],
+    tc: "Accelerations in Everyday Life and Technology",
+    quiz: [{"q": "What is gravitational acceleration g?", "options": ["9.80665 m/s\u00b2", "9.5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9.80665 m/s\u00b2 (standard value). Varies: pole 9.83, equator 9.78 m/s\u00b2.", "fw": "\u2717 g = 9.80665 m/s\u00b2 (exact). Common approximation: 10 m/s\u00b2."}, {"q": "What does \"2 g\" load mean?", "options": ["Double Earth gravity = 19.6 m/s\u00b2", "Twice the speed of light", "2 kg per m\u00b2", "Double the speed of sound"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9.81 m/s\u00b2 = 19.62 m/s\u00b2. Feels like double body weight.", "fw": "\u2717 2 g = 2 \u00d7 Earth gravity = 19.6 m/s\u00b2. Formula 1: up to 6 g in corners!"}, {"q": "How do you calculate velocity in free fall after 3 s?", "options": ["v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s", "v = g + t = 12.81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3.27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s \u2248 105.9 km/h (ignoring air resistance).", "fw": "\u2717 v = g \u00d7 t (basic formula). After 3 s: 29.43 m/s \u2248 106 km/h."}, {"q": "What g-force do F1 drivers experience in fast corners?", "options": ["Up to 6 g", "About 2 g", "About 10 g", "About 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in corners up to 6 g (e.g. Suzuka 130R). Neck trained for this.", "fw": "\u2717 F1 drivers: up to 6 g in corners. Of which 1 g = gravity, 5 g = cornering load."}, {"q": "How large is the gravitational acceleration on the Moon?", "options": ["1.62 m/s\u00b2 (about 1/6 g)", "3.72 m/s\u00b2 (about 1/3 g)", "9.81 m/s\u00b2", "0.1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Moon: g = 1.62 m/s\u00b2 \u2248 1/6 Earth gravity. Mars: 3.72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Moon: 1.62 m/s\u00b2 (1/6 Earth). Mars: 3.72 m/s\u00b2 (1/3 Earth). Venus: 8.87 m/s\u00b2."}],
+  },
+  nl: {
+    title: "Acceleration",
+    breadcrumb: "Kennisbank",
+    cv: "Naar de omzetter \u2192",
+    cv_sub: "Universal-Converter \u00b7 Acceleration",
+    score_tpl: "Score: {score}/{total} goed!",
+    reset: "Opnieuw",
+    qt: "\ud83d\udcdd QUIZ",
+    src: "Bronnen & Referenties",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Acceleration", "body": "<p><strong>Acceleration a</strong> = change in velocity per time (m/s\u00b2). Gravitational acceleration g = 9.80665 m/s\u00b2. <strong>1 g</strong> = gravity at sea level. Formula 1 in corners: up to 6 g. Rocket launch: 3\u20134 g. Roller coasters: 3\u20135 g. Briefly survivable acceleration: about 20\u201340 g (with protection). Light: no acceleration possible \u2013 already at maximum speed.</p>"}],
+    th: ["Application", "Acceleration"],
+    tc: "Accelerations in Everyday Life and Technology",
+    quiz: [{"q": "What is gravitational acceleration g?", "options": ["9.80665 m/s\u00b2", "9.5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9.80665 m/s\u00b2 (standard value). Varies: pole 9.83, equator 9.78 m/s\u00b2.", "fw": "\u2717 g = 9.80665 m/s\u00b2 (exact). Common approximation: 10 m/s\u00b2."}, {"q": "What does \"2 g\" load mean?", "options": ["Double Earth gravity = 19.6 m/s\u00b2", "Twice the speed of light", "2 kg per m\u00b2", "Double the speed of sound"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9.81 m/s\u00b2 = 19.62 m/s\u00b2. Feels like double body weight.", "fw": "\u2717 2 g = 2 \u00d7 Earth gravity = 19.6 m/s\u00b2. Formula 1: up to 6 g in corners!"}, {"q": "How do you calculate velocity in free fall after 3 s?", "options": ["v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s", "v = g + t = 12.81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3.27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s \u2248 105.9 km/h (ignoring air resistance).", "fw": "\u2717 v = g \u00d7 t (basic formula). After 3 s: 29.43 m/s \u2248 106 km/h."}, {"q": "What g-force do F1 drivers experience in fast corners?", "options": ["Up to 6 g", "About 2 g", "About 10 g", "About 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in corners up to 6 g (e.g. Suzuka 130R). Neck trained for this.", "fw": "\u2717 F1 drivers: up to 6 g in corners. Of which 1 g = gravity, 5 g = cornering load."}, {"q": "How large is the gravitational acceleration on the Moon?", "options": ["1.62 m/s\u00b2 (about 1/6 g)", "3.72 m/s\u00b2 (about 1/3 g)", "9.81 m/s\u00b2", "0.1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Moon: g = 1.62 m/s\u00b2 \u2248 1/6 Earth gravity. Mars: 3.72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Moon: 1.62 m/s\u00b2 (1/6 Earth). Mars: 3.72 m/s\u00b2 (1/3 Earth). Venus: 8.87 m/s\u00b2."}],
+  },
+  pl: {
+    title: "Acceleration",
+    breadcrumb: "Baza wiedzy",
+    cv: "Przejd\u017a do przelicznika \u2192",
+    cv_sub: "Universal-Converter \u00b7 Acceleration",
+    score_tpl: "Wynik: {score}/{total}!",
+    reset: "Spr\u00f3buj ponownie",
+    qt: "\ud83d\udcdd QUIZ",
+    src: "\u0179r\u00f3d\u0142a",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Acceleration", "body": "<p><strong>Acceleration a</strong> = change in velocity per time (m/s\u00b2). Gravitational acceleration g = 9.80665 m/s\u00b2. <strong>1 g</strong> = gravity at sea level. Formula 1 in corners: up to 6 g. Rocket launch: 3\u20134 g. Roller coasters: 3\u20135 g. Briefly survivable acceleration: about 20\u201340 g (with protection). Light: no acceleration possible \u2013 already at maximum speed.</p>"}],
+    th: ["Application", "Acceleration"],
+    tc: "Accelerations in Everyday Life and Technology",
+    quiz: [{"q": "What is gravitational acceleration g?", "options": ["9.80665 m/s\u00b2", "9.5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9.80665 m/s\u00b2 (standard value). Varies: pole 9.83, equator 9.78 m/s\u00b2.", "fw": "\u2717 g = 9.80665 m/s\u00b2 (exact). Common approximation: 10 m/s\u00b2."}, {"q": "What does \"2 g\" load mean?", "options": ["Double Earth gravity = 19.6 m/s\u00b2", "Twice the speed of light", "2 kg per m\u00b2", "Double the speed of sound"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9.81 m/s\u00b2 = 19.62 m/s\u00b2. Feels like double body weight.", "fw": "\u2717 2 g = 2 \u00d7 Earth gravity = 19.6 m/s\u00b2. Formula 1: up to 6 g in corners!"}, {"q": "How do you calculate velocity in free fall after 3 s?", "options": ["v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s", "v = g + t = 12.81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3.27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s \u2248 105.9 km/h (ignoring air resistance).", "fw": "\u2717 v = g \u00d7 t (basic formula). After 3 s: 29.43 m/s \u2248 106 km/h."}, {"q": "What g-force do F1 drivers experience in fast corners?", "options": ["Up to 6 g", "About 2 g", "About 10 g", "About 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in corners up to 6 g (e.g. Suzuka 130R). Neck trained for this.", "fw": "\u2717 F1 drivers: up to 6 g in corners. Of which 1 g = gravity, 5 g = cornering load."}, {"q": "How large is the gravitational acceleration on the Moon?", "options": ["1.62 m/s\u00b2 (about 1/6 g)", "3.72 m/s\u00b2 (about 1/3 g)", "9.81 m/s\u00b2", "0.1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Moon: g = 1.62 m/s\u00b2 \u2248 1/6 Earth gravity. Mars: 3.72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Moon: 1.62 m/s\u00b2 (1/6 Earth). Mars: 3.72 m/s\u00b2 (1/3 Earth). Venus: 8.87 m/s\u00b2."}],
+  },
+  tr: {
+    title: "Acceleration",
+    breadcrumb: "Bilgi Bankas\u0131",
+    cv: "D\u00f6n\u00fc\u015ft\u00fcr\u00fcc\u00fcye git \u2192",
+    cv_sub: "Universal-Converter \u00b7 Acceleration",
+    score_tpl: "Puan: {score}/{total}!",
+    reset: "Tekrar dene",
+    qt: "\ud83d\udcdd QUIZ",
+    src: "Kaynaklar",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Acceleration", "body": "<p><strong>Acceleration a</strong> = change in velocity per time (m/s\u00b2). Gravitational acceleration g = 9.80665 m/s\u00b2. <strong>1 g</strong> = gravity at sea level. Formula 1 in corners: up to 6 g. Rocket launch: 3\u20134 g. Roller coasters: 3\u20135 g. Briefly survivable acceleration: about 20\u201340 g (with protection). Light: no acceleration possible \u2013 already at maximum speed.</p>"}],
+    th: ["Application", "Acceleration"],
+    tc: "Accelerations in Everyday Life and Technology",
+    quiz: [{"q": "What is gravitational acceleration g?", "options": ["9.80665 m/s\u00b2", "9.5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9.80665 m/s\u00b2 (standard value). Varies: pole 9.83, equator 9.78 m/s\u00b2.", "fw": "\u2717 g = 9.80665 m/s\u00b2 (exact). Common approximation: 10 m/s\u00b2."}, {"q": "What does \"2 g\" load mean?", "options": ["Double Earth gravity = 19.6 m/s\u00b2", "Twice the speed of light", "2 kg per m\u00b2", "Double the speed of sound"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9.81 m/s\u00b2 = 19.62 m/s\u00b2. Feels like double body weight.", "fw": "\u2717 2 g = 2 \u00d7 Earth gravity = 19.6 m/s\u00b2. Formula 1: up to 6 g in corners!"}, {"q": "How do you calculate velocity in free fall after 3 s?", "options": ["v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s", "v = g + t = 12.81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3.27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s \u2248 105.9 km/h (ignoring air resistance).", "fw": "\u2717 v = g \u00d7 t (basic formula). After 3 s: 29.43 m/s \u2248 106 km/h."}, {"q": "What g-force do F1 drivers experience in fast corners?", "options": ["Up to 6 g", "About 2 g", "About 10 g", "About 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in corners up to 6 g (e.g. Suzuka 130R). Neck trained for this.", "fw": "\u2717 F1 drivers: up to 6 g in corners. Of which 1 g = gravity, 5 g = cornering load."}, {"q": "How large is the gravitational acceleration on the Moon?", "options": ["1.62 m/s\u00b2 (about 1/6 g)", "3.72 m/s\u00b2 (about 1/3 g)", "9.81 m/s\u00b2", "0.1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Moon: g = 1.62 m/s\u00b2 \u2248 1/6 Earth gravity. Mars: 3.72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Moon: 1.62 m/s\u00b2 (1/6 Earth). Mars: 3.72 m/s\u00b2 (1/3 Earth). Venus: 8.87 m/s\u00b2."}],
+  },
+  ar: {
+    title: "Beschleunigung",
+    breadcrumb: "\u0642\u0627\u0639\u062f\u0629 \u0627\u0644\u0645\u0639\u0631\u0641\u0629",
+    cv: "\u0627\u0630\u0647\u0628 \u0625\u0644\u0649 \u0627\u0644\u0645\u062d\u0648\u0651\u0644 \u2192",
+    cv_sub: "Universal-Converter \u00b7 Beschleunigung",
+    score_tpl: "\u0627\u0644\u0646\u062a\u064a\u062c\u0629: {score}/{total}!",
+    reset: "\u062d\u0627\u0648\u0644 \u0645\u0631\u0629 \u0623\u062e\u0631\u0649",
+    qt: "\ud83d\udcdd \u0627\u062e\u062a\u0628\u0627\u0631",
+    src: "\u0627\u0644\u0645\u0635\u0627\u062f\u0631",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Beschleunigung", "body": "<p><strong>Beschleunigung a</strong> = \u00c4nderung der Geschwindigkeit pro Zeit (m/s\u00b2). Erdbeschleunigung g = 9,80665 m/s\u00b2. <strong>1 g</strong> = Schwerkraft auf Meeresh\u00f6he. Formel 1 in Kurven: bis 6 g. Raketenstart: 3\u20134 g. Achterbahnen: 3\u20135 g. Kurzzeitig \u00fcberlebbare Beschleunigung: ca. 20\u201340 g (Schutzausr\u00fcstung). Licht: keine Beschleunigung m\u00f6glich \u2013 bereits auf Maximalgeschwindigkeit.</p>"}],
+    th: ["Anwendung", "Beschleunigung"],
+    tc: "Beschleunigungen im Alltag und Technik",
+    quiz: [{"q": "Was ist die Erdbeschleunigung g?", "options": ["9,80665 m/s\u00b2", "9,5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9,80665 m/s\u00b2 (Standardwert). Variiert: Pol 9,83, \u00c4quator 9,78 m/s\u00b2.", "fw": "\u2717 g = 9,80665 m/s\u00b2 (exakt). H\u00e4ufige N\u00e4herung: 10 m/s\u00b2."}, {"q": "Was bedeutet \"2 g\" Belastung?", "options": ["Doppelte Erdgravitation = 19,6 m/s\u00b2", "2 mal Lichtgeschwindigkeit", "2 kg pro m\u00b2", "Doppelte Schallgeschwindigkeit"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9,81 m/s\u00b2 = 19,62 m/s\u00b2. F\u00fchlt sich an wie doppeltes K\u00f6rpergewicht.", "fw": "\u2717 2 g = 2 \u00d7 Erdgravitation = 19,6 m/s\u00b2. Formel 1: bis 6 g in Kurven!"}, {"q": "Wie berechnet sich die Beschleunigung beim Freien Fall nach 3 s?", "options": ["v = g \u00d7 t = 9,81 \u00d7 3 = 29,43 m/s", "v = g + t = 12,81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3,27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9,81 \u00d7 3 = 29,43 m/s \u2248 105,9 km/h (ohne Luftwiderstand).", "fw": "\u2717 v = g \u00d7 t (Grundformel). Nach 3 s: 29,43 m/s \u2248 106 km/h."}, {"q": "Welche g-Belastung erleben F1-Fahrer in schnellen Kurven?", "options": ["Bis zu 6 g", "Ca. 2 g", "Ca. 10 g", "Ca. 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in Kurven bis 6 g (z.B. Suzuka 130R). Nacken trainiert daf\u00fcr.", "fw": "\u2717 F1-Fahrer: bis 6 g in Kurven. Davon 1 g = Schwerkraft, 5 g = Kurvenbelastung."}, {"q": "Wie gro\u00df ist die Fallbeschleunigung auf dem Mond?", "options": ["1,62 m/s\u00b2 (ca. 1/6 g)", "3,72 m/s\u00b2 (ca. 1/3 g)", "9,81 m/s\u00b2", "0,1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Mond: g = 1,62 m/s\u00b2 \u2248 1/6 Erdgravitation. Mars: 3,72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Mond: 1,62 m/s\u00b2 (1/6 Erde). Mars: 3,72 m/s\u00b2 (1/3 Erde). Venus: 8,87 m/s\u00b2."}],
+  },
+  zh: {
+    title: "Acceleration",
+    breadcrumb: "\u77e5\u8bc6\u5e93",
+    cv: "\u524d\u5f80\u8f6c\u6362\u5668 \u2192",
+    cv_sub: "Universal-Converter \u00b7 Acceleration",
+    score_tpl: "\u5f97\u5206\uff1a{score}/{total}\uff01",
+    reset: "\u518d\u8bd5\u4e00\u6b21",
+    qt: "\ud83d\udcdd \u6d4b\u9a8c",
+    src: "\u6765\u6e90",
+    sections: [{"icon": "\ud83d\udcd6", "title": "Acceleration", "body": "<p><strong>Acceleration a</strong> = change in velocity per time (m/s\u00b2). Gravitational acceleration g = 9.80665 m/s\u00b2. <strong>1 g</strong> = gravity at sea level. Formula 1 in corners: up to 6 g. Rocket launch: 3\u20134 g. Roller coasters: 3\u20135 g. Briefly survivable acceleration: about 20\u201340 g (with protection). Light: no acceleration possible \u2013 already at maximum speed.</p>"}],
+    th: ["Application", "Acceleration"],
+    tc: "Accelerations in Everyday Life and Technology",
+    quiz: [{"q": "What is gravitational acceleration g?", "options": ["9.80665 m/s\u00b2", "9.5 m/s\u00b2", "10 m/s\u00b2", "1 m/s\u00b2"], "correct": 0, "fc": "\u2713 g = 9.80665 m/s\u00b2 (standard value). Varies: pole 9.83, equator 9.78 m/s\u00b2.", "fw": "\u2717 g = 9.80665 m/s\u00b2 (exact). Common approximation: 10 m/s\u00b2."}, {"q": "What does \"2 g\" load mean?", "options": ["Double Earth gravity = 19.6 m/s\u00b2", "Twice the speed of light", "2 kg per m\u00b2", "Double the speed of sound"], "correct": 0, "fc": "\u2713 2 g = 2 \u00d7 9.81 m/s\u00b2 = 19.62 m/s\u00b2. Feels like double body weight.", "fw": "\u2717 2 g = 2 \u00d7 Earth gravity = 19.6 m/s\u00b2. Formula 1: up to 6 g in corners!"}, {"q": "How do you calculate velocity in free fall after 3 s?", "options": ["v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s", "v = g + t = 12.81 m/s", "v = g\u00b2 \u00d7 t = 288 m/s", "v = g / t = 3.27 m/s"], "correct": 0, "fc": "\u2713 v = g \u00d7 t = 9.81 \u00d7 3 = 29.43 m/s \u2248 105.9 km/h (ignoring air resistance).", "fw": "\u2717 v = g \u00d7 t (basic formula). After 3 s: 29.43 m/s \u2248 106 km/h."}, {"q": "What g-force do F1 drivers experience in fast corners?", "options": ["Up to 6 g", "About 2 g", "About 10 g", "About 1 g"], "correct": 0, "fc": "\u2713 F1: lateral g in corners up to 6 g (e.g. Suzuka 130R). Neck trained for this.", "fw": "\u2717 F1 drivers: up to 6 g in corners. Of which 1 g = gravity, 5 g = cornering load."}, {"q": "How large is the gravitational acceleration on the Moon?", "options": ["1.62 m/s\u00b2 (about 1/6 g)", "3.72 m/s\u00b2 (about 1/3 g)", "9.81 m/s\u00b2", "0.1 m/s\u00b2"], "correct": 0, "fc": "\u2713 Moon: g = 1.62 m/s\u00b2 \u2248 1/6 Earth gravity. Mars: 3.72 m/s\u00b2 \u2248 1/3.", "fw": "\u2717 Moon: 1.62 m/s\u00b2 (1/6 Earth). Mars: 3.72 m/s\u00b2 (1/3 Earth). Venus: 8.87 m/s\u00b2."}],
+  }
+};
+
+const ROWS = [["Freier Fall (g)", "9.81 m/s\u00b2 = 1 g"], ["Aufzug (aufw\u00e4rts)", "ca. 1\u20132 m/s\u00b2"], ["PKW (0\u2013100 km/h, 7 s)", "ca. 4 m/s\u00b2 = 0.4 g"], ["Sportwagen (0\u2013100, 3,5 s)", "ca. 8 m/s\u00b2 = 0.8 g"], ["Achterbahn", "20\u201350 m/s\u00b2 = 2\u20135 g"], ["Formel 1 (Kurve)", "bis 60 m/s\u00b2 = 6 g"], ["Kampfjet", "bis 90 m/s\u00b2 = 9 g"], ["Raketenstart", "29\u201349 m/s\u00b2 = 3\u20135 g"], ["Notbremse PKW", "ca. 10 m/s\u00b2 = 1 g"]];
+
+const SRCS = [{"a": "BIPM", "y": 2019, "t": "SI Brochure \u2013 Acceleration", "p": "bipm.org", "u": "https://www.bipm.org/"}, {"a": "NASA", "y": 2023, "t": "Gravitational Acceleration on Planets", "p": "nasa.gov", "u": "https://www.nasa.gov/"}, {"a": "FIA", "y": 2023, "t": "G-Force Monitoring in Formula 1", "p": "fia.com", "u": "https://www.fia.com/"}];
+
+const TAGS = ["m/s\u00b2", "g-Kraft", "Fallbeschleunigung", "Fliehkraft"];
+
+let lang=(new URLSearchParams(location.search).get('lang'))||localStorage.getItem('uc_lang')||'de';
+function buildBar(){
+  document.getElementById('lang-bar').innerHTML=LANGS.map(l=>`<button class="lang-btn${l.code===lang?' active':''}" onclick="setLang('${l.code}')">${l.flag} ${l.code.toUpperCase()}</button>`).join('');
+}
+function setLang(code){lang=code;localStorage.setItem('uc_lang',code);const l=LANGS.find(x=>x.code===code);document.documentElement.dir=l?.rtl?'rtl':'ltr';document.documentElement.lang=code;buildBar();render();}
+function render(){
+  const d=C[lang]||C.de;
+  document.getElementById('bc').innerHTML=`<a href="/blog.html">${d.breadcrumb}</a> ▸ ${d.title}`;
+  document.getElementById('ttl').textContent=d.title;
+  document.getElementById('cv').textContent=d.cv;
+  document.getElementById('cv-sub').textContent=d.cv_sub;
+  document.getElementById('atags').innerHTML=TAGS.map(t=>`<span class="tag">${t}</span>`).join('');
+  const fLabels=[['de','Rechner','en','Converter','fr','Convertisseur','es','Conversor','it','Convertitore','pt','Conversor','nl','Omzetter','pl','Przelicznik','tr','Dönüştürücü','ar','المحوّل','zh','转换器'],['de','Wissenswertes','en','Knowledge','fr','Connaissances','es','Conocimiento','it','Conoscenza','pt','Conhecimento','nl','Kennis','pl','Wiedza','tr','Bilgi','ar','المعرفة','zh','知识'],['de','FAQ','en','FAQ','fr','FAQ','es','FAQ','it','FAQ','pt','FAQ','nl','FAQ','pl','FAQ','tr','SSS','ar','الأسئلة','zh','常见问题'],['de','Impressum','en','Imprint','fr','Mentions légales','es','Aviso legal','it','Note legali','pt','Aviso','nl','Colofon','pl','Nota','tr','Künye','ar','قانوني','zh','声明'],['de','Datenschutz','en','Privacy','fr','Confidentialité','es','Privacidad','it','Privacy','pt','Privacidade','nl','Privacy','pl','Prywatność','tr','Gizlilik','ar','الخصوصية','zh','隐私']];
+  fLabels.forEach((arr,i)=>{const m={};for(let j=0;j<arr.length;j+=2)m[arr[j]]=arr[j+1];const el=document.getElementById('f'+(i+1));if(el)el.textContent=(i===0?'⇢ ':'')+( m[lang]||m.en);});
+  document.getElementById('secs').innerHTML=d.sections.map(s=>`<div class="section"><div class="section-head"><span class="section-icon">${s.icon}</span><span class="section-title">${s.title}</span></div><div class="section-body">${s.body}</div></div>`).join('');
+  if(ROWS.length&&d.th.length){
+    document.getElementById('tbl').innerHTML=`<div class="section"><div class="section-head"><span class="section-icon">📊</span><span class="section-title">${d.tc||'Tabelle'}</span></div><div class="section-body" style="padding:0;overflow-x:auto"><table class="data-table"><thead><tr>${d.th.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${ROWS.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`;
+  }
+  document.getElementById('qt').textContent=d.qt;
+  let score=0,ans=0;
+  document.getElementById('qb').innerHTML=d.quiz.map((q,i)=>`<div id="qq${i}"><div class="quiz-q">${i+1}. ${q.q}</div><div class="quiz-options">${q.options.map((o,j)=>`<div class="quiz-option" data-qi="${i}" data-oi="${j}">${String.fromCharCode(65+j)}. ${o}</div>`).join('')}</div><div class="quiz-feedback" id="qf${i}"></div></div>`).join('')+`<div style="text-align:center;margin-top:8px"><div class="quiz-score" id="qs" data-tpl="${d.score_tpl}"></div><button class="quiz-reset" id="qr">${d.reset}</button></div>`;
+  document.querySelectorAll('.quiz-option').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      const qi=+opt.dataset.qi,oi=+opt.dataset.oi,q=d.quiz[qi];
+      if(document.querySelector(`[data-qi="${qi}"].disabled`))return;
+      document.querySelectorAll(`[data-qi="${qi}"]`).forEach(o=>o.classList.add('disabled'));
+      const ok=oi===q.correct;
+      opt.classList.add(ok?'correct':'wrong');
+      if(!ok)document.querySelector(`[data-qi="${qi}"][data-oi="${q.correct}"]`).classList.add('correct');
+      const fb=document.getElementById('qf'+qi);
+      fb.textContent=ok?q.fc:q.fw;
+      fb.className='quiz-feedback show '+(ok?'correct':'wrong');
+      if(ok)score++;
+      ans++;
+      if(ans===d.quiz.length){
+        const qs=document.getElementById('qs');
+        qs.textContent=qs.dataset.tpl.replace('{score}',score).replace('{total}',d.quiz.length);
+        qs.classList.add('show');
+        document.getElementById('qr').classList.add('show');
+      }
+    });
+  });
+  document.getElementById('qr').addEventListener('click',()=>{score=0;ans=0;document.querySelectorAll('.quiz-option').forEach(o=>o.className='quiz-option');document.querySelectorAll('.quiz-feedback').forEach(f=>f.className='quiz-feedback');document.getElementById('qs').classList.remove('show');document.getElementById('qr').classList.remove('show');});
+  document.getElementById('stitle').textContent=d.src;
+  document.getElementById('sbody').innerHTML=SRCS.map(s=>`<div class="source-box"><strong>${s.a} (${s.y}).</strong> ${s.t}. <a href="${s.u}" target="_blank" rel="noopener">${s.p}</a>.</div>`).join('');
+}
+buildBar();render();
+</script>
+</body>
+</html>
