@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenschutzerklärung — UNIVERSAL-CALCULATOR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #050c1a;
+  --bg-panel: #081428;
+  --bg-card: #0a1930;
+  --blue-bright: #00c8ff;
+  --blue-mid: #0077aa;
+  --blue-dim: #003355;
+  --copper: #d4824a;
+  --copper-light: #f0a060;
+  --copper-dim: #7a3a1a;
+  --grid-line: rgba(0,150,200,0.08);
+  --text-primary: #c8e8ff;
+  --text-secondary: #5a90b0;
+  --border: rgba(0,150,200,0.2);
+  --border-bright: rgba(0,200,255,0.5);
+  --placeholder-bg: rgba(212,130,74,0.12);
+  --placeholder-border: rgba(212,130,74,0.5);
+  --success: #00e5a0;
+  --warning: rgba(255,200,50,0.12);
+  --warning-border: rgba(255,200,50,0.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'IBM Plex Mono', monospace;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  padding: 40px 20px 60px;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--blue-dim); border-radius: 3px; }
+
+.page-wrap { max-width: 780px; margin: 0 auto; }
+
+.page-header {
+  margin-bottom: 40px; padding-bottom: 20px;
+  border-bottom: 1px solid var(--border); position: relative;
+}
+.page-header::after {
+  content: ''; position: absolute;
+  bottom: -1px; left: 0; width: 120px; height: 2px;
+  background: linear-gradient(90deg, var(--copper), transparent);
+}
+.logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900; font-size: 0.95rem;
+  color: var(--blue-bright); letter-spacing: 0.15em;
+  margin-bottom: 12px; display: block; text-decoration: none;
+}
+.logo span { color: var(--copper); }
+.page-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem; font-weight: 700;
+  color: var(--text-primary); letter-spacing: 0.06em; margin-bottom: 6px;
+}
+.page-meta { font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 0.15em; text-transform: uppercase; }
+
+/* TOC */
+.toc {
+  background: var(--bg-panel); border: 1px solid var(--border);
+  border-radius: 4px; padding: 16px 20px; margin-bottom: 24px;
+}
+.toc-title { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--copper); margin-bottom: 10px; }
+.toc-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.toc-list li a {
+  font-size: 0.78rem; color: var(--text-secondary); text-decoration: none;
+  transition: color 0.15s; display: flex; align-items: center; gap: 6px;
+}
+.toc-list li a:hover { color: var(--blue-bright); }
+.toc-list li a::before { content: '▸'; color: var(--blue-dim); font-size: 0.65rem; }
+
+/* SECTIONS */
+.section {
+  background: var(--bg-panel); border: 1px solid var(--border);
+  border-radius: 4px; margin-bottom: 14px; overflow: hidden; position: relative;
+}
+.section::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue-dim), transparent);
+}
+.section-head {
+  padding: 14px 20px 10px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
+  user-select: none;
+}
+.section-head:hover { background: rgba(0,200,255,0.03); }
+.section-icon { font-size: 1rem; }
+.section-title {
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--copper); flex: 1;
+}
+.toggle-icon { color: var(--text-secondary); font-size: 0.75rem; transition: transform 0.2s; }
+.section.open .toggle-icon { transform: rotate(90deg); }
+.section-body {
+  padding: 18px 20px; display: flex; flex-direction: column; gap: 14px;
+  display: none;
+}
+.section.open .section-body { display: flex; }
+
+/* FIELD */
+.field-row {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: 8px; align-items: start;
+}
+@media(max-width:540px) { .field-row { grid-template-columns: 1fr; gap: 2px; } }
+.field-label { font-size: 0.68rem; color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; padding-top: 2px; }
+.field-value { font-size: 0.85rem; color: var(--text-primary); line-height: 1.6; }
+
+/* PLACEHOLDER */
+.placeholder {
+  background: var(--placeholder-bg); border: 1px dashed var(--placeholder-border);
+  border-radius: 3px; padding: 5px 12px; font-size: 0.82rem;
+  color: var(--copper-light); font-style: italic; display: inline-block;
+}
+.placeholder::before { content: '✏ '; font-style: normal; }
+
+/* PROSE */
+.prose { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.85; }
+.prose a { color: var(--blue-bright); text-decoration: none; }
+.prose a:hover { text-decoration: underline; }
+.prose p { margin-bottom: 8px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose ul { padding-left: 16px; margin: 6px 0; }
+.prose ul li { margin-bottom: 4px; }
+
+/* NOTE / WARN */
+.note {
+  background: rgba(0,100,150,0.1); border: 1px solid var(--blue-dim);
+  border-radius: 3px; padding: 10px 14px;
+  font-size: 0.78rem; color: var(--text-secondary); line-height: 1.7;
+}
+.note strong { color: var(--blue-bright); }
+.warn {
+  background: var(--warning); border: 1px solid var(--warning-border);
+  border-radius: 3px; padding: 10px 14px;
+  font-size: 0.78rem; color: #ffe080; line-height: 1.7;
+}
+.warn strong { color: #ffd040; }
+
+/* CHIP TAGS */
+.chip {
+  display: inline-block; background: rgba(0,100,150,0.18);
+  border: 1px solid var(--blue-dim); border-radius: 2px;
+  padding: 2px 8px; font-size: 0.72rem; color: var(--blue-bright);
+  margin: 2px 3px 2px 0;
+}
+
+/* STATUS */
+.status-bar {
+  font-size: 0.62rem; color: var(--text-secondary);
+  letter-spacing: 0.12em; padding: 16px 0 0;
+  border-top: 1px solid var(--border); margin-top: 24px;
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+.status-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--success); display: inline-block; margin-right: 4px; }
+
+/* ===== SITE FOOTER ===== */
+.site-footer {
+  margin-top: 48px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-brand {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem; font-weight: 700;
+  color: var(--blue-bright); letter-spacing: 0.15em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.footer-brand span { color: var(--copper); }
+.footer-links {
+  display: flex; align-items: center; gap: 4px;
+  flex-wrap: wrap;
+}
+.footer-link {
+  font-size: 0.68rem; color: var(--text-secondary);
+  text-decoration: none; letter-spacing: 0.08em;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.footer-link:hover {
+  color: var(--blue-bright);
+  border-color: var(--border);
+  background: rgba(0,200,255,0.05);
+}
+.footer-link.active {
+  color: var(--copper);
+  border-color: rgba(212,130,74,0.3);
+  background: rgba(212,130,74,0.06);
+}
+.footer-sep {
+  color: var(--border);
+  font-size: 0.65rem;
+}
+.footer-copy {
+  width: 100%;
+  font-size: 0.6rem; color: var(--text-secondary);
+  letter-spacing: 0.1em; padding: 10px 0 4px;
+  opacity: 0.55;
+}
+@media(max-width:480px){
+  .site-footer { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+/* ===== MOBILE IMPROVEMENTS ===== */
+@media(max-width:600px){
+  body { padding: 20px 14px 40px; font-size: 14px; }
+  .page-title { font-size: 1.3rem; }
+  .section-body { padding: 14px 14px; }
+  .section-head { padding: 12px 14px 8px; }
+  .field-row { grid-template-columns: 1fr; gap: 2px; }
+  .field-label { padding-top: 0; margin-bottom: 2px; }
+  .toc { padding: 12px 14px; }
+  .note, .warn { padding: 9px 12px; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="page-header">
+    <a class="logo" href="/">UNIVERSAL-<span>CALCULATOR</span></a>
+    <h1 class="page-title">Datenschutzerklärung</h1>
+    <div class="page-meta">DSGVO · BDSG · TTDSG · Stand: <span class="placeholder" style="font-size:0.68rem;padding:2px 8px">Monat Jahr eintragen</span></div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Inhaltsverzeichnis">
+    <div class="toc-title">▸ Inhaltsverzeichnis</div>
+    <ul class="toc-list">
+      <li><a href="#s1">1. Verantwortlicher</a></li>
+      <li><a href="#s2">2. Allgemeine Hinweise & Pflichtinformationen</a></li>
+      <li><a href="#s3">3. Datenerfassung auf dieser Website</a></li>
+      <li><a href="#s4">4. Google AdSense</a></li>
+      <li><a href="#s5">5. Google Analytics</a></li>
+      <li><a href="#s6">6. Hosting & technische Infrastruktur</a></li>
+      <li><a href="#s7">7. Ihre Rechte</a></li>
+      <li><a href="#s8">8. Cookies & Einwilligung</a></li>
+      <li><a href="#s9">9. Externe Links & Drittanbieter</a></li>
+    </ul>
+  </nav>
+
+  <!-- 1. VERANTWORTLICHER -->
+  <div class="section open" id="s1">
+    <div class="section-head" onclick="toggle(this)">
+      <span class="section-icon">👤</span>
+      <span class="section-title">1. Verantwortlicher (Art. 13 DSGVO)</span>
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">Name / Firma</div>
+        <div class="field-value"><span class="placeholder">Vor- und Nachname / Firmenname</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Adresse</div>
+        <div class="field-value"><span class="placeholder">Straße Nr., PLZ Ort, Deutschland</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">E-Mail</div>
+        <div class="field-value"><span class="placeholder">datenschutz@ihre-domain.de</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Telefon</div>
+        <div class="field-value"><span class="placeholder">+49 (0) __ __________</span></div>
+      </div>
+      <div class="note">
+        <strong>Datenschutzbeauftragter:</strong> Sofern Sie gesetzlich zur Benennung eines Datenschutzbeauftragten verpflichtet sind (i.d.R. ab 20 Personen mit regelmäßiger Datenverarbeitung), tragen Sie hier dessen Kontaktdaten ein. Andernfalls kann dieser Abschnitt entfallen. <span class="placeholder" style="font-size:0.75rem">DSB-Name + Kontakt oder „Entfällt"</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ALLGEMEINE HINWEISE -->
+  <div class="section open" id="s2">
+    <div class="section-head" onclick="toggle(this)">
+      <span class="section-icon">ℹ️</span>
+      <span class="section-title">2. Allgemeine Hinweise & Pflichtinformationen</span>
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">Datensicherheit</div>
+        <div class="field-value prose">
+          Diese Website nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung.
+          <div class="chip" style="margin-top:6px">🔒 SSL/TLS aktiv</div>
+          <span class="placeholder" style="margin-left:6px;font-size:0.75rem">HTTPS bestätigen oder anpassen</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Rechtsgrundlagen</div>
+        <div class="field-value prose">
+          Wir verarbeiten personenbezogene Daten auf Basis folgender Rechtsgrundlagen:
+          <ul style="margin-top:6px">
+            <li><span class="chip">Art. 6 Abs. 1 lit. a DSGVO</span> Einwilligung</li>
+            <li><span class="chip">Art. 6 Abs. 1 lit. b DSGVO</span> Vertragserfüllung</li>
+            <li><span class="chip">Art. 6 Abs. 1 lit. f DSGVO</span> Berechtigte Interessen</li>
+          </ul>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Speicherdauer</div>
+        <div class="field-value prose">Personenbezogene Daten werden nur so lange gespeichert, wie es für den jeweiligen Verarbeitungszweck erforderlich ist oder gesetzliche Aufbewahrungsfristen (z.B. Handels- und Steuerrecht: 6–10 Jahre) es verlangen.</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Drittlandübermittlung</div>
+        <div class="field-value prose">
+          Einige eingebundene Dienste (u.a. Google) übermitteln Daten in die USA. Rechtsgrundlage bildet das EU-US Data Privacy Framework (seit Juli 2023) sowie Standardvertragsklauseln gemäß Art. 46 Abs. 2 DSGVO.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. DATENERFASSUNG -->
+  <div class="section open" id="s3">
+    <div class="section-head" onclick="toggle(this)">
+      <span class="section-icon">📊</span>
+      <span class="section-title">3. Datenerfassung auf dieser Website</span>
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">Server-Logfiles</div>
+        <div class="field-value prose">
+          Der Hosting-Anbieter erhebt automatisch Daten in sog. Server-Log-Dateien:
+          <ul style="margin-top:6px">
+            <li>IP-Adresse (anonymisiert oder vollständig je nach Hoster)</li>
+            <li>Browsertyp und -version</li>
+            <li>Verwendetes Betriebssystem</li>
+            <li>Referrer-URL</li>
+            <li>Uhrzeit und Datum des Zugriffs</li>
+            <li>Übertragene Datenmenge</li>
+          </ul>
+          <div class="note" style="margin-top:8px">Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an technischem Betrieb). Speicherdauer: <span class="placeholder" style="font-size:0.75rem">z.B. 7 Tage</span></div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Kontaktformular / E-Mail</div>
+        <div class="field-value prose">
+          <span class="placeholder">Falls kein Kontaktformular vorhanden, diesen Abschnitt entfernen.</span><br><br>
+          Wenn Sie uns per Formular oder E-Mail kontaktieren, werden die angegebenen Daten zum Zweck der Bearbeitung Ihrer Anfrage gespeichert (Name, E-Mail, Nachricht). Rechtsgrundlage: Art. 6 Abs. 1 lit. b oder lit. f DSGVO. Speicherdauer: <span class="placeholder" style="font-size:0.75rem">z.B. 2 Jahre nach Abschluss der Anfrage</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">localStorage (Browser)</div>
+        <div class="field-value prose">
+          Diese Website nutzt den lokalen Browserspeicher (localStorage) ausschließlich zur clientseitigen Speicherung Ihrer bevorzugten Einheiten und des Umrechnungsverlaufs. Diese Daten verlassen Ihren Browser nicht und werden nicht an uns übertragen. Sie können diese Daten jederzeit über die Einstellungen Ihres Browsers löschen. Rechtsgrundlage: § 25 Abs. 2 TTDSG (technisch notwendig).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. GOOGLE ADSENSE -->
+  <div class="section open" id="s4">
+    <div class="section-head" onclick="toggle(this)">
+      <span class="section-icon">📢</span>
+      <span class="section-title">4. Google AdSense (Werbeanzeigen)</span>
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="warn">
+        <strong>⚠ Wichtig:</strong> Google AdSense setzt Cookies und erhebt Nutzungsdaten zu Werbezwecken. Hierfür ist gemäß § 25 TTDSG und Art. 6 Abs. 1 lit. a DSGVO eine <strong>aktive Einwilligung</strong> der Nutzer erforderlich. Stellen Sie sicher, dass Sie ein <strong>Cookie-Consent-Tool</strong> (z.B. Cookiebot, Real Cookie Banner, Complianz) einsetzen, das AdSense erst nach Zustimmung lädt.
+      </div>
+      <div class="field-row">
+        <div class="field-label">Anbieter</div>
+        <div class="field-value">Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland<br><span style="color:var(--text-secondary);font-size:0.78rem">Muttergesellschaft: Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Zweck</div>
+        <div class="field-value prose">Einblendung personalisierter oder nicht-personalisierter Werbeanzeigen basierend auf Ihrem Surfverhalten und Interessen.</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Erhobene Daten</div>
+        <div class="field-value">
+          <span class="chip">Cookie-IDs</span>
+          <span class="chip">IP-Adresse</span>
+          <span class="chip">Browserinformationen</span>
+          <span class="chip">Besuchte Seiten</span>
+          <span class="chip">Interaktionsdaten</span>
+          <span class="chip">Geräteinformationen</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Cookies</div>
+        <div class="field-value prose">
+          Google AdSense setzt u.a. folgende Cookies: <span class="chip">_gads</span> <span class="chip">_gac_</span> <span class="chip">IDE</span> <span class="chip">DSID</span> <span class="chip">test_cookie</span>.<br>
+          Speicherdauer: bis zu 13 Monate (personalisiert) bzw. Sitzungscookies (nicht-personalisiert).
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Personalisierung</div>
+        <div class="field-value prose">
+          <span class="placeholder">Wählen Sie: Personalisierte Werbung aktiv ODER Nur nicht-personalisierte Werbung</span><br><br>
+          Sofern personalisierte Werbung eingesetzt wird, erstellt Google auf Basis Ihrer Online-Aktivitäten ein Interessenprofil. Sie können der personalisierten Werbung widersprechen unter: <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Rechtsgrundlage</div>
+        <div class="field-value"><span class="chip">Art. 6 Abs. 1 lit. a DSGVO</span> Einwilligung (über Cookie-Banner)</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Datenübermittlung</div>
+        <div class="field-value prose">Daten können in die USA übertragen werden. Rechtsgrundlage: EU-US Data Privacy Framework + Standardvertragsklauseln (Art. 46 Abs. 2 DSGVO).</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Datenschutz Google</div>
+        <div class="field-value"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:var(--blue-bright)">https://policies.google.com/privacy</a></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Widerspruch / Opt-Out</div>
+        <div class="field-value prose">
+          Sie können die Verwendung von Cookies durch Google deaktivieren:<br>
+          · <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Anzeigeneinstellungen</a><br>
+          · <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">YourAdChoices (DAA)</a><br>
+          · <a href="https://www.youronlinechoices.com" target="_blank" rel="noopener">Your Online Choices (EDAA)</a><br>
+          · Browser-Plugin: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. GOOGLE ANALYTICS -->
+  <div class="section" id="s5">
+    <div class="section-head" onclick="toggle(this)">
+      <span class="section-icon">📈</span>
+      <span class="section-title">5. Google Analytics (optional – nur wenn genutzt)</span>
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="note"><strong>Hinweis:</strong> Diesen Abschnitt nur behalten, wenn Sie Google Analytics tatsächlich einsetzen. Andernfalls vollständig entfernen. <span class="placeholder" style="font-size:0.75rem">Nutzen Sie GA4? Dann diesen Abschnitt aktivieren.</span></div>
+      <div class="field-row">
+        <div class="field-label">Anbieter</div>
+        <div class="field-value">Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Zweck</div>
+        <div class="field-value prose">Analyse des Nutzerverhaltens (Seitenaufrufe, Verweildauer, Absprungraten, Herkunft der Besucher) zur Optimierung des Webangebots.</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Tracking-ID</div>
+        <div class="field-value"><span class="placeholder">G-XXXXXXXXXX (Ihre GA4 Measurement ID)</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">IP-Anonymisierung</div>
+        <div class="field-value prose">GA4 anonymisiert IP-Adressen standardmäßig. Eine vollständige IP-Adresse wird nicht gespeichert.</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Cookies</div>
+        <div class="field-value"><span class="chip">_ga</span> <span class="chip">_ga_XXXXXXX</span> — Speicherdauer: 2 Jahre / 13 Monate</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Rechtsgrundlage</div>
+        <div class="field-value"><span class="chip">Art. 6 Abs. 1 lit. a DSGVO</span> Einwilligung</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Auftragsverarbeitung</div>
+        <div class="field-value prose">Mit Google wurde ein Auftragsverarbeitungsvertrag (AVV) gemäß Art. 28 DSGVO abgeschlossen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. HOSTING -->
+  <div class="section" id="s6">
+    <div class="section-head" onclick="toggle(this)">
+      <span class="section-icon">🖥️</span>
+      <span class="section-title">6. Hosting & technische Infrastruktur</span>
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">Hosting-Anbieter</div>
+        <div class="field-value"><span class="placeholder">z.B. IONOS SE, Elgendorfer Str. 57, 56410 Montabaur</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Serverstandort</div>
+        <div class="field-value"><span class="placeholder">z.B. Deutschland / EU</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">AVV</div>
+        <div class="field-value prose">Mit dem Hosting-Anbieter wurde ein Auftragsverarbeitungsvertrag (AVV) gemäß Art. 28 DSGVO geschlossen. <span class="placeholder" style="font-size:0.75rem">Bestätigen oder Anbieter anpassen</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">WordPress</div>
+        <div class="field-value prose">Diese Website basiert auf WordPress (automattic.com). Beim Betrieb können durch WordPress-Plugins Daten verarbeitet werden. Details entnehmen Sie den jeweiligen Plugin-Datenschutzhinweisen. <span class="placeholder" style="font-size:0.75rem">Genutzte Plugins auflisten falls erforderlich</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Google Fonts</div>
+        <div class="field-value prose">Diese Website lädt Schriftarten von Google Fonts (fonts.googleapis.com). Dabei wird Ihre IP-Adresse an Google-Server übertragen. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. <br><span class="note" style="display:inline-block;margin-top:6px;"><strong>Tipp:</strong> Zur DSGVO-konformen Alternative: Google Fonts lokal hosten via <a href="https://gwfh.madebymonsters.com" target="_blank" rel="noopener" style="color:var(--blue-bright)">Google Fonts Helper</a>.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. IHRE RECHTE -->
+  <div class="section open" id="s7">
+    <div class="section-head" onclick="toggle(this)">
+      <span class="section-icon">⚖️</span>
+      <span class="section-title">7. Ihre Rechte als betroffene Person</span>
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="prose">
+        <p>Sie haben gegenüber uns folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:</p>
+      </div>
+      <div class="field-row">
+        <div class="field-label"><span class="chip">Art. 15 DSGVO</span></div>
+        <div class="field-value prose">Recht auf Auskunft über gespeicherte Daten</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label"><span class="chip">Art. 16 DSGVO</span></div>
+        <div class="field-value prose">Recht auf Berichtigung unrichtiger Daten</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label"><span class="chip">Art. 17 DSGVO</span></div>
+        <div class="field-value prose">Recht auf Löschung („Recht auf Vergessenwerden")</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label"><span class="chip">Art. 18 DSGVO</span></div>
+        <div class="field-value prose">Recht auf Einschränkung der Verarbeitung</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label"><span class="chip">Art. 20 DSGVO</span></div>
+        <div class="field-value prose">Recht auf Datenübertragbarkeit</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label"><span class="chip">Art. 21 DSGVO</span></div>
+        <div class="field-value prose">Widerspruchsrecht gegen Verarbeitung auf Basis berechtigter Interessen</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label"><span class="chip">Art. 7 Abs. 3 DSGVO</span></div>
+        <div class="field-value prose">Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Beschwerde­recht</div>
+        <div class="field-value prose">
+          Sie haben das Recht, sich bei einer Aufsichtsbehörde zu beschweren. Zuständig ist die Behörde Ihres Bundeslandes:
+          <span class="placeholder" style="margin-top:6px;display:inline-block">z.B. LfDI Baden-Württemberg / BayLDA / Berliner Beauftragte etc.</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Kontakt für Anfragen</div>
+        <div class="field-value"><span class="placeholder">datenschutz@ihre-domain.de</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. COOKIES & EINWILLIGUNG -->
+  <div class="section open" id="s8">
+    <div class="section-head" onclick="toggle(this)">
+      <span class="section-icon">🍪</span>
+      <span class="section-title">8. Cookies & Einwilligungsverwaltung</span>
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="warn">
+        <strong>⚠ Pflicht bei AdSense:</strong> Da Google AdSense eingesetzt wird, sind Sie verpflichtet, ein rechtssicheres Consent-Management zu implementieren. Empfohlene Tools für WordPress: <strong>Real Cookie Banner</strong>, <strong>Complianz</strong>, <strong>Cookiebot</strong> oder <strong>Borlabs Cookie</strong>.
+      </div>
+      <div class="field-row">
+        <div class="field-label">Consent-Tool</div>
+        <div class="field-value"><span class="placeholder">Name Ihres Cookie-Consent-Tools, z.B. „Real Cookie Banner (devowl.io)"</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Technisch notwendige Cookies</div>
+        <div class="field-value prose">Cookies, die für den technischen Betrieb unbedingt erforderlich sind (z.B. Session-Cookies, CSRF-Token, localStorage für Einstellungen), werden ohne Einwilligung gesetzt (§ 25 Abs. 2 TTDSG).</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Analyse- & Marketing-Cookies</div>
+        <div class="field-value prose">Cookies von Google AdSense und ggf. Google Analytics werden nur nach ausdrücklicher Einwilligung des Nutzers gesetzt. Die Einwilligung kann jederzeit widerrufen werden.</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Cookie-Einstellungen ändern</div>
+        <div class="field-value prose">Sie können Ihre Cookie-Einstellungen jederzeit anpassen: <span class="placeholder">Link zu Ihrer Cookie-Einstellungsseite oder „Klicken Sie auf den Cookie-Banner unten links"</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. EXTERNE LINKS -->
+  <div class="section" id="s9">
+    <div class="section-head" onclick="toggle(this)">
+      <span class="section-icon">🔗</span>
+      <span class="section-title">9. Externe Links & Drittanbieter</span>
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="prose">
+        <p>Diese Website kann Links zu externen Websites Dritter enthalten. Auf die Datenschutzpraktiken dieser Websites haben wir keinen Einfluss. Bitte beachten Sie die Datenschutzerklärungen der jeweiligen Anbieter.</p>
+        <p style="margin-top:10px"><span class="placeholder">Falls weitere Drittanbieter eingebunden sind (z.B. YouTube, Social-Media-Plugins, Zahlungsanbieter), hier ergänzen.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <span><span class="status-dot"></span> DOKUMENT AKTIV</span>
+    <span>RECHTSSTAND: DSGVO / TTDSG · DEUTSCHLAND</span>
+    <span>ADSENSE: EINGESCHLOSSEN</span>
+    <span>LETZTE PRÜFUNG: <span class="placeholder" style="font-size:0.62rem;padding:1px 6px">Datum eintragen</span></span>
+  </div>
+
+
+<footer class="site-footer">
+  <a class="footer-brand" href="/">UNIVERSAL-<span>CALCULATOR</span></a>
+  <nav class="footer-links" aria-label="Rechtliches">
+    <a class="footer-link" href="/universal-calculator.html">⇢ Rechner</a>
+    <span class="footer-sep">|</span>
+    <a class="footer-link" href="/impressum.html">Impressum</a>
+    <span class="footer-sep">|</span>
+    <a class="footer-link active" href="/datenschutz.html" aria-current="page">Datenschutz</a>
+  </nav>
+  <div class="footer-copy">© Universal-Calculator · Alle Berechnungen erfolgen lokal im Browser · Keine Garantie auf Richtigkeit</div>
+</footer>
+</div>
+<script>
+function toggle(head) {
+  const section = head.closest('.section');
+  section.classList.toggle('open');
+}
+// Open all on load
+document.querySelectorAll('.section').forEach(s => {
+  if(!s.classList.contains('open')) s.classList.remove('open');
+});
+</script>
+</body>
+</html>

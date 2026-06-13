@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum — UNIVERSAL-CALCULATOR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #050c1a;
+  --bg-panel: #081428;
+  --bg-card: #0a1930;
+  --blue-bright: #00c8ff;
+  --blue-mid: #0077aa;
+  --blue-dim: #003355;
+  --copper: #d4824a;
+  --copper-light: #f0a060;
+  --copper-dim: #7a3a1a;
+  --grid-line: rgba(0,150,200,0.08);
+  --text-primary: #c8e8ff;
+  --text-secondary: #5a90b0;
+  --border: rgba(0,150,200,0.2);
+  --border-bright: rgba(0,200,255,0.5);
+  --placeholder-bg: rgba(212,130,74,0.12);
+  --placeholder-border: rgba(212,130,74,0.5);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'IBM Plex Mono', monospace;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  padding: 40px 20px 60px;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--blue-dim); border-radius: 3px; }
+
+.page-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.page-header {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; width: 120px; height: 2px;
+  background: linear-gradient(90deg, var(--copper), transparent);
+}
+.logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900; font-size: 0.95rem;
+  color: var(--blue-bright); letter-spacing: 0.15em;
+  margin-bottom: 12px; display: block;
+  text-decoration: none;
+}
+.logo span { color: var(--copper); }
+.page-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.8rem; font-weight: 700;
+  color: var(--text-primary); letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.page-meta {
+  font-size: 0.7rem; color: var(--text-secondary);
+  letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+/* SECTIONS */
+.section {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  position: relative;
+}
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--copper-dim), transparent);
+}
+.section-head {
+  padding: 14px 20px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.section-icon { font-size: 1rem; }
+.section-title {
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--copper);
+}
+.section-body {
+  padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+/* FIELD ROWS */
+.field-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 8px; align-items: start;
+}
+@media(max-width:540px) {
+  .field-row { grid-template-columns: 1fr; gap: 2px; }
+}
+.field-label {
+  font-size: 0.68rem; color: var(--text-secondary);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding-top: 2px;
+}
+.field-value {
+  font-size: 0.88rem; color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* PLACEHOLDER BOXES */
+.placeholder {
+  background: var(--placeholder-bg);
+  border: 1px dashed var(--placeholder-border);
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  color: var(--copper-light);
+  font-style: italic;
+  display: inline-block;
+  min-width: 180px;
+}
+.placeholder::before { content: '✏ '; font-style: normal; }
+
+/* PROSE TEXT */
+.prose {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.prose a { color: var(--blue-bright); text-decoration: none; }
+.prose a:hover { text-decoration: underline; }
+
+/* HINWEIS BOX */
+.note {
+  background: rgba(0,100,150,0.1);
+  border: 1px solid var(--blue-dim);
+  border-radius: 3px; padding: 12px 16px;
+  font-size: 0.78rem; color: var(--text-secondary); line-height: 1.7;
+  margin-top: 8px;
+}
+.note strong { color: var(--blue-bright); }
+
+/* STATUS BAR */
+.status-bar {
+  font-size: 0.62rem; color: var(--text-secondary);
+  letter-spacing: 0.12em; padding: 16px 0 0;
+  border-top: 1px solid var(--border); margin-top: 24px;
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+.status-dot { width: 5px; height: 5px; border-radius: 50%; background: #00e5a0; display: inline-block; margin-right: 4px; }
+
+/* ===== SITE FOOTER ===== */
+.site-footer {
+  margin-top: 48px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-brand {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem; font-weight: 700;
+  color: var(--blue-bright); letter-spacing: 0.15em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.footer-brand span { color: var(--copper); }
+.footer-links {
+  display: flex; align-items: center; gap: 4px;
+  flex-wrap: wrap;
+}
+.footer-link {
+  font-size: 0.68rem; color: var(--text-secondary);
+  text-decoration: none; letter-spacing: 0.08em;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.footer-link:hover {
+  color: var(--blue-bright);
+  border-color: var(--border);
+  background: rgba(0,200,255,0.05);
+}
+.footer-link.active {
+  color: var(--copper);
+  border-color: rgba(212,130,74,0.3);
+  background: rgba(212,130,74,0.06);
+}
+.footer-sep {
+  color: var(--border);
+  font-size: 0.65rem;
+}
+.footer-copy {
+  width: 100%;
+  font-size: 0.6rem; color: var(--text-secondary);
+  letter-spacing: 0.1em; padding: 10px 0 4px;
+  opacity: 0.55;
+}
+@media(max-width:480px){
+  .site-footer { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+/* ===== MOBILE IMPROVEMENTS ===== */
+@media(max-width:600px){
+  body { padding: 20px 14px 40px; font-size: 14px; }
+  .page-title { font-size: 1.3rem; }
+  .section-body { padding: 14px 14px; }
+  .section-head { padding: 12px 14px 8px; }
+  .field-row { grid-template-columns: 1fr; gap: 2px; }
+  .field-label { padding-top: 0; margin-bottom: 2px; }
+  .toc { padding: 12px 14px; }
+  .note, .warn { padding: 9px 12px; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="page-header">
+    <a class="logo" href="/">UNIVERSAL-<span>CALCULATOR</span></a>
+    <h1 class="page-title">Impressum</h1>
+    <div class="page-meta">§ 5 TMG · Anbieterkennzeichnung · Stand: <span class="placeholder">Monat Jahr eintragen</span></div>
+  </header>
+
+  <!-- ANGABEN GEM. § 5 TMG -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-icon">🏢</span>
+      <span class="section-title">Angaben gemäß § 5 TMG</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">Name / Firma</div>
+        <div class="field-value"><span class="placeholder">Vor- und Nachname oder Firmenname</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Rechtsform</div>
+        <div class="field-value"><span class="placeholder">z.B. Einzelunternehmen / GmbH / UG</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Straße & Nr.</div>
+        <div class="field-value"><span class="placeholder">Musterstraße 1</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">PLZ & Ort</div>
+        <div class="field-value"><span class="placeholder">12345 Musterstadt</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Land</div>
+        <div class="field-value">Deutschland</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KONTAKT -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-icon">📬</span>
+      <span class="section-title">Kontakt</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">Telefon</div>
+        <div class="field-value"><span class="placeholder">+49 (0) __ __________</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">E-Mail</div>
+        <div class="field-value"><span class="placeholder">kontakt@ihre-domain.de</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Website</div>
+        <div class="field-value"><span class="placeholder">https://www.ihre-domain.de</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEUER / REGISTER -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-icon">🗂️</span>
+      <span class="section-title">Steuer- & Registerangaben</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">USt-IdNr.</div>
+        <div class="field-value">
+          <span class="placeholder">DE___________ (falls vorhanden)</span>
+          <div class="note" style="margin-top:6px"><strong>Hinweis:</strong> Nur eintragen wenn vorhanden. Einzelpersonen ohne USt-ID können dieses Feld weglassen.</div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Steuernummer</div>
+        <div class="field-value"><span class="placeholder">__/___/_____ (nur wenn keine USt-IdNr.)</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Handelsregister</div>
+        <div class="field-value"><span class="placeholder">HRB _____ beim Amtsgericht _______ (nur GmbH/AG etc.)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERANTWORTLICH -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-icon">✍️</span>
+      <span class="section-title">Verantwortlich für den Inhalt (§ 18 Abs. 2 MStV)</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">Name</div>
+        <div class="field-value"><span class="placeholder">Vor- und Nachname</span></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Adresse</div>
+        <div class="field-value"><span class="placeholder">Straße Nr., PLZ Ort</span> <em style="color:var(--text-secondary);font-size:0.75rem">(falls abweichend von oben)</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STREITBEILEGUNG -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-icon">⚖️</span>
+      <span class="section-title">Streitbeilegung & Haftung</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">EU-Streitschlichtung</div>
+        <div class="field-value prose">
+          Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+          <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a><br>
+          <span class="placeholder">Wir sind bereit / nicht bereit, an einem Schlichtungsverfahren teilzunehmen.</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Haftung für Inhalte</div>
+        <div class="field-value prose">
+          Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8–10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Haftung für Links</div>
+        <div class="field-value prose">
+          Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Urheberrecht</div>
+        <div class="field-value prose">
+          Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <span><span class="status-dot"></span> DOKUMENT AKTIV</span>
+    <span>RECHTSSTAND: DEUTSCHLAND · TMG / MSTV</span>
+    <span>LETZTE PRÜFUNG: <span class="placeholder" style="font-size:0.62rem;padding:1px 6px">Datum eintragen</span></span>
+  </div>
+
+
+<footer class="site-footer">
+  <a class="footer-brand" href="/">UNIVERSAL-<span>CALCULATOR</span></a>
+  <nav class="footer-links" aria-label="Rechtliches">
+    <a class="footer-link" href="/universal-calculator.html">⇢ Rechner</a>
+    <span class="footer-sep">|</span>
+    <a class="footer-link active" href="/impressum.html" aria-current="page">Impressum</a>
+    <span class="footer-sep">|</span>
+    <a class="footer-link" href="/datenschutz.html">Datenschutz</a>
+  </nav>
+  <div class="footer-copy">© Universal-Calculator · Alle Berechnungen erfolgen lokal im Browser · Keine Garantie auf Richtigkeit</div>
+</footer>
+</div>
+</body>
+</html>

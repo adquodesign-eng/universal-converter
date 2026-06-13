@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="3;url=universal-calculator.html">
+<title>UNIVERSAL-CALCULATOR — Einheitenumrechner</title>
+<meta name="description" content="Kostenloser Einheitenumrechner für Länge, Gewicht, Temperatur, Währung und über 50 weitere Kategorien — in 11 Sprachen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #050c1a;
+  --blue-bright: #00c8ff;
+  --blue-dim: #003355;
+  --copper: #d4824a;
+  --copper-light: #f0a060;
+  --grid-line: rgba(0,150,200,0.08);
+  --text-primary: #c8e8ff;
+  --text-secondary: #5a90b0;
+  --border: rgba(0,150,200,0.2);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'IBM Plex Mono', monospace;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  overflow: hidden;
+}
+
+/* ANIMATED CORNER ACCENTS */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  width: 200px; height: 200px;
+  border: 1px solid rgba(0,200,255,0.1);
+  pointer-events: none;
+}
+body::before { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+body::after  { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+/* CARD */
+.card {
+  max-width: 540px; width: 100%;
+  background: rgba(8,20,40,0.95);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 48px 40px 36px;
+  position: relative;
+  animation: fadeIn 0.6s ease both;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--copper), var(--blue-bright), transparent);
+  border-radius: 6px 6px 0 0;
+}
+
+/* LOGO */
+.logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900; font-size: clamp(1.1rem, 5vw, 1.6rem);
+  color: var(--blue-bright); letter-spacing: 0.12em;
+  text-shadow: 0 0 30px rgba(0,200,255,0.35);
+  margin-bottom: 6px;
+  display: block; text-decoration: none;
+}
+.logo span { color: var(--copper); }
+
+.tagline {
+  font-size: 0.72rem; color: var(--text-secondary);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+/* FEATURES */
+.features {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 36px;
+}
+@media(max-width:420px){ .features { grid-template-columns: 1fr; } }
+
+.feature {
+  background: rgba(0,100,150,0.08);
+  border: 1px solid var(--border);
+  border-radius: 4px; padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.feature-icon { font-size: 1.1rem; flex-shrink: 0; }
+.feature-text { font-size: 0.72rem; color: var(--text-secondary); line-height: 1.4; }
+.feature-text strong { color: var(--text-primary); display: block; margin-bottom: 1px; }
+
+/* CTA BUTTON */
+.cta-wrap { text-align: center; }
+.cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, rgba(0,120,170,0.3), rgba(0,80,120,0.2));
+  border: 1px solid rgba(0,200,255,0.4);
+  border-radius: 4px;
+  padding: 14px 32px;
+  font-family: 'Orbitron', monospace; font-size: 0.8rem; font-weight: 700;
+  color: var(--blue-bright); letter-spacing: 0.15em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative; overflow: hidden;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,200,255,0.2); }
+  50% { box-shadow: 0 0 0 8px rgba(0,200,255,0); }
+}
+.cta::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0,200,255,0.08), transparent);
+  transform: translateX(-100%);
+}
+.cta:hover {
+  background: linear-gradient(135deg, rgba(0,150,200,0.4), rgba(0,100,150,0.3));
+  border-color: var(--blue-bright);
+  transform: translateY(-1px);
+  animation: none;
+  box-shadow: 0 4px 24px rgba(0,200,255,0.2);
+}
+.cta:hover::after { animation: shimmer 0.5s ease forwards; }
+@keyframes shimmer {
+  to { transform: translateX(100%); }
+}
+.cta svg { transition: transform 0.2s; }
+.cta:hover svg { transform: translateX(4px); }
+
+/* COUNTDOWN */
+.countdown-wrap {
+  margin-top: 16px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.countdown-bar-bg {
+  flex: 1; max-width: 200px; height: 2px;
+  background: rgba(0,150,200,0.15); border-radius: 1px; overflow: hidden;
+}
+.countdown-bar {
+  height: 100%; background: var(--blue-bright);
+  border-radius: 1px;
+  animation: drain 3s linear forwards;
+}
+@keyframes drain { from { width: 100%; } to { width: 0%; } }
+.countdown-text {
+  font-size: 0.62rem; color: var(--text-secondary);
+  letter-spacing: 0.1em; white-space: nowrap;
+}
+
+/* FOOTER LINKS */
+.page-footer {
+  margin-top: 28px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  flex-wrap: wrap;
+}
+.page-footer a {
+  font-size: 0.62rem; color: var(--text-secondary);
+  text-decoration: none; padding: 4px 8px;
+  border: 1px solid transparent; border-radius: 3px;
+  letter-spacing: 0.08em; transition: all 0.15s;
+}
+.page-footer a:hover { color: var(--blue-bright); border-color: var(--border); }
+.page-footer-sep { color: var(--border); font-size: 0.6rem; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <a class="logo" href="universal-calculator.html">UNIVERSAL-<span>CALCULATOR</span></a>
+  <div class="tagline">Einheitenumrechner · 11 Sprachen · 50+ Kategorien</div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">📏</div>
+      <div class="feature-text">
+        <strong>50+ Kategorien</strong>
+        Länge, Gewicht, Temperatur, Währung &amp; mehr
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🌍</div>
+      <div class="feature-text">
+        <strong>11 Sprachen</strong>
+        DE, EN, FR, ES, IT, PT, RU, AR, ZH, JA, HI
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-text">
+        <strong>Lokal im Browser</strong>
+        Keine Daten werden übertragen
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📱</div>
+      <div class="feature-text">
+        <strong>Mobil optimiert</strong>
+        Funktioniert auf jedem Gerät
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-wrap">
+    <a class="cta" href="universal-calculator.html">
+      Zum Rechner starten
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+    <div class="countdown-wrap">
+      <div class="countdown-bar-bg"><div class="countdown-bar"></div></div>
+      <span class="countdown-text" id="countdown-txt">Weiterleitung in 3 s …</span>
+    </div>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <a href="impressum.html">Impressum</a>
+  <span class="page-footer-sep">|</span>
+  <a href="datenschutz.html">Datenschutz</a>
+</footer>
+
+<script>
+// Countdown display
+let secs = 3;
+const txt = document.getElementById('countdown-txt');
+const iv = setInterval(() => {
+  secs--;
+  if (secs <= 0) {
+    clearInterval(iv);
+    txt.textContent = 'Weiterleitung …';
+    window.location.href = 'universal-calculator.html';
+  } else {
+    txt.textContent = `Weiterleitung in ${secs} s …`;
+  }
+}, 1000);
+</script>
+</body>
+</html>
