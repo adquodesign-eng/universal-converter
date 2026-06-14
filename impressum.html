@@ -299,14 +299,7 @@ body {
     </div>
   </div>
       </div>
-      <div class="field-row">
-        <div class="field-label">Steuernummer</div>
-        <div class="field-value"><span class="placeholder">Steuernummer eintragen</span></div>
-      </div>
-      <div class="field-row">
-        <div class="field-label">Handelsregister</div>
-        <div class="field-value">— (Einzelunternehmen)</div>
-      </div>
+
     </div>
   </div>
 
@@ -414,21 +407,6 @@ body {
     </nav>
     <div class="footer-copy">© 2026 Universal-Converter</div>
   </footer>
-  <script>
-(function() {
-  var lang = (new URLSearchParams(location.search).get('lang')) || localStorage.getItem('uc_lang') || 'de';
-  var L = {"converter": {"de": "⇢ Rechner", "en": "⇢ Converter", "fr": "⇢ Convertisseur", "es": "⇢ Conversor", "it": "⇢ Convertitore", "pt": "⇢ Conversor", "nl": "⇢ Omzetter", "pl": "⇢ Przelicznik", "tr": "⇢ Dönüştürücü", "ar": "⇢ المحوّل", "zh": "⇢ 转换器"}, "wissen": {"de": "Wissenswertes", "en": "Knowledge", "fr": "Connaissances", "es": "Conocimiento", "it": "Conoscenza", "pt": "Conhecimento", "nl": "Kennis", "pl": "Wiedza", "tr": "Bilgi", "ar": "المعرفة", "zh": "知识"}, "faq": {"de": "FAQ", "en": "FAQ", "fr": "FAQ", "es": "FAQ", "it": "FAQ", "pt": "FAQ", "nl": "FAQ", "pl": "FAQ", "tr": "SSS", "ar": "الأسئلة", "zh": "常见问题"}, "help": {"de": "Hilfe", "en": "Help", "fr": "Aide", "es": "Ayuda", "it": "Aiuto", "pt": "Ajuda", "nl": "Hulp", "pl": "Pomoc", "tr": "Yardım", "ar": "المساعدة", "zh": "帮助"}, "imp": {"de": "Impressum", "en": "Imprint", "fr": "Mentions légales", "es": "Aviso legal", "it": "Note legali", "pt": "Aviso legal", "nl": "Colofon", "pl": "Nota prawna", "tr": "Künye", "ar": "إشعار قانوني", "zh": "法律声明"}, "dsgvo": {"de": "Datenschutz", "en": "Privacy", "fr": "Confidentialité", "es": "Privacidad", "it": "Privacy", "pt": "Privacidade", "nl": "Privacy", "pl": "Prywatność", "tr": "Gizlilik", "ar": "الخصوصية", "zh": "隐私"}};
-  var activeHref = location.pathname.split('/').pop() || 'index.html';
-  var map = {
-    'fl-converter': L.converter, 'fl-wissen': L.wissen, 'fl-faq': L.faq,
-    'fl-help': L.help, 'fl-imp': L.imp, 'fl-dsgvo': L.dsgvo
-  };
-  Object.entries(map).forEach(function(e) {
-    var el = document.getElementById(e[0]);
-    if(el) el.textContent = e[1][lang] || e[1]['de'];
-  });
-})();
-</script>
 </div>
 </body>
 </html>

@@ -386,28 +386,7 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 .sub-tab:hover { border-color: var(--blue-mid); color: var(--text-primary); }
 .sub-tab.active { border-color: var(--blue-bright); color: var(--blue-bright); background: rgba(0,200,255,0.08); }
 
-/* STATUS BAR */
-.status-bar {
-  font-size: 1.10rem; color: var(--text-secondary); letter-spacing: 0.1em;
-  padding: 6px 0; border-top: 1px solid var(--border); margin-top: 16px;
-  display: flex; gap: 16px; flex-wrap: wrap;
-}
-.status-bar span { display: flex; align-items: center; gap: 4px; }
-.status-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--success); display: inline-block; }
 
-/* ===== SITE FOOTER ===== */
-.site-footer {
-  margin-top: 0;
-  padding: 12px 20px;
-  border-top: 1px solid var(--border);
-  background: rgba(5,12,26,0.97);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  position: relative; z-index: 1;
-}
 .footer-brand {
   font-family: 'Orbitron', monospace;
   font-size: 1.00rem; font-weight: 700;
@@ -1099,11 +1078,8 @@ function renderStandard(cat, area) {
       <div class="results-label">${t('all_units')}</div>
       <div class="results-grid" id="results-grid"></div>
     </div>
-    <div class="status-bar">
-      <span><span class="status-dot"></span> ONLINE</span>
-      <span>KAT: ${cat.id.toUpperCase()}</span>
-      <span>${cat.units.length} EINHEITEN</span>
-    </div>
+    ${(function(){const wm={"laenge": "wiki-laenge.html", "gewicht": "wiki-gewicht.html", "temp": "wiki-temperatur.html", "flaeche": "wiki-flaeche.html", "volumen": "wiki-volumen.html", "geschw": "wiki-geschwindigkeit.html", "druck": "wiki-druck.html", "energie": "wiki-energie.html", "leistung": "wiki-leistung.html", "zeit": "wiki-zeit.html", "daten": "wiki-daten.html", "transfer": "wiki-transfer.html", "winkel": "wiki-winkel.html", "frequenz": "wiki-frequenz.html", "spannung": "wiki-spannung.html", "widerstand": "wiki-widerstand.html", "kapazitaet": "wiki-kapazitaet.html", "indukt": "wiki-induktivitaet.html", "magnet": "wiki-magnet.html", "licht": "wiki-licht.html", "radio": "wiki-radioaktivitaet.html", "kraftstoff": "wiki-kraftstoff.html", "konzentration": "wiki-konzentration.html", "viskos": "wiki-viskositaet.html", "kraft": "wiki-kraft.html", "drehm": "wiki-drehmoment.html", "beschl": "wiki-beschleunigung.html", "dichte": "wiki-dichte.html", "schall": "wiki-schall.html", "kochen": "wiki-kochen.html", "schuh": "wiki-schuh.html", "kleider": "wiki-kleider.html", "papier": "wiki-papier.html", "typo": "wiki-typo.html", "waehrung": "wiki-waehrung.html", "timezone": "wiki-timezone.html"};const wf=wm[cat.id];if(!wf)return'';const wl={'de':'📚 Wissenswertes zu diesem Thema','en':'📚 Knowledge about this topic','fr':'📚 En savoir plus','es':'📚 Más información','it':'📚 Approfondimento','pt':'📚 Saiba mais','nl':'📚 Meer weten','pl':'📚 Więcej informacji','tr':'📚 Bu konuda bilgi','ar':'📚 معرفة المزيد','zh':'📚 了解更多'};return`<a href="/${wf}?lang=${currentLang}" style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:10px 14px;background:rgba(0,100,150,0.08);border:1px solid rgba(0,150,200,0.2);border-radius:3px;text-decoration:none;color:#5a90b0;font-size:0.78rem;letter-spacing:0.05em;transition:all 0.15s;" onmouseover="this.style.borderColor='#00c8ff';this.style.color='#00c8ff'" onmouseout="this.style.borderColor='rgba(0,150,200,0.2)';this.style.color='#5a90b0'"><span>${wl[currentLang]||wl.de}</span><span style="color:#00c8ff">⇢</span></a>`;})()}
+
   `;
   area.appendChild(panel);
 

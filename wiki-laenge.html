@@ -130,21 +130,6 @@ body{background:var(--bg-deep);color:var(--text-primary);font-family:'IBM Plex M
     </nav>
     <div class="footer-copy">© 2026 Universal-Converter</div>
   </footer>
-  <script>
-(function() {
-  var lang = (new URLSearchParams(location.search).get('lang')) || localStorage.getItem('uc_lang') || 'de';
-  var L = {"converter": {"de": "⇢ Rechner", "en": "⇢ Converter", "fr": "⇢ Convertisseur", "es": "⇢ Conversor", "it": "⇢ Convertitore", "pt": "⇢ Conversor", "nl": "⇢ Omzetter", "pl": "⇢ Przelicznik", "tr": "⇢ Dönüştürücü", "ar": "⇢ المحوّل", "zh": "⇢ 转换器"}, "wissen": {"de": "Wissenswertes", "en": "Knowledge", "fr": "Connaissances", "es": "Conocimiento", "it": "Conoscenza", "pt": "Conhecimento", "nl": "Kennis", "pl": "Wiedza", "tr": "Bilgi", "ar": "المعرفة", "zh": "知识"}, "faq": {"de": "FAQ", "en": "FAQ", "fr": "FAQ", "es": "FAQ", "it": "FAQ", "pt": "FAQ", "nl": "FAQ", "pl": "FAQ", "tr": "SSS", "ar": "الأسئلة", "zh": "常见问题"}, "help": {"de": "Hilfe", "en": "Help", "fr": "Aide", "es": "Ayuda", "it": "Aiuto", "pt": "Ajuda", "nl": "Hulp", "pl": "Pomoc", "tr": "Yardım", "ar": "المساعدة", "zh": "帮助"}, "imp": {"de": "Impressum", "en": "Imprint", "fr": "Mentions légales", "es": "Aviso legal", "it": "Note legali", "pt": "Aviso legal", "nl": "Colofon", "pl": "Nota prawna", "tr": "Künye", "ar": "إشعار قانوني", "zh": "法律声明"}, "dsgvo": {"de": "Datenschutz", "en": "Privacy", "fr": "Confidentialité", "es": "Privacidad", "it": "Privacy", "pt": "Privacidade", "nl": "Privacy", "pl": "Prywatność", "tr": "Gizlilik", "ar": "الخصوصية", "zh": "隐私"}};
-  var activeHref = location.pathname.split('/').pop() || 'index.html';
-  var map = {
-    'fl-converter': L.converter, 'fl-wissen': L.wissen, 'fl-faq': L.faq,
-    'fl-help': L.help, 'fl-imp': L.imp, 'fl-dsgvo': L.dsgvo
-  };
-  Object.entries(map).forEach(function(e) {
-    var el = document.getElementById(e[0]);
-    if(el) el.textContent = e[1][lang] || e[1]['de'];
-  });
-})();
-</script>
 </div>
 <script>
 const LANGS=[{code:'de',flag:'🇩🇪'},{code:'en',flag:'🇬🇧'},{code:'fr',flag:'🇫🇷'},{code:'es',flag:'🇪🇸'},{code:'it',flag:'🇮🇹'},{code:'pt',flag:'🇵🇹'},{code:'nl',flag:'🇳🇱'},{code:'pl',flag:'🇵🇱'},{code:'tr',flag:'🇹🇷'},{code:'ar',flag:'🇸🇦',rtl:true},{code:'zh',flag:'🇨🇳'}];
@@ -310,7 +295,6 @@ const ROWS = [["\u00c5ngstr\u00f6m", "\u00c5", "1\u00d710\u207b\u00b9\u2070 m", 
 const SRCS = [{"a": "BIPM", "y": 2019, "t": "The International System of Units (SI)", "p": "bipm.org", "u": "https://www.bipm.org/en/publications/si-brochure/"}, {"a": "NASA", "y": 2023, "t": "Solar System Exploration", "p": "nasa.gov", "u": "https://solarsystem.nasa.gov/"}, {"a": "IAU", "y": 2012, "t": "Re-definition of Astronomical Unit", "p": "iau.org", "u": "https://www.iau.org/"}];
 
 const TAGS_T = {"de": ["SI", "Meter", "Astronomie", "Geschichte"], "en": ["SI", "Meter", "Astronomy", "History"], "fr": ["SI", "Meter", "Astronomie", "Histoire"], "es": ["SI", "Meter", "Astronom\u00eda", "Historia"], "it": ["SI", "Meter", "Astronomia", "Storia"], "pt": ["SI", "Meter", "Astronomia", "Hist\u00f3ria"], "nl": ["SI", "Meter", "Astronomie", "Geschiedenis"], "pl": ["SI", "Meter", "Astronomia", "Historia"], "tr": ["SI", "Meter", "Astronomi", "Tarih"], "ar": ["SI", "Meter", "\u0639\u0644\u0645 \u0627\u0644\u0641\u0644\u0643", "\u0627\u0644\u062a\u0627\u0631\u064a\u062e"], "zh": ["SI", "Meter", "\u5929\u6587\u5b66", "\u5386\u53f2"]};
-const TAGS = TAGS_T;
 
 let lang=(new URLSearchParams(location.search).get('lang'))||localStorage.getItem('uc_lang')||'de';
 function buildBar(){
@@ -323,7 +307,7 @@ function render(){
   document.getElementById('ttl').textContent=d.title;
   document.getElementById('cv').textContent=d.cv;
   document.getElementById('cv-sub').textContent=d.cv_sub;
-  document.getElementById('atags').innerHTML=TAGS.map(t=>`<span class="tag">${t}</span>`).join('');
+  document.getElementById('atags').innerHTML=(TAGS_T[lang]||TAGS_T.de||[]).map(t=>`<span class="tag">${t}</span>`).join('');
   const fLabels=[['de','Rechner','en','Converter','fr','Convertisseur','es','Conversor','it','Convertitore','pt','Conversor','nl','Omzetter','pl','Przelicznik','tr','Dönüştürücü','ar','المحوّل','zh','转换器'],['de','Wissenswertes','en','Knowledge','fr','Connaissances','es','Conocimiento','it','Conoscenza','pt','Conhecimento','nl','Kennis','pl','Wiedza','tr','Bilgi','ar','المعرفة','zh','知识'],['de','FAQ','en','FAQ','fr','FAQ','es','FAQ','it','FAQ','pt','FAQ','nl','FAQ','pl','FAQ','tr','SSS','ar','الأسئلة','zh','常见问题'],['de','Impressum','en','Imprint','fr','Mentions légales','es','Aviso legal','it','Note legali','pt','Aviso','nl','Colofon','pl','Nota','tr','Künye','ar','قانوني','zh','声明'],['de','Datenschutz','en','Privacy','fr','Confidentialité','es','Privacidad','it','Privacy','pt','Privacidade','nl','Privacy','pl','Prywatność','tr','Gizlilik','ar','الخصوصية','zh','隐私']];
   fLabels.forEach((arr,i)=>{const m={};for(let j=0;j<arr.length;j+=2)m[arr[j]]=arr[j+1];const el=document.getElementById('f'+(i+1));if(el)el.textContent=(i===0?'⇢ ':'')+( m[lang]||m.en);});
   document.getElementById('secs').innerHTML=d.sections.map(s=>`<div class="section"><div class="section-head"><span class="section-icon">${s.icon}</span><span class="section-title">${s.title}</span></div><div class="section-body">${s.body}</div></div>`).join('');

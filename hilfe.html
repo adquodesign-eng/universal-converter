@@ -60,8 +60,6 @@ kbd{background:var(--bg-card);border:1px solid var(--blue-dim);border-radius:3px
 .footer-copy{width:100%;font-size:0.6rem;color:var(--text-secondary);letter-spacing:0.1em;padding:10px 0 4px;opacity:0.55;}
 @media(max-width:600px){.page-wrap{padding:24px 14px 60px;}.page-title{font-size:1.3rem;}.help-grid{grid-template-columns:1fr;}}
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630"
-     crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="lang-bar"></div>
@@ -92,21 +90,6 @@ kbd{background:var(--bg-card);border:1px solid var(--blue-dim);border-radius:3px
     </nav>
     <div class="footer-copy">© 2026 Universal-Converter</div>
   </footer>
-  <script>
-(function() {
-  var lang = (new URLSearchParams(location.search).get('lang')) || localStorage.getItem('uc_lang') || 'de';
-  var L = {"converter": {"de": "⇢ Rechner", "en": "⇢ Converter", "fr": "⇢ Convertisseur", "es": "⇢ Conversor", "it": "⇢ Convertitore", "pt": "⇢ Conversor", "nl": "⇢ Omzetter", "pl": "⇢ Przelicznik", "tr": "⇢ Dönüştürücü", "ar": "⇢ المحوّل", "zh": "⇢ 转换器"}, "wissen": {"de": "Wissenswertes", "en": "Knowledge", "fr": "Connaissances", "es": "Conocimiento", "it": "Conoscenza", "pt": "Conhecimento", "nl": "Kennis", "pl": "Wiedza", "tr": "Bilgi", "ar": "المعرفة", "zh": "知识"}, "faq": {"de": "FAQ", "en": "FAQ", "fr": "FAQ", "es": "FAQ", "it": "FAQ", "pt": "FAQ", "nl": "FAQ", "pl": "FAQ", "tr": "SSS", "ar": "الأسئلة", "zh": "常见问题"}, "help": {"de": "Hilfe", "en": "Help", "fr": "Aide", "es": "Ayuda", "it": "Aiuto", "pt": "Ajuda", "nl": "Hulp", "pl": "Pomoc", "tr": "Yardım", "ar": "المساعدة", "zh": "帮助"}, "imp": {"de": "Impressum", "en": "Imprint", "fr": "Mentions légales", "es": "Aviso legal", "it": "Note legali", "pt": "Aviso legal", "nl": "Colofon", "pl": "Nota prawna", "tr": "Künye", "ar": "إشعار قانوني", "zh": "法律声明"}, "dsgvo": {"de": "Datenschutz", "en": "Privacy", "fr": "Confidentialité", "es": "Privacidad", "it": "Privacy", "pt": "Privacidade", "nl": "Privacy", "pl": "Prywatność", "tr": "Gizlilik", "ar": "الخصوصية", "zh": "隐私"}};
-  var activeHref = location.pathname.split('/').pop() || 'index.html';
-  var map = {
-    'fl-converter': L.converter, 'fl-wissen': L.wissen, 'fl-faq': L.faq,
-    'fl-help': L.help, 'fl-imp': L.imp, 'fl-dsgvo': L.dsgvo
-  };
-  Object.entries(map).forEach(function(e) {
-    var el = document.getElementById(e[0]);
-    if(el) el.textContent = e[1][lang] || e[1]['de'];
-  });
-})();
-</script>
 </div>
 
 <script>
@@ -210,11 +193,11 @@ function render(){
   const d=HELP[currentLang]||HELP['de'];
   document.getElementById('page-title').textContent=d.title;
   document.getElementById('page-meta').textContent=d.meta+' · Universal-Converter';
-  document.getElementById('footer-converter').textContent=d.footer_converter;
-  document.getElementById('footer-faq').textContent=d.footer_faq;
-  document.getElementById('footer-help').textContent=d.footer_help;
-  document.getElementById('footer-impressum').textContent=d.footer_impressum;
-  document.getElementById('footer-datenschutz').textContent=d.footer_datenschutz;
+  document.getElementById('fl-converter').textContent=d.footer_converter;
+  document.getElementById('fl-faq').textContent=d.footer_faq;
+  document.getElementById('fl-help').textContent=d.footer_help;
+  document.getElementById('fl-imp').textContent=d.footer_impressum;
+  document.getElementById('fl-dsgvo').textContent=d.footer_datenschutz;
   document.getElementById('footer-copy').textContent=d.footer_copy;
 
   // Cards
@@ -245,5 +228,7 @@ function render(){
 buildLangBar();
 render();
 </script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630"
+     crossorigin="anonymous"></script>
 </body>
 </html>
