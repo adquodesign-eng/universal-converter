@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Universal-Converter — Universeller Einheitenrechner</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg-deep: #050c1a;
@@ -44,7 +36,7 @@
 .lang-btn {
   background: none; border: 1px solid transparent;
   border-radius: 3px; cursor: pointer; padding: 2px 7px;
-  font-size: 0.72rem; color: var(--text-secondary);
+  font-size: 0.87rem; color: var(--text-secondary);
   font-family: 'IBM Plex Mono', monospace;
   transition: all 0.15s; white-space: nowrap;
   display: flex; align-items: center; gap: 4px;
@@ -52,9 +44,9 @@
 }
 .lang-btn:hover { border-color: var(--border); color: var(--text-primary); background: rgba(0,200,255,0.05); }
 .lang-btn.active { border-color: var(--copper); color: var(--copper); background: rgba(212,130,74,0.1); }
-.lang-flag { font-size: 0.95rem; line-height: 1; }
+.lang-flag { font-size: 1.10rem; line-height: 1; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 14px; scroll-behavior: smooth; }
+html { font-size: 16px; scroll-behavior: smooth; }
 body {
   background: var(--bg-deep);
   color: var(--text-primary);
@@ -83,7 +75,7 @@ body {
 }
 .header-logo {
   font-family: 'Orbitron', monospace;
-  font-weight: 900; font-size: 0.85rem;
+  font-weight: 900; font-size: 1.00rem;
   color: var(--blue-bright);
   letter-spacing: 0.12em;
   text-shadow: 0 0 20px rgba(0,200,255,0.4);
@@ -91,7 +83,7 @@ body {
 }
 .header-logo span { color: var(--copper); }
 .header-subtitle {
-  font-size: 0.7rem; color: var(--text-secondary);
+  font-size: 1.00rem; color: var(--text-secondary);
   letter-spacing: 0.2em; text-transform: uppercase;
   display: none;
 }
@@ -109,7 +101,7 @@ body {
 #global-search {
   background: transparent; border: none; outline: none;
   color: var(--text-primary); font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.85rem; width: 100%;
+  font-size: 1.00rem; width: 100%;
 }
 #global-search::placeholder { color: var(--text-secondary); }
 .hamburger {
@@ -142,14 +134,14 @@ body {
   display: flex; align-items: center; gap: 8px;
   padding: 7px 16px; cursor: pointer;
   border-left: 2px solid transparent;
-  transition: all 0.15s; font-size: 0.78rem;
+  transition: all 0.15s; font-size: 0.93rem;
   color: var(--text-secondary); white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis;
 }
 .sidebar-item:hover { background: rgba(0,200,255,0.06); color: var(--text-primary); border-left-color: var(--blue-dim); }
 .sidebar-item.active { background: rgba(0,200,255,0.1); color: var(--blue-bright); border-left-color: var(--blue-bright); }
 .sidebar-item .icon { font-size: 1rem; flex-shrink: 0; }
-.sidebar-fav { margin-left: auto; opacity: 0.4; font-size: 0.75rem; cursor: pointer; transition: opacity 0.2s; }
+.sidebar-fav { margin-left: auto; opacity: 0.4; font-size: 0.90rem; cursor: pointer; transition: opacity 0.2s; }
 .sidebar-fav:hover, .sidebar-fav.active { opacity: 1; color: var(--copper); }
 
 /* MAIN */
@@ -177,8 +169,8 @@ body {
   transition: background 0.1s;
 }
 .search-result-item:hover { background: rgba(0,200,255,0.1); }
-.search-result-item .sr-cat { font-size: 0.65rem; color: var(--copper); letter-spacing: 0.15em; text-transform: uppercase; }
-.search-result-item .sr-unit { font-size: 0.85rem; color: var(--text-primary); }
+.search-result-item .sr-cat { font-size: 1.10rem; color: var(--copper); letter-spacing: 0.15em; text-transform: uppercase; }
+.search-result-item .sr-unit { font-size: 1.00rem; color: var(--text-primary); }
 mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radius: 2px; }
 
 /* CATEGORY HEADER */
@@ -191,7 +183,7 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
   color: var(--blue-bright); letter-spacing: 0.08em;
 }
 .cat-title .cat-icon { margin-right: 8px; }
-.cat-desc { font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px; letter-spacing: 0.05em; }
+.cat-desc { font-size: 0.87rem; color: var(--text-secondary); margin-top: 4px; letter-spacing: 0.05em; }
 
 /* INPUT SECTION */
 .input-section {
@@ -211,14 +203,14 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
   gap: 12px; align-items: end; margin-bottom: 16px;
 }
 .input-group label {
-  display: block; font-size: 0.65rem; letter-spacing: 0.2em;
+  display: block; font-size: 1.10rem; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--copper); margin-bottom: 6px;
 }
 .input-group select, .input-group input[type=number] {
   width: 100%; background: var(--bg-input);
   border: 1px solid var(--border); border-radius: 3px;
   color: var(--text-primary); font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.85rem; padding: 8px 10px; outline: none;
+  font-size: 1.00rem; padding: 8px 10px; outline: none;
   transition: border-color 0.2s;
   appearance: none; -webkit-appearance: none;
 }
@@ -264,7 +256,7 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
   background: var(--bg-deep); padding: 0 4px;
   letter-spacing: 0.1em;
 }
-.result-unit { font-size: 0.65rem; color: var(--text-secondary); letter-spacing: 0.1em; margin-bottom: 4px; }
+.result-unit { font-size: 1.10rem; color: var(--text-secondary); letter-spacing: 0.1em; margin-bottom: 4px; }
 .result-value {
   font-family: 'Share Tech Mono', monospace;
   font-size: 1.05rem; color: var(--text-primary);
@@ -273,7 +265,7 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 .result-copy {
   position: absolute; top: 6px; right: 6px;
   background: none; border: none; cursor: pointer;
-  color: var(--text-secondary); font-size: 0.7rem; padding: 2px 4px;
+  color: var(--text-secondary); font-size: 1.00rem; padding: 2px 4px;
   border-radius: 2px; transition: all 0.15s; opacity: 0;
 }
 .result-card:hover .result-copy { opacity: 1; }
@@ -288,7 +280,7 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 .table-section table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
 .table-section thead th {
   background: var(--bg-card); color: var(--copper);
-  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+  font-size: 1.10rem; letter-spacing: 0.15em; text-transform: uppercase;
   padding: 8px 12px; border-bottom: 1px solid var(--border); text-align: left;
 }
 .table-section tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
@@ -303,32 +295,32 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
   border-radius: 4px; padding: 16px; margin-top: 20px;
 }
 .history-title {
-  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 1.10rem; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--copper); margin-bottom: 10px;
   display: flex; align-items: center; justify-content: space-between;
 }
 .history-clear {
   background: none; border: 1px solid var(--border); border-radius: 2px;
-  color: var(--text-secondary); font-size: 0.65rem; padding: 2px 8px;
+  color: var(--text-secondary); font-size: 1.10rem; padding: 2px 8px;
   cursor: pointer; font-family: inherit; transition: all 0.15s;
 }
 .history-clear:hover { border-color: var(--copper); color: var(--copper); }
 .history-list { display: flex; flex-direction: column; gap: 4px; }
 .history-item {
   display: flex; align-items: center; gap: 8px;
-  font-size: 0.75rem; padding: 5px 8px; border-radius: 2px;
+  font-size: 0.90rem; padding: 5px 8px; border-radius: 2px;
   cursor: pointer; border: 1px solid transparent; transition: all 0.15s;
 }
 .history-item:hover { background: rgba(0,200,255,0.06); border-color: var(--border); }
 .history-item .hi-val { color: var(--blue-bright); font-family: 'Share Tech Mono', monospace; }
 .history-item .hi-arrow { color: var(--text-secondary); }
-.history-item .hi-cat { color: var(--copper); font-size: 0.65rem; margin-left: auto; }
+.history-item .hi-cat { color: var(--copper); font-size: 1.10rem; margin-left: auto; }
 
 /* CURRENCY NOTE */
 .info-box {
   background: rgba(212,130,74,0.08); border: 1px solid var(--copper-dim);
   border-radius: 3px; padding: 12px 16px; margin-bottom: 16px;
-  font-size: 0.78rem; color: var(--text-secondary); line-height: 1.6;
+  font-size: 0.93rem; color: var(--text-secondary); line-height: 1.6;
 }
 .info-box strong { color: var(--copper); }
 
@@ -353,8 +345,8 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 .mobile-nav-item:hover, .mobile-nav-item.active { color: var(--blue-bright); background: rgba(0,200,255,0.08); }
 .mobile-nav-item .mn-icon { font-size: 1.1rem; }
 @media(max-width:768px){
-  .mobile-nav { display: block; }
-  #main { padding-bottom: 80px; }
+  .mobile-nav { display: none; }
+  #main { padding-bottom: 20px; }
 }
 
 /* ANIMATIONS */
@@ -379,7 +371,7 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 .sub-tab {
   padding: 4px 12px; border-radius: 2px; border: 1px solid var(--border);
   background: transparent; color: var(--text-secondary); cursor: pointer;
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.87rem;
   letter-spacing: 0.05em; transition: all 0.15s;
 }
 .sub-tab:hover { border-color: var(--blue-mid); color: var(--text-primary); }
@@ -387,7 +379,7 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 
 /* STATUS BAR */
 .status-bar {
-  font-size: 0.65rem; color: var(--text-secondary); letter-spacing: 0.1em;
+  font-size: 1.10rem; color: var(--text-secondary); letter-spacing: 0.1em;
   padding: 6px 0; border-top: 1px solid var(--border); margin-top: 16px;
   display: flex; gap: 16px; flex-wrap: wrap;
 }
@@ -409,7 +401,7 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 }
 .footer-brand {
   font-family: 'Orbitron', monospace;
-  font-size: 0.7rem; font-weight: 700;
+  font-size: 1.00rem; font-weight: 700;
   color: var(--blue-bright); letter-spacing: 0.15em;
   text-decoration: none;
   white-space: nowrap;
@@ -420,7 +412,7 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
   flex-wrap: wrap;
 }
 .footer-link {
-  font-size: 0.68rem; color: var(--text-secondary);
+  font-size: 0.98rem; color: var(--text-secondary);
   text-decoration: none; letter-spacing: 0.08em;
   padding: 5px 10px;
   border: 1px solid transparent;
@@ -440,7 +432,7 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 }
 .footer-sep {
   color: var(--border);
-  font-size: 0.65rem;
+  font-size: 1.10rem;
 }
 .footer-copy {
   width: 100%;
@@ -492,7 +484,42 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 #cookie-reopen{position:fixed;bottom:16px;left:16px;z-index:8888;background:var(--bg-panel);border:1px solid var(--border);border-radius:50%;width:36px;height:36px;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:1rem;transition:all 0.15s;color:var(--text-secondary);box-shadow:0 2px 12px rgba(0,0,0,0.4);}
 #cookie-reopen.show{display:flex;}
 #cookie-reopen:hover{border-color:var(--copper);color:var(--copper);}
+
+/* CATEGORY OVERVIEW GRID */
+.cat-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px; margin-bottom: 20px;
+}
+.cat-overview-item {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 4px; padding: 10px 12px;
+  cursor: pointer; transition: all 0.15s;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; color: var(--text-secondary);
+}
+.cat-overview-item:hover {
+  border-color: var(--blue-bright); color: var(--blue-bright);
+  background: rgba(0,200,255,0.06);
+}
+.cat-overview-item .co-icon { font-size: 1.1rem; flex-shrink: 0; }
+.cat-overview-item .co-label { font-size: 0.72rem; line-height: 1.3; }
+.cat-overview-section {
+  background: var(--bg-panel); border: 1px solid var(--border);
+  border-radius: 4px; padding: 16px 20px; margin-bottom: 20px;
+  position: relative;
+}
+.cat-overview-section::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue-bright), transparent);
+}
+.cat-overview-title {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--copper); margin-bottom: 12px;
+}
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -531,6 +558,8 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 // DATA
 // ============================================================
 const CATEGORIES = [
+{id:'timezone', label:'Zeit & Zeitzonen', icon:'🕐', group:'Schnellzugriff', special:'timezone'},
+{id:'waehrung', label:'Währungen', icon:'💱', group:'Schnellzugriff', special:'waehrung'},
 {id:'laenge', label:'Länge & Entfernung', icon:'📏', group:'Physik',
  units:[
   {id:'mm',l:'Millimeter',s:'mm',f:0.001},
@@ -867,8 +896,6 @@ const CATEGORIES = [
   {id:'cm_px',l:'Zentimeter (bei 96dpi)',s:'cm',f:37.795},
   {id:'in_px',l:'Zoll (bei 96dpi)',s:'in',f:96},
  ]},
-{id:'waehrung', label:'Währungen', icon:'💱', group:'Finanzen', special:'waehrung'},
-{id:'timezone', label:'Zeit & Zeitzonen', icon:'🕐', group:'Alltag', special:'timezone'},
 ];
 
 // ============================================================
@@ -1063,7 +1090,6 @@ function renderStandard(cat, area) {
       <div class="results-label">${t('all_units')}</div>
       <div class="results-grid" id="results-grid"></div>
     </div>
-    <div id="history-section"></div>
     <div class="status-bar">
       <span><span class="status-dot"></span> ONLINE</span>
       <span>KAT: ${cat.id.toUpperCase()}</span>
@@ -1095,8 +1121,7 @@ function renderStandard(cat, area) {
       `;
       grid.appendChild(card);
     });
-    addHistory(`${fmtNum(val)} ${fromU.s}`, cat.label);
-    renderHistory();
+
   }
 
   valFrom.addEventListener('input', calc);
@@ -1106,7 +1131,6 @@ function renderStandard(cat, area) {
     valFrom.focus();
   });
   calc();
-  renderHistory();
 }
 
 // ============================================================
@@ -1139,7 +1163,6 @@ function renderTemp(cat, area) {
       <div class="results-label">${t('all_scales')}</div>
       <div class="results-grid" id="temp-grid"></div>
     </div>
-    <div id="history-section"></div>
   `;
   area.appendChild(panel);
   function calc() {
@@ -1157,8 +1180,7 @@ function renderTemp(cat, area) {
       card.innerHTML = `<div class="result-unit">${u.l}</div><div class="result-value">${fmtNum(result)} <span style="color:var(--text-secondary);font-size:0.75em">${u.s}</span></div><button class="result-copy" onclick="copyText('${fmtNum(result)} ${u.s}')" aria-label="Kopieren">⎘</button>`;
       grid.appendChild(card);
     });
-    addHistory(`${fmtNum(v)} ${fromU.s}`, 'Temperatur');
-    renderHistory();
+
   }
   document.getElementById('temp-val').addEventListener('input', calc);
   document.getElementById('temp-from').addEventListener('change', calc);
@@ -1443,7 +1465,7 @@ function renderWaehrung(area) {
   const opts = keys.map(k=>`<option value="${k}">${rates[k].n} (${k})</option>`).join('');
   area.innerHTML = `<div class="cat-panel">
     <div class="cat-header"><div><div class="cat-title">💱 Währungen</div><div class="cat-desc">${keys.length} Währungen · Statische Referenzkurse</div></div></div>
-    <div class="info-box"><strong>⚠ Hinweis:</strong> Diese Kurse sind <strong>statische Beispielkurse (Stand: ca. Mitte 2024)</strong> und dienen nur zur Orientierung. Für aktuelle Kurse empfiehlt sich <a href="https://www.ecb.europa.eu" target="_blank" rel="noopener" style="color:var(--blue-bright)">EZB</a>, <a href="https://finance.yahoo.com" target="_blank" rel="noopener" style="color:var(--blue-bright)">Yahoo Finance</a> oder eine Währungs-API.</div>
+    <div class="info-box"><strong>⚠ Hinweis:</strong> Diese Kurse sind <strong>statische Beispielkurse (Stand: Juni 2026)</strong> und dienen nur zur Orientierung. Für aktuelle Kurse empfiehlt sich <a href="https://www.ecb.europa.eu" target="_blank" rel="noopener" style="color:var(--blue-bright)">EZB</a>, <a href="https://finance.yahoo.com" target="_blank" rel="noopener" style="color:var(--blue-bright)">Yahoo Finance</a> oder eine Währungs-API.</div>
     <div class="input-section">
       <div class="input-row">
         <div class="input-group">
@@ -1497,33 +1519,9 @@ window.copyText = function(text) {
 // ============================================================
 // HISTORY
 // ============================================================
-function addHistory(valStr, catLabel) {
-  history.unshift({ val: valStr, cat: catLabel, ts: Date.now() });
-  if(history.length > 10) history.pop();
-  localStorage.setItem('unitex_history', JSON.stringify(history));
-}
-function renderHistory() {
-  const sec = document.getElementById('history-section');
-  if(!sec) return;
-  if(history.length===0) { sec.innerHTML=''; return; }
-  sec.innerHTML = `<div class="history-wrap">
-    <div class="history-title">
-      <span>${t('history_title')}</span>
-      <button class="history-clear" onclick="clearHistory()">${t('history_clear')}</button>
-    </div>
-    <div class="history-list">
-      ${history.slice(0,10).map(h=>`
-        <div class="history-item">
-          <span class="hi-val">${h.val}</span>
-          <span class="hi-cat">${h.cat}</span>
-        </div>`).join('')}
-    </div>
-  </div>`;
-}
-window.clearHistory = function() {
-  history = []; localStorage.removeItem('unitex_history');
-  renderHistory();
-};
+function addHistory(valStr, catLabel) { /* history disabled */ }
+function renderHistory() { /* history disabled */ }
+window.clearHistory = function() { /* history disabled */ };
 
 // ============================================================
 // GLOBAL SEARCH
@@ -1618,6 +1616,7 @@ const LANGS = [
 const T = {
   de: {
     subtitle: 'Universeller Einheitenrechner',
+    units_count: 'Einheiten',
     search_placeholder: 'Einheit suchen...',
     search_aria: 'Globale Suche',
     menu_aria: 'Menü öffnen',
@@ -1636,14 +1635,14 @@ const T = {
     online: 'ONLINE',
     units_count: 'EINHEITEN',
     cat_label: 'KAT',
-    currency_note: '⚠ Hinweis: Diese Kurse sind <strong>statische Beispielkurse (Stand: ca. Mitte 2024)</strong> und dienen nur zur Orientierung.',
+    currency_note: '⚠ Hinweis: Diese Kurse sind <strong>statische Beispielkurse (Stand: Juni 2026)</strong> und dienen nur zur Orientierung.',
     currency_all: '▸ ALLE WÄHRUNGEN',
     fuel_note: 'Nicht-lineare Umrechnung · Kehrwertbasis',
     consumption: 'Verbrauch',
     temperature: 'Temperatur',
     nonlinear: 'Nichtlineare Umrechnung',
     enter_value: 'Bitte Wert eingeben',
-    groups: {Physik:'Physik', Digital:'Digital', Mathematik:'Mathematik', Elektrik:'Elektrik', Wissenschaft:'Wissenschaft', Alltag:'Alltag', Finanzen:'Finanzen'},
+    groups: {Schnellzugriff:'Schnellzugriff', Physik:'Physik', Digital:'Digital', Mathematik:'Mathematik', Elektrik:'Elektrik', Wissenschaft:'Wissenschaft', Alltag:'Alltag', Finanzen:'Finanzen'},
     categories: {
       laenge:'Länge & Entfernung', gewicht:'Gewicht & Masse', temp:'Temperatur',
       flaeche:'Fläche', volumen:'Volumen & Kapazität', geschw:'Geschwindigkeit',
@@ -1661,6 +1660,7 @@ const T = {
   },
   en: {
     subtitle: 'Universal Unit Converter',
+    units_count: 'Units',
     search_placeholder: 'Search unit...',
     search_aria: 'Global search',
     menu_aria: 'Open menu',
@@ -1679,14 +1679,14 @@ const T = {
     online: 'ONLINE',
     units_count: 'UNITS',
     cat_label: 'CAT',
-    currency_note: '⚠ Note: These are <strong>static sample rates (approx. mid-2024)</strong> for reference only.',
+    currency_note: '⚠ Note: These are <strong>static sample rates (approx. June 2026)</strong> for reference only.',
     currency_all: '▸ ALL CURRENCIES',
     fuel_note: 'Non-linear conversion · reciprocal basis',
     consumption: 'Consumption',
     temperature: 'Temperature',
     nonlinear: 'Non-linear conversion',
     enter_value: 'Please enter a value',
-    groups: {Physik:'Physics', Digital:'Digital', Mathematik:'Mathematics', Elektrik:'Electrical', Wissenschaft:'Science', Alltag:'Everyday', Finanzen:'Finance'},
+    groups: {Schnellzugriff:'Quick Access', Physik:'Physics', Digital:'Digital', Mathematik:'Mathematics', Elektrik:'Electrical', Wissenschaft:'Science', Alltag:'Everyday', Finanzen:'Finance'},
     categories: {
       laenge:'Length & Distance', gewicht:'Weight & Mass', temp:'Temperature',
       flaeche:'Area', volumen:'Volume & Capacity', geschw:'Speed',
@@ -1704,6 +1704,7 @@ const T = {
   },
   fr: {
     subtitle: 'Convertisseur d\'unités universel',
+    units_count: 'Unités',
     search_placeholder: 'Rechercher une unité...',
     search_aria: 'Recherche globale',
     menu_aria: 'Ouvrir le menu',
@@ -1722,14 +1723,14 @@ const T = {
     online: 'EN LIGNE',
     units_count: 'UNITÉS',
     cat_label: 'CAT',
-    currency_note: '⚠ Note : Taux de change <strong>statiques (env. mi-2024)</strong>, à titre indicatif uniquement.',
+    currency_note: '⚠ Note : Taux de change <strong>statiques (env. juin 2026)</strong>, à titre indicatif uniquement.',
     currency_all: '▸ TOUTES LES DEVISES',
     fuel_note: 'Conversion non linéaire',
     consumption: 'Consommation',
     temperature: 'Température',
     nonlinear: 'Conversion non linéaire',
     enter_value: 'Veuillez entrer une valeur',
-    groups: {Physik:'Physique', Digital:'Numérique', Mathematik:'Mathématiques', Elektrik:'Électrique', Wissenschaft:'Science', Alltag:'Quotidien', Finanzen:'Finance'},
+    groups: {Schnellzugriff:'Accès rapide', Physik:'Physique', Digital:'Numérique', Mathematik:'Mathématiques', Elektrik:'Électrique', Wissenschaft:'Science', Alltag:'Quotidien', Finanzen:'Finance'},
     categories: {
       laenge:'Longueur & Distance', gewicht:'Poids & Masse', temp:'Température',
       flaeche:'Surface', volumen:'Volume & Capacité', geschw:'Vitesse',
@@ -1747,6 +1748,7 @@ const T = {
   },
   es: {
     subtitle: 'Conversor universal de unidades',
+    units_count: 'Unidades',
     search_placeholder: 'Buscar unidad...',
     search_aria: 'Búsqueda global',
     menu_aria: 'Abrir menú',
@@ -1765,14 +1767,14 @@ const T = {
     online: 'EN LÍNEA',
     units_count: 'UNIDADES',
     cat_label: 'CAT',
-    currency_note: '⚠ Nota: Tasas de cambio <strong>estáticas (aprox. mediados 2024)</strong>, solo orientativas.',
+    currency_note: '⚠ Nota: Tasas de cambio <strong>estáticas (aprox. junio 2026)</strong>, solo orientativas.',
     currency_all: '▸ TODAS LAS DIVISAS',
     fuel_note: 'Conversión no lineal',
     consumption: 'Consumo',
     temperature: 'Temperatura',
     nonlinear: 'Conversión no lineal',
     enter_value: 'Por favor ingrese un valor',
-    groups: {Physik:'Física', Digital:'Digital', Mathematik:'Matemáticas', Elektrik:'Eléctrica', Wissenschaft:'Ciencia', Alltag:'Cotidiano', Finanzen:'Finanzas'},
+    groups: {Schnellzugriff:'Acceso rápido', Physik:'Física', Digital:'Digital', Mathematik:'Matemáticas', Elektrik:'Eléctrica', Wissenschaft:'Ciencia', Alltag:'Cotidiano', Finanzen:'Finanzas'},
     categories: {
       laenge:'Longitud & Distancia', gewicht:'Peso & Masa', temp:'Temperatura',
       flaeche:'Área', volumen:'Volumen & Capacidad', geschw:'Velocidad',
@@ -1790,6 +1792,7 @@ const T = {
   },
   it: {
     subtitle: 'Convertitore universale di unità',
+    units_count: 'Unità',
     search_placeholder: 'Cerca unità...',
     search_aria: 'Ricerca globale',
     menu_aria: 'Apri menu',
@@ -1808,14 +1811,14 @@ const T = {
     online: 'ONLINE',
     units_count: 'UNITÀ',
     cat_label: 'CAT',
-    currency_note: '⚠ Nota: Tassi di cambio <strong>statici (circa metà 2024)</strong>, solo indicativi.',
+    currency_note: '⚠ Nota: Tassi di cambio <strong>statici (circa giugno 2026)</strong>, solo indicativi.',
     currency_all: '▸ TUTTE LE VALUTE',
     fuel_note: 'Conversione non lineare',
     consumption: 'Consumo',
     temperature: 'Temperatura',
     nonlinear: 'Conversione non lineare',
     enter_value: 'Inserire un valore',
-    groups: {Physik:'Fisica', Digital:'Digitale', Mathematik:'Matematica', Elektrik:'Elettrica', Wissenschaft:'Scienza', Alltag:'Quotidiano', Finanzen:'Finanza'},
+    groups: {Schnellzugriff:'Accesso rapido', Physik:'Fisica', Digital:'Digitale', Mathematik:'Matematica', Elektrik:'Elettrica', Wissenschaft:'Scienza', Alltag:'Quotidiano', Finanzen:'Finanza'},
     categories: {
       laenge:'Lunghezza & Distanza', gewicht:'Peso & Massa', temp:'Temperatura',
       flaeche:'Area', volumen:'Volume & Capacità', geschw:'Velocità',
@@ -1833,6 +1836,7 @@ const T = {
   },
   pt: {
     subtitle: 'Conversor universal de unidades',
+    units_count: 'Unidades',
     search_placeholder: 'Pesquisar unidade...',
     search_aria: 'Pesquisa global',
     menu_aria: 'Abrir menu',
@@ -1851,14 +1855,14 @@ const T = {
     online: 'ONLINE',
     units_count: 'UNIDADES',
     cat_label: 'CAT',
-    currency_note: '⚠ Nota: Taxas de câmbio <strong>estáticas (aprox. meados 2024)</strong>, apenas indicativas.',
+    currency_note: '⚠ Nota: Taxas de câmbio <strong>estáticas (aprox. junho 2026)</strong>, apenas indicativas.',
     currency_all: '▸ TODAS AS MOEDAS',
     fuel_note: 'Conversão não linear',
     consumption: 'Consumo',
     temperature: 'Temperatura',
     nonlinear: 'Conversão não linear',
     enter_value: 'Por favor insira um valor',
-    groups: {Physik:'Física', Digital:'Digital', Mathematik:'Matemática', Elektrik:'Elétrica', Wissenschaft:'Ciência', Alltag:'Cotidiano', Finanzen:'Finanças'},
+    groups: {Schnellzugriff:'Acceso rápido', Physik:'Física', Digital:'Digital', Mathematik:'Matemática', Elektrik:'Elétrica', Wissenschaft:'Ciência', Alltag:'Cotidiano', Finanzen:'Finanças'},
     categories: {
       laenge:'Comprimento & Distância', gewicht:'Peso & Massa', temp:'Temperatura',
       flaeche:'Área', volumen:'Volume & Capacidade', geschw:'Velocidade',
@@ -1876,6 +1880,7 @@ const T = {
   },
   nl: {
     subtitle: 'Universele eenhedenomzetter',
+    units_count: 'Eenheden',
     search_placeholder: 'Eenheid zoeken...',
     search_aria: 'Globaal zoeken',
     menu_aria: 'Menu openen',
@@ -1894,14 +1899,14 @@ const T = {
     online: 'ONLINE',
     units_count: 'EENHEDEN',
     cat_label: 'CAT',
-    currency_note: '⚠ Opmerking: <strong>Statische wisselkoersen (ca. midden 2024)</strong>, alleen ter indicatie.',
+    currency_note: '⚠ Opmerking: <strong>Statische wisselkoersen (ca. juni 2026)</strong>, alleen ter indicatie.',
     currency_all: '▸ ALLE VALUTA\'S',
     fuel_note: 'Niet-lineaire conversie',
     consumption: 'Verbruik',
     temperature: 'Temperatuur',
     nonlinear: 'Niet-lineaire conversie',
     enter_value: 'Voer een waarde in',
-    groups: {Physik:'Fysica', Digital:'Digitaal', Mathematik:'Wiskunde', Elektrik:'Elektrisch', Wissenschaft:'Wetenschap', Alltag:'Dagelijks', Finanzen:'Financiën'},
+    groups: {Schnellzugriff:'Snelle toegang', Physik:'Fysica', Digital:'Digitaal', Mathematik:'Wiskunde', Elektrik:'Elektrisch', Wissenschaft:'Wetenschap', Alltag:'Dagelijks', Finanzen:'Financiën'},
     categories: {
       laenge:'Lengte & Afstand', gewicht:'Gewicht & Massa', temp:'Temperatuur',
       flaeche:'Oppervlakte', volumen:'Volume & Capaciteit', geschw:'Snelheid',
@@ -1919,6 +1924,7 @@ const T = {
   },
   pl: {
     subtitle: 'Uniwersalny przelicznik jednostek',
+    units_count: 'Jednostek',
     search_placeholder: 'Szukaj jednostki...',
     search_aria: 'Wyszukiwanie globalne',
     menu_aria: 'Otwórz menu',
@@ -1937,14 +1943,14 @@ const T = {
     online: 'ONLINE',
     units_count: 'JEDNOSTEK',
     cat_label: 'KAT',
-    currency_note: '⚠ Uwaga: <strong>Statyczne kursy wymiany (ok. połowa 2024)</strong>, tylko orientacyjne.',
+    currency_note: '⚠ Uwaga: <strong>Statyczne kursy wymiany (ok. czerwiec 2026)</strong>, tylko orientacyjne.',
     currency_all: '▸ WSZYSTKIE WALUTY',
     fuel_note: 'Konwersja nieliniowa',
     consumption: 'Zużycie',
     temperature: 'Temperatura',
     nonlinear: 'Konwersja nieliniowa',
     enter_value: 'Proszę wprowadzić wartość',
-    groups: {Physik:'Fizyka', Digital:'Cyfrowe', Mathematik:'Matematyka', Elektrik:'Elektryczne', Wissenschaft:'Nauka', Alltag:'Codzienne', Finanzen:'Finanse'},
+    groups: {Schnellzugriff:'Szybki dostęp', Physik:'Fizyka', Digital:'Cyfrowe', Mathematik:'Matematyka', Elektrik:'Elektryczne', Wissenschaft:'Nauka', Alltag:'Codzienne', Finanzen:'Finanse'},
     categories: {
       laenge:'Długość & Odległość', gewicht:'Waga & Masa', temp:'Temperatura',
       flaeche:'Powierzchnia', volumen:'Objętość & Pojemność', geschw:'Prędkość',
@@ -1962,6 +1968,7 @@ const T = {
   },
   tr: {
     subtitle: 'Evrensel birim dönüştürücü',
+    units_count: 'Birim',
     search_placeholder: 'Birim ara...',
     search_aria: 'Global arama',
     menu_aria: 'Menüyü aç',
@@ -1980,14 +1987,14 @@ const T = {
     online: 'ÇEVRİMİÇİ',
     units_count: 'BİRİM',
     cat_label: 'KAT',
-    currency_note: '⚠ Not: <strong>Statik döviz kurları (yaklaşık 2024 ortası)</strong>, yalnızca referans amaçlıdır.',
+    currency_note: '⚠ Not: <strong>Statik döviz kurları (yaklaşık 2026 ortası)</strong>, yalnızca referans amaçlıdır.',
     currency_all: '▸ TÜM PARA BİRİMLERİ',
     fuel_note: 'Doğrusal olmayan dönüşüm',
     consumption: 'Tüketim',
     temperature: 'Sıcaklık',
     nonlinear: 'Doğrusal olmayan dönüşüm',
     enter_value: 'Lütfen bir değer girin',
-    groups: {Physik:'Fizik', Digital:'Dijital', Mathematik:'Matematik', Elektrik:'Elektrik', Wissenschaft:'Bilim', Alltag:'Günlük', Finanzen:'Finans'},
+    groups: {Schnellzugriff:'Hızlı erişim', Physik:'Fizik', Digital:'Dijital', Mathematik:'Matematik', Elektrik:'Elektrik', Wissenschaft:'Bilim', Alltag:'Günlük', Finanzen:'Finans'},
     categories: {
       laenge:'Uzunluk & Mesafe', gewicht:'Ağırlık & Kütle', temp:'Sıcaklık',
       flaeche:'Alan', volumen:'Hacim & Kapasite', geschw:'Hız',
@@ -2005,6 +2012,7 @@ const T = {
   },
   ar: {
     subtitle: 'محوّل الوحدات العالمي',
+    units_count: 'وحدات',
     search_placeholder: 'ابحث عن وحدة...',
     search_aria: 'بحث عالمي',
     menu_aria: 'فتح القائمة',
@@ -2023,14 +2031,14 @@ const T = {
     online: 'متصل',
     units_count: 'وحدات',
     cat_label: 'فئة',
-    currency_note: '⚠ ملاحظة: <strong>أسعار صرف ثابتة (تقريباً منتصف 2024)</strong>، للاستئناس فقط.',
+    currency_note: '⚠ ملاحظة: <strong>أسعار صرف ثابتة (تقريباً يونيو 2026)</strong>، للاستئناس فقط.',
     currency_all: '▸ جميع العملات',
     fuel_note: 'تحويل غير خطي',
     consumption: 'الاستهلاك',
     temperature: 'درجة الحرارة',
     nonlinear: 'تحويل غير خطي',
     enter_value: 'الرجاء إدخال قيمة',
-    groups: {Physik:'الفيزياء', Digital:'رقمي', Mathematik:'الرياضيات', Elektrik:'كهربائي', Wissenschaft:'علم', Alltag:'يومي', Finanzen:'مالية'},
+    groups: {Schnellzugriff:'وصول سريع', Physik:'الفيزياء', Digital:'رقمي', Mathematik:'الرياضيات', Elektrik:'كهربائي', Wissenschaft:'علم', Alltag:'يومي', Finanzen:'مالية'},
     categories: {
       laenge:'الطول والمسافة', gewicht:'الوزن والكتلة', temp:'درجة الحرارة',
       flaeche:'المساحة', volumen:'الحجم والسعة', geschw:'السرعة',
@@ -2048,6 +2056,7 @@ const T = {
   },
   zh: {
     subtitle: '通用单位换算器',
+    units_count: '单位',
     search_placeholder: '搜索单位...',
     search_aria: '全局搜索',
     menu_aria: '打开菜单',
@@ -2066,14 +2075,14 @@ const T = {
     online: '在线',
     units_count: '单位',
     cat_label: '类别',
-    currency_note: '⚠ 注意：<strong>静态汇率（约2024年中）</strong>，仅供参考。',
+    currency_note: '⚠ 注意：<strong>静态汇率（约2026年6月）</strong>，仅供参考。',
     currency_all: '▸ 所有货币',
     fuel_note: '非线性转换',
     consumption: '消耗',
     temperature: '温度',
     nonlinear: '非线性转换',
     enter_value: '请输入一个值',
-    groups: {Physik:'物理', Digital:'数字', Mathematik:'数学', Elektrik:'电气', Wissenschaft:'科学', Alltag:'日常', Finanzen:'金融'},
+    groups: {Schnellzugriff:'快速访问', Physik:'物理', Digital:'数字', Mathematik:'数学', Elektrik:'电气', Wissenschaft:'科学', Alltag:'日常', Finanzen:'金融'},
     categories: {
       laenge:'长度与距离', gewicht:'重量与质量', temp:'温度',
       flaeche:'面积', volumen:'体积与容量', geschw:'速度',
@@ -2149,6 +2158,20 @@ function setLang(code) {
   buildMobileNav();
   // Re-render current panel
   renderPanel(activeCat);
+  // Update footer links
+  const footerMap = {
+    'fl-rechner': {de:'⇢ Rechner',en:'⇢ Converter',fr:'⇢ Convertisseur',es:'⇢ Conversor',it:'⇢ Convertitore',pt:'⇢ Conversor',nl:'⇢ Omzetter',pl:'⇢ Przelicznik',tr:'⇢ Dönüştürücü',ar:'⇢ المحوّل',zh:'⇢ 转换器'},
+    'fl-wissen':  {de:'Wissenswertes',en:'Knowledge',fr:'Connaissances',es:'Conocimiento',it:'Conoscenza',pt:'Conhecimento',nl:'Kennis',pl:'Wiedza',tr:'Bilgi',ar:'المعرفة',zh:'知识'},
+    'fl-faq':     {de:'FAQ',en:'FAQ',fr:'FAQ',es:'FAQ',it:'FAQ',pt:'FAQ',nl:'FAQ',pl:'FAQ',tr:'SSS',ar:'الأسئلة',zh:'常见问题'},
+    'fl-hilfe':   {de:'Hilfe',en:'Help',fr:'Aide',es:'Ayuda',it:'Aiuto',pt:'Ajuda',nl:'Hulp',pl:'Pomoc',tr:'Yardım',ar:'المساعدة',zh:'帮助'},
+    'fl-imp':     {de:'Impressum',en:'Imprint',fr:'Mentions légales',es:'Aviso legal',it:'Note legali',pt:'Aviso legal',nl:'Colofon',pl:'Nota prawna',tr:'Künye',ar:'إشعار قانوني',zh:'法律声明'},
+    'fl-dsgvo':   {de:'Datenschutz',en:'Privacy',fr:'Confidentialité',es:'Privacidad',it:'Privacy',pt:'Privacidade',nl:'Privacy',pl:'Prywatność',tr:'Gizlilik',ar:'الخصوصية',zh:'隐私'},
+    'fl-copy':    {de:'© 2026 Universal-Converter · Alle Berechnungen lokal · Keine Garantie',en:'© 2026 Universal-Converter · All calculations local · No warranty',fr:'© 2026 Universal-Converter · Calculs locaux · Aucune garantie',es:'© 2026 Universal-Converter · Cálculos locales · Sin garantía',it:'© 2026 Universal-Converter · Calcoli locali · Nessuna garanzia',pt:'© 2026 Universal-Converter · Cálculos locais · Sem garantia',nl:'© 2026 Universal-Converter · Lokale berekeningen · Geen garantie',pl:'© 2026 Universal-Converter · Obliczenia lokalne · Brak gwarancji',tr:'© 2026 Universal-Converter · Yerel hesaplamalar · Garanti yok',ar:'© 2026 Universal-Converter · الحسابات محلية · لا ضمان',zh:'© 2026 Universal-Converter · 本地计算 · 不保证准确性'},
+  };
+  Object.entries(footerMap).forEach(([id, labels]) => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = labels[code] || labels['de'];
+  });
 }
 
 
@@ -2252,7 +2275,6 @@ function renderTimezone(cat,area){
       <div class="results-label">${lbl.all_results} · <span id="tz-count">${TIMEZONES.length}</span></div>
       <div class="results-grid" id="tz-results"></div>
     </div>
-    <div id="history-section"></div>
     <div class="status-bar">
       <span><span class="status-dot"></span> ONLINE</span>
       <span>ZEITZONEN: ${TIMEZONES.length}</span>
@@ -2294,8 +2316,7 @@ function renderTimezone(cat,area){
       `;
       grid.appendChild(card);
     });
-    addHistory(`${tzTime.value} ${fromTZ.id}`, (TZ_LABELS[currentLang]||TZ_LABELS['de']).title);
-    renderHistory();
+
   }
 
   tzNow.addEventListener('click',()=>{
@@ -2314,6 +2335,43 @@ function renderTimezone(cat,area){
   renderHistory();
 }
 
+
+// ============================================================
+// CATEGORY OVERVIEW (Welcome Screen)
+// ============================================================
+function renderOverview() {
+  const area = document.getElementById('content-area');
+  const groups = {};
+  CATEGORIES.forEach(cat => {
+    const g = cat.group || 'Sonstige';
+    if(!groups[g]) groups[g] = [];
+    groups[g].push(cat);
+  });
+
+  let html = `<div class="cat-panel">
+    <div class="cat-header">
+      <div>
+        <div class="cat-title">🔢 Universal-Converter</div>
+        <div class="cat-desc">${t('subtitle')} · ${CATEGORIES.length} Kategorien</div>
+      </div>
+    </div>`;
+
+  Object.entries(groups).forEach(([group, cats]) => {
+    html += `<div class="cat-overview-section">
+      <div class="cat-overview-title">${tGroup(group)}</div>
+      <div class="cat-overview">`;
+    cats.forEach(cat => {
+      html += `<div class="cat-overview-item" onclick="setCategory('${cat.id}')" role="button" tabindex="0" aria-label="${cat.label}">
+        <span class="co-icon" aria-hidden="true">${cat.icon}</span>
+        <span class="co-label">${cat.label}</span>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+  html += '</div>';
+  area.innerHTML = html;
+}
+
 // ============================================================
 // INIT
 // ============================================================
@@ -2321,19 +2379,25 @@ buildSidebar();
 buildMobileNav();
 buildLangBar();
 setLang(currentLang);
-setCategory('laenge');
+renderOverview();
 </script>
 
 <footer class="site-footer" aria-label="Seitenfußer">
   <a class="footer-brand" href="/">UNIVERSAL-<span>CONVERTER</span></a>
-  <nav class="footer-links" aria-label="Rechtliches">
-    <a class="footer-link active" href="/universal-calculator.html" aria-current="page">⇢ Rechner</a>
+  <nav class="footer-links" aria-label="Navigation">
+    <a class="footer-link active" href="/universal-converter.html" id="fl-rechner">⇢ Rechner</a>
     <span class="footer-sep">|</span>
-    <a class="footer-link" href="/impressum.html">Impressum</a>
+    <a class="footer-link" href="/blog.html" id="fl-wissen">Wissenswertes</a>
     <span class="footer-sep">|</span>
-    <a class="footer-link" href="/datenschutz.html">Datenschutz</a>
+    <a class="footer-link" href="/faq.html" id="fl-faq">FAQ</a>
+    <span class="footer-sep">|</span>
+    <a class="footer-link" href="/hilfe.html" id="fl-hilfe">Hilfe</a>
+    <span class="footer-sep">|</span>
+    <a class="footer-link" href="/impressum.html" id="fl-imp">Impressum</a>
+    <span class="footer-sep">|</span>
+    <a class="footer-link" href="/datenschutz.html" id="fl-dsgvo">Datenschutz</a>
   </nav>
-  <div class="footer-copy">© Universal-Converter · Alle Berechnungen erfolgen lokal im Browser · Keine Garantie auf Richtigkeit</div>
+  <div class="footer-copy" id="fl-copy">© 2026 Universal-Converter · Alle Berechnungen erfolgen lokal im Browser · Keine Garantie auf Richtigkeit</div>
 </footer>
 
 <div id="cookie-banner" role="dialog" aria-label="Cookie-Einstellungen">

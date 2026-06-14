@@ -79,7 +79,7 @@ body{background:var(--bg-deep);color:var(--text-primary);font-family:'IBM Plex M
     <nav class="footer-links">
       <a class="footer-link" href="/universal-converter.html" id="fl-converter">⇢ Rechner</a>
       <span class="footer-sep">|</span>
-      <a class="footer-link active" href="/blog.html" id="fl-blog">Wissenswertes</a>
+      <a class="footer-link active" href="/blog.html" id="fl-wissen">Wissenswertes</a>
       <span class="footer-sep">|</span>
       <a class="footer-link" href="/faq.html" id="fl-faq">FAQ</a>
       <span class="footer-sep">|</span>
@@ -89,8 +89,23 @@ body{background:var(--bg-deep);color:var(--text-primary);font-family:'IBM Plex M
       <span class="footer-sep">|</span>
       <a class="footer-link" href="/datenschutz.html" id="fl-dsgvo">Datenschutz</a>
     </nav>
-    <div class="footer-copy" id="fl-copy">© 2026 Universal-Converter</div>
+    <div class="footer-copy">© 2026 Universal-Converter</div>
   </footer>
+  <script>
+(function() {
+  var lang = (new URLSearchParams(location.search).get('lang')) || localStorage.getItem('uc_lang') || 'de';
+  var L = {"converter": {"de": "⇢ Rechner", "en": "⇢ Converter", "fr": "⇢ Convertisseur", "es": "⇢ Conversor", "it": "⇢ Convertitore", "pt": "⇢ Conversor", "nl": "⇢ Omzetter", "pl": "⇢ Przelicznik", "tr": "⇢ Dönüştürücü", "ar": "⇢ المحوّل", "zh": "⇢ 转换器"}, "wissen": {"de": "Wissenswertes", "en": "Knowledge", "fr": "Connaissances", "es": "Conocimiento", "it": "Conoscenza", "pt": "Conhecimento", "nl": "Kennis", "pl": "Wiedza", "tr": "Bilgi", "ar": "المعرفة", "zh": "知识"}, "faq": {"de": "FAQ", "en": "FAQ", "fr": "FAQ", "es": "FAQ", "it": "FAQ", "pt": "FAQ", "nl": "FAQ", "pl": "FAQ", "tr": "SSS", "ar": "الأسئلة", "zh": "常见问题"}, "help": {"de": "Hilfe", "en": "Help", "fr": "Aide", "es": "Ayuda", "it": "Aiuto", "pt": "Ajuda", "nl": "Hulp", "pl": "Pomoc", "tr": "Yardım", "ar": "المساعدة", "zh": "帮助"}, "imp": {"de": "Impressum", "en": "Imprint", "fr": "Mentions légales", "es": "Aviso legal", "it": "Note legali", "pt": "Aviso legal", "nl": "Colofon", "pl": "Nota prawna", "tr": "Künye", "ar": "إشعار قانوني", "zh": "法律声明"}, "dsgvo": {"de": "Datenschutz", "en": "Privacy", "fr": "Confidentialité", "es": "Privacidad", "it": "Privacy", "pt": "Privacidade", "nl": "Privacy", "pl": "Prywatność", "tr": "Gizlilik", "ar": "الخصوصية", "zh": "隐私"}};
+  var activeHref = location.pathname.split('/').pop() || 'index.html';
+  var map = {
+    'fl-converter': L.converter, 'fl-wissen': L.wissen, 'fl-faq': L.faq,
+    'fl-help': L.help, 'fl-imp': L.imp, 'fl-dsgvo': L.dsgvo
+  };
+  Object.entries(map).forEach(function(e) {
+    var el = document.getElementById(e[0]);
+    if(el) el.textContent = e[1][lang] || e[1]['de'];
+  });
+})();
+</script>
 </div>
 <script>
 const LANGS=[{code:'de',flag:'🇩🇪',name:'Deutsch'},{code:'en',flag:'🇬🇧',name:'English'},{code:'fr',flag:'🇫🇷',name:'Français'},{code:'es',flag:'🇪🇸',name:'Español'},{code:'it',flag:'🇮🇹',name:'Italiano'},{code:'pt',flag:'🇵🇹',name:'Português'},{code:'nl',flag:'🇳🇱',name:'Nederlands'},{code:'pl',flag:'🇵🇱',name:'Polski'},{code:'tr',flag:'🇹🇷',name:'Türkçe'},{code:'ar',flag:'🇸🇦',name:'العربية',rtl:true},{code:'zh',flag:'🇨🇳',name:'中文'}];

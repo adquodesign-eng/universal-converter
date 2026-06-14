@@ -60,6 +60,8 @@ kbd{background:var(--bg-card);border:1px solid var(--blue-dim);border-radius:3px
 .footer-copy{width:100%;font-size:0.6rem;color:var(--text-secondary);letter-spacing:0.1em;padding:10px 0 4px;opacity:0.55;}
 @media(max-width:600px){.page-wrap{padding:24px 14px 60px;}.page-title{font-size:1.3rem;}.help-grid{grid-template-columns:1fr;}}
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="lang-bar"></div>
@@ -76,18 +78,35 @@ kbd{background:var(--bg-card);border:1px solid var(--blue-dim);border-radius:3px
   <footer class="site-footer">
     <a class="footer-brand" href="/">UNIVERSAL-<span>CONVERTER</span></a>
     <nav class="footer-links">
-      <a class="footer-link" href="/universal-converter.html" id="footer-converter">⇢ Rechner</a>
+      <a class="footer-link" href="/universal-converter.html" id="fl-converter">⇢ Rechner</a>
       <span class="footer-sep">|</span>
-      <a class="footer-link" href="/faq.html" id="footer-faq">FAQ</a>
+      <a class="footer-link" href="/blog.html" id="fl-wissen">Wissenswertes</a>
       <span class="footer-sep">|</span>
-      <a class="footer-link active" href="/hilfe.html" id="footer-help">Hilfe</a>
+      <a class="footer-link" href="/faq.html" id="fl-faq">FAQ</a>
       <span class="footer-sep">|</span>
-      <a class="footer-link" href="/impressum.html" id="footer-impressum">Impressum</a>
+      <a class="footer-link active" href="/hilfe.html" id="fl-help">Hilfe</a>
       <span class="footer-sep">|</span>
-      <a class="footer-link" href="/datenschutz.html" id="footer-datenschutz">Datenschutz</a>
+      <a class="footer-link" href="/impressum.html" id="fl-imp">Impressum</a>
+      <span class="footer-sep">|</span>
+      <a class="footer-link" href="/datenschutz.html" id="fl-dsgvo">Datenschutz</a>
     </nav>
-    <div class="footer-copy" id="footer-copy">© Universal-Converter · Alle Berechnungen erfolgen lokal im Browser</div>
+    <div class="footer-copy">© 2026 Universal-Converter</div>
   </footer>
+  <script>
+(function() {
+  var lang = (new URLSearchParams(location.search).get('lang')) || localStorage.getItem('uc_lang') || 'de';
+  var L = {"converter": {"de": "⇢ Rechner", "en": "⇢ Converter", "fr": "⇢ Convertisseur", "es": "⇢ Conversor", "it": "⇢ Convertitore", "pt": "⇢ Conversor", "nl": "⇢ Omzetter", "pl": "⇢ Przelicznik", "tr": "⇢ Dönüştürücü", "ar": "⇢ المحوّل", "zh": "⇢ 转换器"}, "wissen": {"de": "Wissenswertes", "en": "Knowledge", "fr": "Connaissances", "es": "Conocimiento", "it": "Conoscenza", "pt": "Conhecimento", "nl": "Kennis", "pl": "Wiedza", "tr": "Bilgi", "ar": "المعرفة", "zh": "知识"}, "faq": {"de": "FAQ", "en": "FAQ", "fr": "FAQ", "es": "FAQ", "it": "FAQ", "pt": "FAQ", "nl": "FAQ", "pl": "FAQ", "tr": "SSS", "ar": "الأسئلة", "zh": "常见问题"}, "help": {"de": "Hilfe", "en": "Help", "fr": "Aide", "es": "Ayuda", "it": "Aiuto", "pt": "Ajuda", "nl": "Hulp", "pl": "Pomoc", "tr": "Yardım", "ar": "المساعدة", "zh": "帮助"}, "imp": {"de": "Impressum", "en": "Imprint", "fr": "Mentions légales", "es": "Aviso legal", "it": "Note legali", "pt": "Aviso legal", "nl": "Colofon", "pl": "Nota prawna", "tr": "Künye", "ar": "إشعار قانوني", "zh": "法律声明"}, "dsgvo": {"de": "Datenschutz", "en": "Privacy", "fr": "Confidentialité", "es": "Privacidad", "it": "Privacy", "pt": "Privacidade", "nl": "Privacy", "pl": "Prywatność", "tr": "Gizlilik", "ar": "الخصوصية", "zh": "隐私"}};
+  var activeHref = location.pathname.split('/').pop() || 'index.html';
+  var map = {
+    'fl-converter': L.converter, 'fl-wissen': L.wissen, 'fl-faq': L.faq,
+    'fl-help': L.help, 'fl-imp': L.imp, 'fl-dsgvo': L.dsgvo
+  };
+  Object.entries(map).forEach(function(e) {
+    var el = document.getElementById(e[0]);
+    if(el) el.textContent = e[1][lang] || e[1]['de'];
+  });
+})();
+</script>
 </div>
 
 <script>
