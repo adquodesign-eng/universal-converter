@@ -419,22 +419,27 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 .sub-tab.active { border-color: var(--blue-bright); color: var(--blue-bright); background: rgba(0,200,255,0.08); }
 
 
-.footer-brand {
-  font-family: 'Orbitron', monospace;
-  font-size: 1.00rem; font-weight: 700;
-  color: var(--blue-bright); letter-spacing: 0.15em;
-  text-decoration: none;
-  white-space: nowrap;
+/* ===== FOOTER ===== */
+.site-footer {
+  margin-top: 0;
+  padding: 8px 20px 6px;
+  border-top: 1px solid var(--border);
+  background: rgba(5,12,26,0.97);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  position: relative; z-index: 1;
 }
-.footer-brand span { color: var(--copper); }
+.footer-brand { display: none; }
 .footer-links {
-  display: flex; align-items: center; gap: 4px;
-  flex-wrap: wrap;
+  display: flex; align-items: center; gap: 2px;
+  flex-wrap: wrap; justify-content: center;
 }
 .footer-link {
-  font-size: 0.98rem; color: var(--text-secondary);
-  text-decoration: none; letter-spacing: 0.08em;
-  padding: 5px 10px;
+  font-size: 0.75rem; color: var(--text-secondary);
+  text-decoration: none; letter-spacing: 0.06em;
+  padding: 4px 8px;
   border: 1px solid transparent;
   border-radius: 3px;
   transition: all 0.15s;
@@ -456,14 +461,16 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 }
 .footer-copy {
   width: 100%;
-  font-size: 0.6rem; color: var(--text-secondary);
-  letter-spacing: 0.1em; padding: 6px 0 2px;
-  opacity: 0.5;
+  font-size: 0.62rem; color: var(--text-secondary);
+  letter-spacing: 0.06em; padding: 2px 0 4px;
+  opacity: 0.55; text-align: center; line-height: 1.5;
 }
-@media(max-width:480px){
-  .site-footer { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .footer-copy { display: none; }
+@media(max-width:768px){
+  .footer-link { font-size: 0.68rem; padding: 4px 6px; }
+  .footer-sep { font-size: 0.6rem; }
+  .footer-copy { font-size: 0.58rem; opacity: 0.5; }
 }
+
 
 /* COOKIE CONSENT */
 #cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(8,20,40,0.98);border-top:2px solid var(--copper);padding:16px 20px;backdrop-filter:blur(12px);display:none;animation:slideUp 0.3s ease;}
@@ -538,13 +545,6 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
   color: var(--copper); margin-bottom: 12px;
 }
 
-@media(max-width:768px){
-  .site-footer { padding: 8px 12px; gap: 4px; justify-content: center; }
-  .footer-brand { display: none; }
-  .footer-copy { display: none; }
-  .footer-link { font-size: 0.68rem; padding: 4px 6px; }
-  .footer-sep { font-size: 0.6rem; }
-}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630"
      crossorigin="anonymous"></script>
@@ -2432,7 +2432,6 @@ renderOverview();
 </script>
 
 <footer class="site-footer" aria-label="Seitenfußer">
-  <a class="footer-brand" href="/">UNIVERSAL-<span>CONVERTER</span></a>
   <nav class="footer-links" aria-label="Navigation">
     <a class="footer-link active" href="/universal-converter.html" id="fl-rechner">⇢ Rechner</a>
     <span class="footer-sep">|</span>
