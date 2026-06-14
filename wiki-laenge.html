@@ -13,7 +13,7 @@
 html{font-size:16px;scroll-behavior:smooth;}
 body{background:var(--bg-deep);color:var(--text-primary);font-family:'IBM Plex Mono',monospace;min-height:100vh;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:40px 40px;padding-top:var(--lang-bar-h);}
 ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg-deep);}::-webkit-scrollbar-thumb{background:var(--blue-dim);border-radius:3px;}
-#lang-bar{position:fixed;top:0;left:0;right:0;height:var(--lang-bar-h);background:rgba(4,10,22,0.98);border-bottom:1px solid rgba(212,130,74,0.25);display:flex;align-items:center;justify-content:center;gap:3px;z-index:200;padding:0 12px;overflow-x:auto;scrollbar-width:none;}
+#lang-bar{position:fixed;top:0;left:0;right:0;height:var(--lang-bar-h);background:rgba(4,10,22,0.98);border-bottom:1px solid rgba(212,130,74,0.25);display:flex;align-items:center;justify-content:flex-end;z-index:200;padding:0 16px;}
 #lang-bar::-webkit-scrollbar{display:none;}
 .lang-btn{background:none;border:1px solid transparent;border-radius:3px;cursor:pointer;padding:2px 7px;font-size:0.75rem;color:var(--text-secondary);font-family:'IBM Plex Mono',monospace;transition:all 0.15s;white-space:nowrap;display:flex;align-items:center;gap:4px;flex-shrink:0;}
 .lang-btn:hover{border-color:var(--border);color:var(--text-primary);}
@@ -87,6 +87,8 @@ body{background:var(--bg-deep);color:var(--text-primary);font-family:'IBM Plex M
 .footer-copy{width:100%;font-size:0.65rem;color:var(--text-secondary);padding:10px 0 4px;opacity:0.6;}
 @media(max-width:600px){.page-wrap{padding:24px 14px 60px;}.article-title{font-size:1.2rem;}.section-body,.quiz-body{padding:14px 14px;}}
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="lang-bar"></div>
@@ -114,11 +116,10 @@ body{background:var(--bg-deep);color:var(--text-primary);font-family:'IBM Plex M
     <div class="section-body" id="sbody"></div>
   </div>
   <footer class="site-footer">
-    <a class="footer-brand" href="/">UNIVERSAL-<span>CONVERTER</span></a>
     <nav class="footer-links">
       <a class="footer-link" href="/universal-converter.html" id="fl-converter">⇢ Rechner</a>
       <span class="footer-sep">|</span>
-      <a class="footer-link active" href="/blog.html" id="fl-wissen">Wissenswertes</a>
+      <a class="footer-link" href="/blog.html" id="fl-wissen" class="footer-link active">Wissenswertes</a>
       <span class="footer-sep">|</span>
       <a class="footer-link" href="/faq.html" id="fl-faq">FAQ</a>
       <span class="footer-sep">|</span>
@@ -128,7 +129,7 @@ body{background:var(--bg-deep);color:var(--text-primary);font-family:'IBM Plex M
       <span class="footer-sep">|</span>
       <a class="footer-link" href="/datenschutz.html" id="fl-dsgvo">Datenschutz</a>
     </nav>
-    <div class="footer-copy">© 2026 Universal-Converter</div>
+    <div class="footer-copy">© 2026 Universal-Converter · Alle Berechnungen erfolgen lokal im Browser · Keine Garantie auf Richtigkeit</div>
   </footer>
 </div>
 <script>
@@ -298,7 +299,19 @@ const TAGS_T = {"de": ["SI", "Meter", "Astronomie", "Geschichte"], "en": ["SI", 
 
 let lang=(new URLSearchParams(location.search).get('lang'))||localStorage.getItem('uc_lang')||'de';
 function buildBar(){
-  document.getElementById('lang-bar').innerHTML=LANGS.map(l=>`<button class="lang-btn${l.code===lang?' active':''}" onclick="setLang('${l.code}')">${l.flag} ${l.code.toUpperCase()}</button>`).join('');
+  const bar=document.getElementById('lang-bar');
+  const cur={code:lang,flag:{"de": "🇩🇪", "en": "🇬🇧", "fr": "🇫🇷", "es": "🇪🇸", "it": "🇮🇹", "pt": "🇵🇹", "nl": "🇳🇱", "pl": "🇵🇱", "tr": "🇹🇷", "ar": "🇸🇦", "zh": "🇨🇳"}[lang]||'🌐',name:{"de": "Deutsch", "en": "English", "fr": "Français", "es": "Español", "it": "Italiano", "pt": "Português", "nl": "Nederlands", "pl": "Polski", "tr": "Türkçe", "ar": "العربية", "zh": "中文"}[lang]||lang};
+  bar.innerHTML=`<div style="position:relative" id="ldd-wrap">
+    <button onclick="event.stopPropagation();const m=document.getElementById('ldd-m');const b=this;const open=m.style.display==='block';m.style.display=open?'none':'block';b.style.borderColor=open?'rgba(212,130,74,0.3)':'var(--copper)';" style="background:rgba(0,50,85,0.4);border:1px solid rgba(212,130,74,0.3);border-radius:3px;cursor:pointer;padding:3px 10px;font-size:0.78rem;color:var(--copper);font-family:'IBM Plex Mono',monospace;display:flex;align-items:center;gap:6px;">
+      <span>${cur.flag}</span><span>${cur.code.toUpperCase()}</span><span style="font-size:0.55rem;opacity:0.7">▼</span>
+    </button>
+    <div id="ldd-m" style="display:none;position:absolute;top:calc(100% + 4px);right:0;background:rgba(4,10,22,0.99);border:1px solid rgba(212,130,74,0.25);border-radius:4px;min-width:160px;z-index:300;box-shadow:0 8px 32px rgba(0,0,0,0.5);max-height:300px;overflow-y:auto;">
+      ${["de", "en", "fr", "es", "it", "pt", "nl", "pl", "tr", "ar", "zh"].map(code=>{const f={"de": "🇩🇪", "en": "🇬🇧", "fr": "🇫🇷", "es": "🇪🇸", "it": "🇮🇹", "pt": "🇵🇹", "nl": "🇳🇱", "pl": "🇵🇱", "tr": "🇹🇷", "ar": "🇸🇦", "zh": "🇨🇳"}[code]||'🌐';const n={"de": "Deutsch", "en": "English", "fr": "Français", "es": "Español", "it": "Italiano", "pt": "Português", "nl": "Nederlands", "pl": "Polski", "tr": "Türkçe", "ar": "العربية", "zh": "中文"}[code]||code;return`<div onclick="event.stopPropagation();setLang('${code}');document.getElementById('ldd-m').style.display='none';" style="display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;font-size:0.78rem;color:${code===lang?'var(--copper)':'var(--text-secondary)'};font-family:'IBM Plex Mono',monospace;background:${code===lang?'rgba(212,130,74,0.06)':'transparent'};border-bottom:1px solid rgba(0,150,200,0.06);">
+        <span>${f}</span><span style="flex:1">${n}</span>${code===lang?'<span style="color:var(--copper);font-size:0.7rem">✓</span>':''}
+      </div>`}).join('')}
+    </div>
+  </div>`;
+  document.addEventListener('click',()=>{const m=document.getElementById('ldd-m');if(m)m.style.display='none';});
 }
 function setLang(code){lang=code;localStorage.setItem('uc_lang',code);const l=LANGS.find(x=>x.code===code);document.documentElement.dir=l?.rtl?'rtl':'ltr';document.documentElement.lang=code;buildBar();render();}
 function render(){
