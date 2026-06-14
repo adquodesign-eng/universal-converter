@@ -87,22 +87,30 @@ body::after  { bottom: 20px; right: 20px; border-left: none; border-top: none; }
   margin-bottom: 36px;
 }
 
-/* FEATURES */
-.features {
+/* CATEGORY TILES */
+.cat-tiles {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 10px; margin-bottom: 36px;
+  gap: 10px; margin-bottom: 28px;
 }
-@media(max-width:420px){ .features { grid-template-columns: 1fr; } }
-
-.feature {
+@media(max-width:420px){ .cat-tiles { grid-template-columns: 1fr 1fr; gap: 8px; } }
+.cat-tile {
   background: rgba(0,100,150,0.08);
   border: 1px solid var(--border);
-  border-radius: 4px; padding: 10px 14px;
-  display: flex; align-items: center; gap: 10px;
+  border-radius: 4px; padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 4px;
+  text-decoration: none; transition: all 0.2s;
+  position: relative; overflow: hidden;
 }
-.feature-icon { font-size: 1.1rem; flex-shrink: 0; }
-.feature-text { font-size: 0.72rem; color: var(--text-secondary); line-height: 1.4; }
-.feature-text strong { color: var(--text-primary); display: block; margin-bottom: 1px; }
+.cat-tile::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--blue-dim), transparent);
+  transition: background 0.2s;
+}
+.cat-tile:hover { border-color: var(--blue-bright); background: rgba(0,150,200,0.12); transform: translateY(-2px); }
+.cat-tile:hover::before { background: linear-gradient(90deg, var(--blue-bright), transparent); }
+.cat-tile-icon { font-size: 1.3rem; margin-bottom: 2px; }
+.cat-tile-title { font-size: 0.72rem; font-weight: 600; color: var(--blue-bright); letter-spacing: 0.04em; }
+.cat-tile-sub { font-size: 0.62rem; color: var(--text-secondary); }
 
 /* CTA BUTTON */
 .cta-wrap { text-align: center; }
@@ -179,50 +187,41 @@ body::after  { bottom: 20px; right: 20px; border-left: none; border-top: none; }
 .page-footer a:hover { color: var(--blue-bright); border-color: var(--border); }
 .page-footer-sep { color: var(--border); font-size: 0.6rem; }
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 
 <div class="card">
   <a class="logo" href="universal-converter.html">UNIVERSAL-<span>CONVERTER</span></a>
-  <div class="tagline">Einheitenumrechner · 11 Sprachen · 50+ Kategorien</div>
+  <div class="tagline">Einheitenumrechner · 11 Sprachen · 36 Kategorien</div>
 
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">📏</div>
-      <div class="feature-text">
-        <strong>50+ Kategorien</strong>
-        Länge, Gewicht, Temperatur, Währung &amp; mehr
-      </div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🌍</div>
-      <div class="feature-text">
-        <strong>11 Sprachen</strong>
-        DE, EN, FR, ES, IT, PT, RU, AR, ZH, JA, HI
-      </div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🔒</div>
-      <div class="feature-text">
-        <strong>Lokal im Browser</strong>
-        Keine Daten werden übertragen
-      </div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">📱</div>
-      <div class="feature-text">
-        <strong>Mobil optimiert</strong>
-        Funktioniert auf jedem Gerät
-      </div>
-    </div>
+  <div class="cat-tiles">
+    <a class="cat-tile" href="universal-converter.html#timezone">
+      <span class="cat-tile-icon">🕐</span>
+      <span class="cat-tile-title">Zeit & Zeitzonen</span>
+      <span class="cat-tile-sub">UTC · DST · Weltzeiten</span>
+    </a>
+    <a class="cat-tile" href="universal-converter.html#waehrung">
+      <span class="cat-tile-icon">💱</span>
+      <span class="cat-tile-title">Währungen</span>
+      <span class="cat-tile-sub">EUR · USD · GBP · JPY</span>
+    </a>
+    <a class="cat-tile" href="universal-converter.html#laenge">
+      <span class="cat-tile-icon">📏</span>
+      <span class="cat-tile-title">Länge & Entfernung</span>
+      <span class="cat-tile-sub">km · mi · ft · Lichtjahr</span>
+    </a>
+    <a class="cat-tile" href="universal-converter.html#gewicht">
+      <span class="cat-tile-icon">⚖️</span>
+      <span class="cat-tile-title">Gewicht & Masse</span>
+      <span class="cat-tile-sub">kg · lb · oz · Tonne</span>
+    </a>
   </div>
 
   <div class="cta-wrap">
     <a class="cta" href="universal-converter.html">
-      Zum Rechner starten
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
+      Alle 36+ Kategorien →
     </a>
     <div class="countdown-wrap">
       <div class="countdown-bar-bg"><div class="countdown-bar"></div></div>

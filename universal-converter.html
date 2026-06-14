@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Universal-Converter — Universeller Einheitenrechner</title>
 <meta name="description" content="Kostenloser Online-Einheitenrechner mit 36 Kategorien, 700+ Einheiten in 11 Sprachen. Länge, Gewicht, Temperatur, Währungen, Zeitzonen und mehr.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,27 +32,45 @@
   --header-h: 60px;
   --lang-bar-h: 32px;
 }
-/* LANGUAGE BAR */
+/* LANGUAGE DROPDOWN */
 #lang-bar {
   position: fixed; top: 0; left: 0; right: 0; height: var(--lang-bar-h);
   background: rgba(4,10,22,0.98);
   border-bottom: 1px solid rgba(212,130,74,0.25);
-  display: flex; align-items: center; justify-content: center;
-  gap: 3px; z-index: 200; padding: 0 12px;
-  overflow-x: auto; scrollbar-width: none;
+  display: flex; align-items: center; justify-content: flex-end;
+  z-index: 200; padding: 0 max(16px, env(safe-area-inset-right, 16px));
 }
-#lang-bar::-webkit-scrollbar { display: none; }
-.lang-btn {
-  background: none; border: 1px solid transparent;
-  border-radius: 3px; cursor: pointer; padding: 2px 7px;
-  font-size: 0.87rem; color: var(--text-secondary);
+.lang-dropdown-wrap { position: relative; }
+.lang-dropdown-btn {
+  background: rgba(0,50,85,0.4); border: 1px solid rgba(212,130,74,0.3);
+  border-radius: 3px; cursor: pointer; padding: 3px 10px;
+  font-size: 0.78rem; color: var(--copper);
   font-family: 'IBM Plex Mono', monospace;
-  transition: all 0.15s; white-space: nowrap;
-  display: flex; align-items: center; gap: 4px;
-  flex-shrink: 0;
+  transition: all 0.15s; display: flex; align-items: center; gap: 6px;
 }
-.lang-btn:hover { border-color: var(--border); color: var(--text-primary); background: rgba(0,200,255,0.05); }
-.lang-btn.active { border-color: var(--copper); color: var(--copper); background: rgba(212,130,74,0.1); }
+.lang-dropdown-btn:hover { border-color: var(--copper); background: rgba(212,130,74,0.1); }
+.lang-dropdown-btn .dd-arrow { font-size: 0.55rem; opacity: 0.7; transition: transform 0.2s; }
+.lang-dropdown-btn.open .dd-arrow { transform: rotate(180deg); }
+.lang-dropdown-menu {
+  display: none; position: absolute; top: calc(100% + 4px); right: 0;
+  background: rgba(4,10,22,0.99); border: 1px solid rgba(212,130,74,0.25);
+  border-radius: 4px; min-width: 160px; z-index: 300;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  max-height: 320px; overflow-y: auto;
+}
+.lang-dropdown-menu.show { display: block; }
+.lang-menu-item {
+  display: flex; align-items: center; gap: 8px; padding: 7px 12px;
+  cursor: pointer; font-size: 0.78rem; color: var(--text-secondary);
+  font-family: 'IBM Plex Mono', monospace; transition: all 0.1s;
+  border-bottom: 1px solid rgba(0,150,200,0.06);
+}
+.lang-menu-item:last-child { border-bottom: none; }
+.lang-menu-item:hover { background: rgba(0,150,200,0.08); color: var(--text-primary); }
+.lang-menu-item.active { color: var(--copper); background: rgba(212,130,74,0.06); }
+.lang-menu-item .lm-flag { font-size: 1rem; }
+.lang-menu-item .lm-name { flex: 1; }
+.lang-menu-item .lm-check { color: var(--copper); font-size: 0.7rem; }
 .lang-flag { font-size: 1.10rem; line-height: 1; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; }
@@ -79,7 +97,9 @@ body {
   background: rgba(5,12,26,0.95);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 20px; z-index: 100;
+  padding: 0 max(16px, env(safe-area-inset-right, 16px));
+  padding-left: max(16px, env(safe-area-inset-left, 16px));
+  z-index: 100;
   backdrop-filter: blur(10px);
 }
 .header-logo {
@@ -124,12 +144,14 @@ body {
 
 /* SIDEBAR */
 #sidebar {
-  width: var(--sidebar-w); min-height: calc(100vh - var(--header-h) - var(--lang-bar-h));
+  width: var(--sidebar-w);
   background: rgba(8,20,40,0.97);
   border-right: 1px solid var(--border);
   position: fixed; top: calc(var(--header-h) + var(--lang-bar-h)); left: 0; bottom: 0;
   overflow-y: auto; z-index: 90;
   transition: transform 0.3s ease;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 60px;
 }
 #sidebar.hidden { transform: translateX(-100%); }
 .sidebar-section { padding: 6px 0; }
@@ -160,7 +182,17 @@ body {
   transition: margin-left 0.3s;
 }
 #main.full { margin-left: 0; }
-@media(max-width:768px){ #main { margin-left: 0; padding: 16px; padding-bottom: 80px; } }
+@media(max-width:768px){
+  #main { margin-left: 0; padding: 16px; padding-bottom: 40px; }
+  #sidebar {
+    top: calc(var(--header-h) + var(--lang-bar-h));
+    bottom: 0;
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #sidebar .sidebar-inner { padding-bottom: 24px; }
+}
 
 /* SEARCH RESULTS */
 #search-results {
@@ -504,6 +536,14 @@ mark { background: rgba(0,200,255,0.25); color: var(--blue-bright); border-radiu
 .cat-overview-title {
   font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--copper); margin-bottom: 12px;
+}
+
+@media(max-width:768px){
+  .site-footer { padding: 8px 12px; gap: 4px; justify-content: center; }
+  .footer-brand { display: none; }
+  .footer-copy { display: none; }
+  .footer-link { font-size: 0.68rem; padding: 4px 6px; }
+  .footer-sep { font-size: 0.6rem; }
 }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630"
@@ -2102,15 +2142,39 @@ function tGroup(g) {
 
 function buildLangBar() {
   const bar = document.getElementById('lang-bar');
-  bar.innerHTML = LANGS.map(l =>
-    `<button class="lang-btn${l.code===currentLang?' active':''}" data-lang="${l.code}" aria-label="${l.name}" title="${l.name}">
-      <span class="lang-flag">${l.flag}</span>
-      <span class="lang-code">${l.code.toUpperCase()}</span>
-    </button>`
-  ).join('');
-  bar.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => setLang(btn.dataset.lang));
+  const cur = LANGS.find(l=>l.code===currentLang)||LANGS[0];
+  bar.innerHTML = `<div class="lang-dropdown-wrap" id="lang-dd-wrap">
+    <button class="lang-dropdown-btn" id="lang-dd-btn" aria-haspopup="true" aria-expanded="false">
+      <span>${cur.flag}</span><span style="letter-spacing:0.08em">${cur.code.toUpperCase()}</span>
+      <span class="dd-arrow">▼</span>
+    </button>
+    <div class="lang-dropdown-menu" id="lang-dd-menu">
+      ${LANGS.map(l=>`<div class="lang-menu-item${l.code===currentLang?' active':''}" data-lang="${l.code}">
+        <span class="lm-flag">${l.flag}</span>
+        <span class="lm-name">${l.name}</span>
+        ${l.code===currentLang?'<span class="lm-check">✓</span>':''}
+      </div>`).join('')}
+    </div>
+  </div>`;
+  const ddBtn = document.getElementById('lang-dd-btn');
+  const ddMenu = document.getElementById('lang-dd-menu');
+  ddBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = ddMenu.classList.contains('show');
+    ddBtn.classList.toggle('open', !isOpen);
+    ddMenu.classList.toggle('show', !isOpen);
+    ddBtn.setAttribute('aria-expanded', String(!isOpen));
   });
+  ddMenu.querySelectorAll('.lang-menu-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setLang(item.dataset.lang);
+    });
+  });
+  document.addEventListener('click', () => {
+    if(ddMenu) ddMenu.classList.remove('show');
+    if(ddBtn) { ddBtn.classList.remove('open'); ddBtn.setAttribute('aria-expanded','false'); }
+  }, {once: false});
 }
 
 function setLang(code) {
@@ -2121,7 +2185,7 @@ function setLang(code) {
   document.documentElement.dir = lang?.rtl ? 'rtl' : 'ltr';
   document.documentElement.lang = code;
   // Update lang bar
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===code));
+  buildLangBar();
   // Update page title
   document.title = `Universal-Converter — ${t('subtitle')}`;
   // Update search placeholder
