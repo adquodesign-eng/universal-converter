@@ -13,7 +13,7 @@
 html{font-size:15px;scroll-behavior:smooth;}
 body{background:var(--bg-deep);color:var(--text-primary);font-family:'IBM Plex Mono',monospace;min-height:100vh;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:40px 40px;padding-top:var(--lang-bar-h);}
 ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg-deep);}::-webkit-scrollbar-thumb{background:var(--blue-dim);border-radius:3px;}
-#lang-bar{position:fixed;top:0;left:0;right:0;height:var(--lang-bar-h);background:rgba(4,10,22,0.98);border-bottom:1px solid rgba(212,130,74,0.25);display:flex;align-items:center;justify-content:center;gap:3px;z-index:200;padding:0 12px;overflow-x:auto;scrollbar-width:none;}
+#lang-bar{position:fixed;top:0;left:0;right:0;height:var(--lang-bar-h);background:rgba(4,10,22,0.98);border-bottom:1px solid rgba(212,130,74,0.25);display:flex;align-items:center;justify-content:flex-end;z-index:200;padding:0 16px;}
 #lang-bar::-webkit-scrollbar{display:none;}
 .lang-btn{background:none;border:1px solid transparent;border-radius:3px;cursor:pointer;padding:2px 7px;font-size:0.72rem;color:var(--text-secondary);font-family:'IBM Plex Mono',monospace;transition:all 0.15s;white-space:nowrap;display:flex;align-items:center;gap:4px;flex-shrink:0;}
 .lang-btn:hover{border-color:var(--border);color:var(--text-primary);}
@@ -74,7 +74,6 @@ kbd{background:var(--bg-card);border:1px solid var(--blue-dim);border-radius:3px
   <div id="help-sections"></div>
 
   <footer class="site-footer">
-    <a class="footer-brand" href="/">UNIVERSAL-<span>CONVERTER</span></a>
     <nav class="footer-links">
       <a class="footer-link" href="/universal-converter.html" id="fl-converter">⇢ Rechner</a>
       <span class="footer-sep">|</span>
@@ -88,7 +87,7 @@ kbd{background:var(--bg-card);border:1px solid var(--blue-dim);border-radius:3px
       <span class="footer-sep">|</span>
       <a class="footer-link" href="/datenschutz.html" id="fl-dsgvo">Datenschutz</a>
     </nav>
-    <div class="footer-copy">© 2026 Universal-Converter</div>
+    <div class="footer-copy" id="footer-copy">© 2026 Universal-Converter · Alle Berechnungen erfolgen lokal im Browser · Keine Garantie auf Richtigkeit</div>
   </footer>
 </div>
 
